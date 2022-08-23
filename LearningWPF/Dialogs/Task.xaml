@@ -1,0 +1,41 @@
+﻿<Window x:Class="LearningWPF.Dialogs.Task"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LearningWPF.Dialogs"
+        mc:Ignorable="d"
+        Title="Task"
+        Width="320" Height="140"
+        Style="{StaticResource ScreenStyle}">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin = "2" Text="Title"/>
+        <TextBox x:Name="TitleTextBox" Grid.Row="0" Grid.Column="1" Margin = "2" 
+                 Text = "{Binding Title}"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin = "2" Text="Completion"/>
+        <TextBox x:Name="CompletionTextBox" Grid.Column = "1" Grid.Row = "1" Margin = "2" 
+                 Text = "{Binding Completion}"/>
+
+        <WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan = "2" HorizontalAlignment="Center" Margin="0, 10">
+            <Button x:Name="CancelButton" Content = "_Cancel" Click="CancelButton_Click" 
+                    Height="20" Width="{StaticResource CommonControlWidth}" Margin="3"/>
+            <Button x:Name="OkButton" Content = "_OK" Click="OkButton_Click" 
+                    Height="20" Width="{StaticResource CommonControlWidth}" Margin="3"/>
+            
+        </WrapPanel>
+
+    </Grid>
+</Window>

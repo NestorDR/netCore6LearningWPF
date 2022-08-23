@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="LearningWPF.UserControls.Start.HelloWorld"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LearningWPF.UserControls"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="800" 
+             Style="{StaticResource ScreenStyle}"
+             Loaded="HelloWorld_Loaded"
+             Unloaded="HelloWorld_Unloaded">
+    
+    <UserControl.Resources>
+        <system:String x:Key="UserControlResourceString">Hello World! From User Control Resource</system:String>
+        <!--Visit: https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.GridLength?view=winrt-22621-->
+        <GridLength x:Key="CommonColumnWidth">130</GridLength>
+
+        <!--#region Style resources-->
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0 2"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="2 2"/>
+        </Style>
+        <!--#endregion Style resources-->
+    </UserControl.Resources>
+
+    <DockPanel x:Name="UserControlMainPanel" Margin="10">
+        <DockPanel.Resources>
+            <system:String x:Key="PanelResourceString">Hello World! From Panel Resource</system:String>
+        </DockPanel.Resources>
+
+        <!--
+          Binding - Visit: https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/?view=netdesktop-6.0
+         In this example: DataContext = Parent window of this user control.
+
+            ┌───────────────────────────────┐                      ┌─────────────────────────────────┐
+            │ UIElement TARGET              │<────── OneWay ───────┤ SOURCE                          │
+            │ Dependency Object   : TextBox │<────── TwoWay ──────>│ Object, default is: DataContext │
+            │  Dependency Property:  Text   ├── OneWayToSource ───>│  Value path       :  Property   │
+            └───────────────────────────────┘                      └─────────────────────────────────┘
+
+        The most properties default value for BindingMode is OneWay, but some dependency properties, 
+          typically properties of user-editable controls such as:
+              - TextBox.Text, and 
+              - CheckBox.IsChecked 
+          have as default value to TwoWay binding.
+        -->
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{DynamicResource CommonColumnWidth}"/>
+                <ColumnDefinition Width="*" MinWidth="200"/>
+                <ColumnDefinition Width="{DynamicResource CommonColumnWidth}"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" SharedSizeGroup="row"/>
+                <RowDefinition Height="Auto" SharedSizeGroup="row"/>
+            </Grid.RowDefinitions>
+
+            <!--Row 0-->
+            <TextBlock Text="Window title:" Grid.Row="0" Grid.Column="0"/>
+            <TextBox x:Name="WindowTitleTextBox" Grid.Row="0" Grid.Column="1"
+                     Text="{Binding Title, UpdateSourceTrigger=Explicit}"
+                     Margin="0, 0, 3, 0"
+                     ToolTip="Window Title - UpdateSourceTrigger=Explicit"/>
+            <Button x:Name="UpdateTitleButton" Content="Update title" Grid.Row="0" Grid.Column="2"
+                    Click="UpdateTitleButton_Click" 
+                    HorizontalAlignment="Stretch" Height="20"/>
+            <!--Row 1-->
+            <TextBlock Text="Window dimensions W:" Grid.Row="1" Grid.Column="0"/>
+            <WrapPanel Grid.Row="1" Grid.Column="1">
+                <TextBox x:Name="WidthTextBox"
+                         Text="{Binding Width, UpdateSourceTrigger=LostFocus}"
+                         Width="{StaticResource CommonControlWidth}"
+                         LostFocus="WidthHeightTextBox_LostFocus" ToolTip="Window Width - UpdateSourceTrigger=LostFocus"/>
+                <TextBlock Text=" H:" Margin="10 0 5 0" />
+                <TextBox x:Name="HeightTextBox" 
+                         Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
+                         Width="{StaticResource CommonControlWidth}"
+                         LostFocus="WidthHeightTextBox_LostFocus" ToolTip="Window Height - UpdateSourceTrigger=PropertyChanged"/>
+            </WrapPanel>
+
+        </Grid>
+
+        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0, 10, 0, 0"
+                   Text="Title List - Load the list and select an item"
+                   Style="{StaticResource SubtitleStyle}"/>
+
+        <WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
+            <Button x:Name="LoadMeButton" Click="LoadMeButton_Click"  
+                    Height="20" Width="{StaticResource CommonControlWidth}">
+                <WrapPanel>
+                    <TextBlock Foreground="Blue" Text="Load"/>
+                    <TextBlock Foreground="Red" Text=" Titles" xml:space="preserve"></TextBlock>
+                </WrapPanel>
+            </Button>
+            <Button x:Name="ClearListButton" Content="Clear list" Click="ClearListButton_Click" 
+                    Height="20" Width="{StaticResource CommonControlWidth}"/>
+        </WrapPanel>
+
+        <ListBox x:Name="ResourceListBox" Margin="0, 5, 0, 0"
+                 SelectionChanged="ResourceListBox_SelectionChanged">
+            <ListBox.Resources>
+                <system:String x:Key="ListBoxResourceString">Hello World! From List Box Resource</system:String>
+            </ListBox.Resources>
+        </ListBox>
+    </DockPanel>
+</UserControl>

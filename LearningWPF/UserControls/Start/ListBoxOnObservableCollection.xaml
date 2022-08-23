@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="LearningWPF.UserControls.Start.ListBoxOnObservableCollection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LearningWPF.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="800"
+             Style="{StaticResource ScreenStyle}"
+             Loaded="ListBoxSelection_Loaded"
+             Unloaded="ListBoxSelection_Unloaded">
+
+    <DockPanel Margin="10">
+        <Grid DockPanel.Dock="Right" Margin="10, 0, 0, 0">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="0,0,0,5" />
+                </Style>
+            </Grid.Resources>
+            
+            <StackPanel VerticalAlignment="Top">
+                <TextBlock HorizontalAlignment="Center" Style="{StaticResource SubtitleStyle}">Selection</TextBlock>
+                <Button x:Name="ShowSelectedItemButton" Click="ShowSelectedItemButton_Click">Show selected</Button>
+                <Button x:Name="SelectNextButton" Click="SelectNextButton_Click">Select next</Button>
+                <Button x:Name="SelectLastButton" Click="SelectLastButton_Click">Select last</Button>
+                <Button x:Name="SelectCSharpButton" Click="SelectCSharpButton_Click">Select C#</Button>
+                <Button x:Name="SelectAllButton" Click="SelectAllButton_Click">Select all</Button>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Bottom">
+                <TextBlock HorizontalAlignment="Center" Style="{StaticResource SubtitleStyle}">Actions</TextBlock>
+                <Button x:Name="AddItemButton" Click="AddItemButton_Click">Add task</Button>
+                <Button x:Name="ChangeItemButton" Click="ChangeItemButton_Click" >Change task</Button>
+                <Button x:Name="DeleteItemButton" Click="DeleteItemButton_Click">Delete task</Button>
+            </StackPanel>
+
+        </Grid>
+
+        <!-- SelectionMode="Extended" allows multi-selection -->
+        <ListBox x:Name="TaskListBox" HorizontalContentAlignment="Stretch" 
+                 SelectionMode="Extended" 
+                 SelectionChanged="TaskListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Title}" />
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding Completion}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel></UserControl>
