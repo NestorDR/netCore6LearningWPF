@@ -43,7 +43,7 @@ namespace LearningWPF.UserControls.Start
         {
             // ColorsComboBox is bound to a property list, each being a color, instead of a simple list of colors,
             //  thus we must use GetValue
-            Color selectedColor = (Color)((PropertyInfo)ColorsComboBox.SelectedItem).GetValue(null, null);
+            Color selectedColor = (Color)((PropertyInfo)ColorsComboBox.SelectedItem).GetValue(null, null)!;
             this.Background = new SolidColorBrush(selectedColor);
         }
     }

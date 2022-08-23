@@ -149,14 +149,14 @@ namespace CommonLibrary.Extensions
             return match.Success ? match.Value.ToInt() : 0;
         }
 
-        public static string ExtractQueryStringParamValue(this string queryString, string paramName)
+        public static string? ExtractQueryStringParamValue(this string queryString, string paramName)
         {
             if (string.IsNullOrWhiteSpace(queryString) || string.IsNullOrWhiteSpace(paramName)) return string.Empty;
 
             var query = queryString.Replace("?", "");
             if (!query.Contains("=")) return string.Empty;
-            var queryValues = query.Split('&').Select(piQ => piQ.Split('=')).ToDictionary(piKey => piKey[0].ToLower().Trim(), piValue => piValue[1]);
-            var found = queryValues.TryGetValue(paramName.ToLower().Trim(), out var result);
+            Dictionary<string, string> queryValues = query.Split('&').Select(piQ => piQ.Split('=')).ToDictionary(piKey => piKey[0].ToLower().Trim(), piValue => piValue[1]);
+            bool found = queryValues.TryGetValue(paramName.ToLower().Trim(), out var result);
             return found ? result : string.Empty;
 
         }

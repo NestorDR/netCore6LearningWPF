@@ -50,7 +50,7 @@
     /// </summary>
     /// <param name="messageName">A message name</param>
     /// <param name="payload">The payload to send with the message</param>
-    public void SendMessage(string messageName, object payload)
+    public void SendMessage(string messageName, object? payload)
     {
         var arg = new MessageBrokerEventArgs(messageName, payload);
 

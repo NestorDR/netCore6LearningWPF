@@ -34,7 +34,7 @@
         /// </summary>
         /// <param name="messageName">A Message Name</param>
         /// <param name="payload">The Payload for the Message</param>
-        public MessageBrokerEventArgs(string messageName, object payload) : base()
+        public MessageBrokerEventArgs(string messageName, object? payload) : base()
         {
             MessageName = messageName;
             MessagePayload = payload;

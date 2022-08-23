@@ -12,7 +12,7 @@ namespace CommonLibrary
     /// <summary>
     /// The PropertyChanged Event to raise to any UI object
     /// </summary>
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// The PropertyChanged Event to raise to any UI object
@@ -22,7 +22,7 @@ namespace CommonLibrary
     protected void RaisePropertyChanged(string propertyName)
     {
       // Grab a handler
-      PropertyChangedEventHandler handler = this.PropertyChanged;
+      PropertyChangedEventHandler? handler = this.PropertyChanged;
       
       // Only raise event if handler is connected
       if (handler == null) return;

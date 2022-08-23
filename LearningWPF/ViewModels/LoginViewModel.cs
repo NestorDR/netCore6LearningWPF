@@ -7,7 +7,7 @@ using LearningWPF.Models;
 
 namespace LearningWPF.ViewModels
 {
-    public class LoginViewModel : ViewModelBase
+    public sealed class LoginViewModel : ViewModelBase
     {
         public LoginViewModel() : base()
         {
@@ -19,15 +19,15 @@ namespace LearningWPF.ViewModels
             };
         }
 
-        private UserModel _Entity;
+        private UserModel _entity;
 
         public UserModel Entity
         {
-            get => _Entity;
+            get => _entity;
             set
             {
-                _Entity = value;
-                RaisePropertyChanged("Entity");
+                _entity = value;
+                RaisePropertyChanged(nameof(Entity));
             }
         }
         /*

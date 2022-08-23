@@ -21,22 +21,21 @@ namespace LearningWPF.UserControls.Start
         {
             InitializeComponent();
 
+            // Initialize data context
+            _letterContext = new LetterContext(_alphabet[0]);
+            DataContext = _letterContext;
+
             // Initialize view
             FirstAlphabetComboBox.ItemsSource = _alphabet;
             FirstAlphabetComboBox.SelectedIndex = 0;
 
             SecondAlphabetComboBox.ItemsSource = _alphabet;
-            SecondAlphabetComboBox.SelectedIndex = FirstAlphabetComboBox.SelectedIndex;
+            SecondAlphabetComboBox.SelectedIndex = 0;
 
-            // Initialize data context
-            _letterContext = new LetterContext((char) FirstAlphabetComboBox.SelectedItem);
-            DataContext = _letterContext;
         }
 
         private void FirstAlphabetComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_letterContext == null) return;
-
             _letterContext.FirstLetter.Value = (char)((ComboBox)sender).SelectedItem;
             _letterContext.FirstLetterCharValue = _letterContext.FirstLetter.Value;
             MessageBox.Show($"1º letter:\nObj is {_letterContext.FirstLetter.Value}\nChar is {_letterContext.FirstLetterCharValue}", "1º Letter");
@@ -49,8 +48,6 @@ namespace LearningWPF.UserControls.Start
 
         private void SecondAlphabetComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_letterContext == null) return;
-            
             _letterContext.SecondLetter.Value = (char)((ComboBox)sender).SelectedItem;
             _letterContext.SecondLetterCharValue = _letterContext.SecondLetter.Value;
             MessageBox.Show($"2º letter:\nObj is {_letterContext.SecondLetter.Value}\nChar is {_letterContext.SecondLetterCharValue}", "2º Letter");
@@ -65,7 +62,7 @@ namespace LearningWPF.UserControls.Start
     internal class LetterContext : INotifyPropertyChanged
     {
         // Threshold for 
-        public char ThresholdLetter => 'F';
+        public static char ThresholdLetter => 'F';
 
         #region Properties
 
@@ -131,10 +128,10 @@ namespace LearningWPF.UserControls.Start
 
         internal LetterContext(char letter)
         {
-            FirstLetter = new Letter { Value = letter };
+            _firstLetter = new Letter { Value = letter };
             FirstLetterCharValue = FirstLetter.Value;
 
-            SecondLetter = new Letter { Value = letter };
+            _secondLetter = new Letter { Value = letter };
             SecondLetterCharValue = SecondLetter.Value;
         }
 
