@@ -7,13 +7,13 @@ In VS 2022 follow this menu sequence
 
 Then in console to create c# database schema type
 
-    `add-migration CreateDatabase`
+    ```add-migration CreateDatabase```
 
 where `CreateDatabase` is the migration name
 
 Then push the migrations to database typing
 
-    `update-database`
+    ```update-database```
 
 ## Migrations Tools
 To create migrations, apply migrations, and generate code for a model based on an existing database use [Package Manager Console tools](https://docs.microsoft.com/en-us/ef/core/cli/powershell).
@@ -29,6 +29,6 @@ and you want to just use Entity Framework Core, you can run `Remove-Module Entit
 # Using T-Script
 For the creation of the database and the tables, a Transact SQL script is attached:
 
-    `create_database_and_tables.sql`
+    ```create_database_and_tables.sql```
 
 open it and run it in your MS SQL Server Management Studio
