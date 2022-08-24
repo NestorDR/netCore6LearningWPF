@@ -30,6 +30,7 @@ If you get the
 and you want to just use Entity Framework Core, you can run `Remove-Module EntityFramework6`
 
 ## Using T-Script
+
 For the creation of the database and the tables, a Transact SQL script is attached:
 
     `create_database_and_tables.sql`
