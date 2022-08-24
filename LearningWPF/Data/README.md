@@ -1,11 +1,11 @@
 ﻿# Data Description
 
 ## Packages installed
-Microsoft.EntityFrameworkCore
-Microsoft.EntityFrameworkCore.SqlServer
-Microsoft.EntityFrameworkCore.Tools
-Microsoft.Extensions.Configuration.Json
-Microsoft.Extensions.Hosting
+- Microsoft.EntityFrameworkCore
+- Microsoft.EntityFrameworkCore.SqlServer
+- Microsoft.EntityFrameworkCore.Tools
+- Microsoft.Extensions.Configuration.Json
+
 
 ## Sources
 [EF Core getting Started with WPF](https://docs.microsoft.com/en-us/ef/core/get-started/wpf)
@@ -57,9 +57,8 @@ Add the following NuGet packages
 
 [Multi-Tenanted EF Core Migration Deployment](https://chadgolden.com/blog/multi-tenanted-entity-framework-core-migration-deployment)
 
-## DBContext.OnConfiguring 
+### DBContext.OnConfiguring 
 Override OnConfiguring method to configure the database, using the [Application.Properties](https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.properties?view=windowsdesktop-6.0) backed up in the appsettings.json configuration.
-
 
 ### Migrations Tools
 To create migrations, apply migrations, and generate code for a model based on an existing database use [Package Manager Console tools](https://docs.microsoft.com/en-us/ef/core/cli/powershell).

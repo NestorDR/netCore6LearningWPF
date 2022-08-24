@@ -19,11 +19,14 @@
 To create migrations, apply migrations, and generate code for a model based on an existing database use [Package Manager Console tools](https://docs.microsoft.com/en-us/ef/core/cli/powershell).
 - Microsoft.EntityFrameworkCore.Tools
 
-If you get the message: ==Both Entity Framework Core and Entity Framework 6 are installed==, and you want to just use Entity Framework Core, you can run
-`Remove-Module EntityFramework6`
+If you get the warning:
+> **Warning**
+> Both Entity Framework Core and Entity Framework 6 are installed
+and you want to just use Entity Framework Core, you can run `Remove-Module EntityFramework6`
 
 # Using T-Script
-
 For the creation of the database and the tables, a Transact SQL script is attached:
-      `create_database_and_tables.sql`
+
+    `create_database_and_tables.sql`
+
 open it and run it in your MS SQL Server Management Studio
