@@ -16,9 +16,8 @@
 
 [Multi-Tenanted EF Core Migration Deployment](https://chadgolden.com/blog/multi-tenanted-entity-framework-core-migration-deployment)
 
-## Configuration
 
-### appsettings.json
+## Configuration using appsettings.json
 [.NET now uses the appsettings.json file for app settings](https://docs.microsoft.com/en-us/dotnet/core/porting/upgrade-assistant-wpf-framework#modernize-appsettingsjson)
 
 [JSON configuration provider](https://docs.microsoft.com/en-us/dotnet/core/extensions/configuration-providers#json-configuration-provider)
@@ -51,15 +50,14 @@ Add the following NuGet packages
 - Microsoft.EntityFrameworkCore
 - Microsoft.EntityFrameworkCore.SqlServer
 
-### Inheriting from DBContext
-
+#### Inheriting from DBContext
 [Can not add appsettings.json inside WPF project .Net Core](https://stackoverflow.com/questions/59909207/cannot-add-appsettings-json-inside-wpf-project-net-core-3-0#67338758)
 
 [Multi-Tenanted EF Core Migration Deployment](https://chadgolden.com/blog/multi-tenanted-entity-framework-core-migration-deployment)
 
-### DBContext.OnConfiguring 
+#### DBContext.OnConfiguring 
 Override OnConfiguring method to configure the database, using the [Application.Properties](https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.properties?view=windowsdesktop-6.0) backed up in the appsettings.json configuration.
 
-### Migrations Tools
+#### Migrations Tools
 To create migrations, apply migrations, and generate code for a model based on an existing database use [Package Manager Console tools](https://docs.microsoft.com/en-us/ef/core/cli/powershell).
 - Microsoft.EntityFrameworkCore.Tools

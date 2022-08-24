@@ -1,7 +1,6 @@
 ﻿# Create the learningWPF database 
 
 ## Implementing Migrations
-
 In VS 2022 follow this menu sequence
 
     > Tools
@@ -18,7 +17,7 @@ Then push the migrations to database typing
 
     `update-database`
 
-### Migrations Tools
+#### Migrations Tools
 To create migrations, apply migrations, and generate code for a model based on an existing database use [Package Manager Console tools](https://docs.microsoft.com/en-us/ef/core/cli/powershell).
 - Microsoft.EntityFrameworkCore.Tools
 
@@ -30,7 +29,6 @@ If you get the
 and you want to just use Entity Framework Core, you can run `Remove-Module EntityFramework6`
 
 ## Using T-Script
-
 For the creation of the database and the tables, a Transact SQL script is attached:
 
     `create_database_and_tables.sql`
