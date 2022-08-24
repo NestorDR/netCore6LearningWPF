@@ -1,25 +1,16 @@
 ﻿using System;
 using System.Linq;
+// --- App modules ---
 using CommonLibrary.MessageBroker;
 using CommonLibrary.ViewModels;
-//using LearningWPF.Data;
+using LearningWPF.Data;
 using LearningWPF.Models;
 
 namespace LearningWPF.ViewModels
 {
     public sealed class LoginViewModel : ViewModelBase
     {
-        public LoginViewModel() : base()
-        {
-            DisplayStatusMessage("Login to Application");
-
-            Entity = new UserModel
-            {
-                UserName = Environment.UserName
-            };
-        }
-
-        private UserModel _entity;
+        private UserModel _entity = null!;
 
         public UserModel Entity
         {
@@ -30,43 +21,54 @@ namespace LearningWPF.ViewModels
                 RaisePropertyChanged(nameof(Entity));
             }
         }
-        /*
+
+        public LoginViewModel() : base()
+        {
+            DisplayStatusMessage("Login to Application");
+
+            Entity = new UserModel
+            {
+                UserName = Environment.UserName
+            };
+        }
+
+        /// <summary>
+        /// Validate non-empty values
+        /// </summary>
+        /// <returns></returns>
         public bool Validate()
         {
             Entity.IsLoggedIn = false;
+
             ValidationMessages.Clear();
-            if (string.IsNullOrEmpty(Entity.UserName))
-            {
+            if (string.IsNullOrWhiteSpace(Entity.UserName))
                 AddValidationMessage("UserName", "User Name Must Be Filled In");
-            }
-
-            if (string.IsNullOrEmpty(Entity.Password))
-            {
+            if (string.IsNullOrWhiteSpace(Entity.Password))
                 AddValidationMessage("Password", "Password Must Be Filled In");
-            }
 
-            var result = (ValidationMessages.Count == 0);
-
-            return result;
+            return (ValidationMessages.Count == 0);
         }
 
+        /// <summary>
+        /// Check Credentials in User Table
+        /// </summary>
+        /// <returns></returns>
         public bool ValidateCredentials()
         {
             bool result = false;
 
             try
             {
-                var db = new AppDbContext();
+                AppDbContext db = new();
 
-                // NOTE: Not using password here, but in production you would. I intentionally leave it out so as not having to go into hashing and securing your password.
-                if (db.Users.Any(u => u.UserName == Entity.UserName))
+                // NOTE: It will be necessary to hash and secure your password.
+                if (db.Users.Where(u => u.UserName == Entity.UserName && u.Password == Entity.Password).Count() > 0)
                 {
                     result = true;
                 }
                 else
                 {
-                    AddValidationMessage("LoginFailed",
-                        "Invalid User Name and/or Password.");
+                    AddValidationMessage("LoginFailed", "Invalid User Name and/or Password.");
                 }
             }
             catch (Exception ex)
@@ -79,12 +81,8 @@ namespace LearningWPF.ViewModels
 
         public bool Login()
         {
+            if (!Validate() || !ValidateCredentials()) return false;
 
-            if (!Validate()) return false;
-            // Check Credentials in User Table
-            
-            if (!ValidateCredentials()) return false;
-            
             // Mark as logged in
             Entity.IsLoggedIn = true;
 
@@ -103,12 +101,10 @@ namespace LearningWPF.ViewModels
             {
                 // Display Informational Message
                 MessageBroker.Instance.SendMessage(
-                    MessageBrokerMessages.DISPLAY_TIMEOUT_INFO_MESSAGE_TITLE,
-                    "User NOT Logged In.");
+                    MessageBrokerMessages.DISPLAY_TIMEOUT_INFO_MESSAGE_TITLE, "User NOT logged In.");
             }
 
             base.Close(wasCancelled);
         }
-        */
     }
 }

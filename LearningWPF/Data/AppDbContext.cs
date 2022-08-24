@@ -1,24 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+// --- App modules ---
 using CommonLibrary.Validation;
 using LearningWPF.Common;
 using LearningWPF.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace LearningWPF.Data
 {
     internal class AppDbContext : DbContext
     {
-        public AppDbContext() : base()
-        {
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured) return;
 
-            // Application.Properties Property, visit: https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.properties?view=windowsdesktop-6.0
             string connectionString = AppSettings.Instance.ConnectionString;
 
             /* Previously, using System.Windows.Application.Properties. v
@@ -39,6 +35,8 @@ namespace LearningWPF.Data
         {
             // Retrieve the error messages from EF Core
             var sb = new StringBuilder();
+            sb.AppendLine($"{ex.GetType().Name} error details - {ex.InnerException?.InnerException?.Message}.");
+            
             foreach (EntityEntry entityEntry in ex.Entries)
             {
                 sb.AppendLine(
@@ -49,8 +47,8 @@ namespace LearningWPF.Data
             {
                 new()
                 {
-                    Message = $"DbUpdateException error details - {ex?.InnerException?.InnerException?.Message}",
-                    PropertyName = sb.ToString()
+                    PropertyName = ex.GetType().Name,
+                    Message = sb.ToString(),
                 }
             };
         }

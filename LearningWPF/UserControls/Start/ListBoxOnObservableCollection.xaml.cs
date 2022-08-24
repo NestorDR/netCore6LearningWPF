@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+// --- App modules ---
 using LearningWPF.Dialogs;
 using LearningWPF.Models;
 

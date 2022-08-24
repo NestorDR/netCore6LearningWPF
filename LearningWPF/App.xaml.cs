@@ -1,7 +1,7 @@
-﻿using System.IO;
-using System.Windows;
-using LearningWPF.Common;
+﻿using System.Windows;
 using Microsoft.Extensions.Configuration;
+// --- App modules ---
+using LearningWPF.Common;
 
 namespace LearningWPF
 {
@@ -20,7 +20,7 @@ namespace LearningWPF
 
             /* Previously, using System.Windows.Application.Properties
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(System.IO.Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
             Configuration = builder.Build();

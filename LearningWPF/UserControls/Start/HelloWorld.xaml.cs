@@ -1,7 +1,8 @@
-﻿using LearningWPF.Common;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+// --- App modules ---
+using LearningWPF.Common;
 
 namespace LearningWPF.UserControls.Start
 {
