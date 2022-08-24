@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Net.Mime;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using CommonLibrary.Validation;
 using LearningWPF.Models;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +17,9 @@ namespace LearningWPF.Data
         {
             if (optionsBuilder.IsConfigured) return;
 
+            // Application.Properties Property, visit: https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.properties?view=windowsdesktop-6.0
             optionsBuilder
-                .UseSqlServer("Server=localhost\\DEV2019;Database=learningWPF;Trusted_Connection=True;MultipleActiveResultSets=true");
+                .UseSqlServer(Application.Current.Properties["DefaultConnectionSting"]?.ToString() ?? throw new InvalidOperationException("The connection string is not set or is invalid."));
         }
 
         /*

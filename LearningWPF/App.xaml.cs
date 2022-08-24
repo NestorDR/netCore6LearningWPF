@@ -12,13 +12,16 @@ namespace LearningWPF
     {
         public IConfiguration? Configuration { get; private set; }
 
-        private void App_Startup(object sender, StartupEventArgs e)
+        public App()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
             Configuration = builder.Build();
+
+            // Application.Properties Property, visit: https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.properties?view=windowsdesktop-6.0
+            this.Properties["DefaultConnectionSting"] = Configuration.GetConnectionString("DefaultConnection");
         }
 
         /// <summary>
@@ -33,6 +36,5 @@ namespace LearningWPF
                 "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
         }
-
     }
 }
