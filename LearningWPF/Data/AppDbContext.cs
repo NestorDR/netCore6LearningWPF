@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Collections.Generic;
+using System.Text;
 using CommonLibrary.Validation;
+using LearningWPF.Common;
 using LearningWPF.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace LearningWPF.Data
 {
@@ -18,24 +19,41 @@ namespace LearningWPF.Data
             if (optionsBuilder.IsConfigured) return;
 
             // Application.Properties Property, visit: https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.properties?view=windowsdesktop-6.0
-            optionsBuilder
-                .UseSqlServer(Application.Current.Properties["DefaultConnectionSting"]?.ToString() ?? throw new InvalidOperationException("The connection string is not set or is invalid."));
+            string connectionString = AppSettings.Instance.ConnectionString;
+
+            /* Previously, using System.Windows.Application.Properties. v
+               Visit: https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.properties?view=windowsdesktop-6.0
+            connectionString = Application.Current.Properties["DefaultConnectionSting"].ToString();
+            */
+
+            /* Required to use Migrations
+            if (string.IsNullOrWhiteSpace(connectionString))
+                connectionString =
+                    "Server=localhost\\DEV2019;Database=learningWPF;Trusted_Connection=True;MultipleActiveResultSets=true";
+            */
+            
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
-        /*
-        public List<ValidationMessage> CreateValidationMessages(DbEntityValidationException ex)
+        public List<ValidationMessage> CreateValidationMessages(DbUpdateException ex)
         {
-            // Retrieve the error messages from EF
-            return ex.EntityValidationErrors
-                .SelectMany(x => x.ValidationErrors)
-                .Select(error => new ValidationMessage 
-                    { 
-                        Message = error.ErrorMessage, 
-                        PropertyName = error.PropertyName
+            // Retrieve the error messages from EF Core
+            var sb = new StringBuilder();
+            foreach (EntityEntry entityEntry in ex.Entries)
+            {
+                sb.AppendLine(
+                    $"Entity of type {entityEntry.Entity.GetType().Name} in state {entityEntry.State} could not be updated.");
+            }
 
-                    }).ToList();
+            return new List<ValidationMessage>
+            {
+                new()
+                {
+                    Message = $"DbUpdateException error details - {ex?.InnerException?.InnerException?.Message}",
+                    PropertyName = sb.ToString()
+                }
+            };
         }
-        */
 
         /*
          In Entity Framework Core, the DbSet represents the set of entities. 

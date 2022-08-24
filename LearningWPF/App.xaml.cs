@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
+using LearningWPF.Common;
 using Microsoft.Extensions.Configuration;
 
 namespace LearningWPF
@@ -14,6 +15,10 @@ namespace LearningWPF
 
         public App()
         {
+            // Load Application Settings
+            AppSettings.Instance.LoadSettings();
+
+            /* Previously, using System.Windows.Application.Properties
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -22,6 +27,7 @@ namespace LearningWPF
 
             // Application.Properties Property, visit: https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.properties?view=windowsdesktop-6.0
             this.Properties["DefaultConnectionSting"] = Configuration.GetConnectionString("DefaultConnection");
+            */
         }
 
         /// <summary>

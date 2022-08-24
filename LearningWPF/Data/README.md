@@ -25,7 +25,7 @@
 [Can not add appsettings.json inside WPF project .Net Core](https://stackoverflow.com/questions/59909207/cannot-add-appsettings-json-inside-wpf-project-net-core-3-0#59909447)
 
 Add the following NuGet package
-  Microsoft.Extensions.Configuration.Json
+- Microsoft.Extensions.Configuration.Json
 
 Create and add appsettings.json manually and set property (F4 shortcut) "Copy to Output Directory": "Copy if newer".
 
@@ -56,7 +56,7 @@ Add the following NuGet packages
 [Multi-Tenanted EF Core Migration Deployment](https://chadgolden.com/blog/multi-tenanted-entity-framework-core-migration-deployment)
 
 #### DBContext.OnConfiguring 
-Override OnConfiguring method to configure the database, using the [Application.Properties](https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.properties?view=windowsdesktop-6.0) backed up in the appsettings.json configuration.
+Override the OnConfiguring method to configure the database, but you must use a literal string to do so.
 
 #### Migrations Tools
 To create migrations, apply migrations, and generate code for a model based on an existing database use [Package Manager Console tools](https://docs.microsoft.com/en-us/ef/core/cli/powershell).

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using LearningWPF.Common;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -73,6 +74,7 @@ namespace LearningWPF.UserControls.Start
             ResourceListBox.Items.Add(this.FindResource("UserControlResourceString").ToString());
             ResourceListBox.Items.Add(((Window) DataContext).FindResource("WindowResourceString").ToString());
             ResourceListBox.Items.Add(Application.Current.FindResource("ApplicationResourceString")?.ToString());
+            ResourceListBox.Items.Add(AppSettings.Instance.ConnectionString);
         }
 
         private void ClearListButton_Click(object sender, RoutedEventArgs e)
