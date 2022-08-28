@@ -10,7 +10,7 @@
       get => _propertyName;
       set {
         _propertyName = value;
-        RaisePropertyChanged(nameof(PropertyName));
+        NotifyPropertyChanged();
       }
     }
 
@@ -20,7 +20,7 @@
       get => _message;
       set {
         _message = value;
-        RaisePropertyChanged(nameof(Message));
+        NotifyPropertyChanged();
       }
     }
 

@@ -14,7 +14,7 @@ namespace LearningWPF.ViewModels
             set
             {
                 _loginMenuHeader = value;
-                RaisePropertyChanged(nameof(LoginMenuHeader));
+                NotifyPropertyChanged();
             }
         }
 
@@ -25,7 +25,7 @@ namespace LearningWPF.ViewModels
             set
             {
                 _statusMessage = value;
-                RaisePropertyChanged(nameof(StatusMessage));
+                NotifyPropertyChanged();
             }
         }
 
@@ -39,7 +39,7 @@ namespace LearningWPF.ViewModels
             set
             {
                 _isInfoMessageVisible = value;
-                RaisePropertyChanged(nameof(IsInfoMessageVisible));
+                NotifyPropertyChanged();
             }
         }
 
@@ -53,7 +53,7 @@ namespace LearningWPF.ViewModels
             set
             {
                 _infoMessage = value;
-                RaisePropertyChanged(nameof(InfoMessage));
+                NotifyPropertyChanged();
             }
         }
 
@@ -67,7 +67,7 @@ namespace LearningWPF.ViewModels
             set
             {
                 _infoMessageTitle = value;
-                RaisePropertyChanged(nameof(InfoMessageTitle));
+                NotifyPropertyChanged();
             }
         }
 
@@ -78,7 +78,7 @@ namespace LearningWPF.ViewModels
             set
             {
                 _infoMessageTimeout = value;
-                RaisePropertyChanged(nameof(InfoMessageTimeout));
+                NotifyPropertyChanged();
             }
         }
         

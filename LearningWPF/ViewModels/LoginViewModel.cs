@@ -18,7 +18,7 @@ namespace LearningWPF.ViewModels
             set
             {
                 _entity = value;
-                RaisePropertyChanged(nameof(Entity));
+                NotifyPropertyChanged();
             }
         }
 

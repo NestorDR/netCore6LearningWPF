@@ -28,7 +28,7 @@ namespace LearningWPF.Common
             set
             {
                 _connectionString = value;
-                RaisePropertyChanged(nameof(ConnectionString));
+                NotifyPropertyChanged();
             }
         }
 

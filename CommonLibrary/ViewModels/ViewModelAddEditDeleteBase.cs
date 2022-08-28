@@ -14,7 +14,7 @@
       get => _isListEnabled;
       set {
         _isListEnabled = value;
-        RaisePropertyChanged(nameof(IsListEnabled));
+        NotifyPropertyChanged();
       }
     }
 
@@ -23,7 +23,7 @@
       get => _isDetailEnabled;
       set {
         _isDetailEnabled = value;
-        RaisePropertyChanged(nameof(IsDetailEnabled));
+        NotifyPropertyChanged();
       }
     }
 
@@ -32,7 +32,7 @@
       get => _isAddMode;
       set {
         _isAddMode = value;
-        RaisePropertyChanged(nameof(IsAddMode));
+        NotifyPropertyChanged();
       }
     }
     #endregion

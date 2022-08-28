@@ -13,8 +13,6 @@
     
     <UserControl.Resources>
         <system:String x:Key="UserControlResourceString">Hello World! From User Control Resource</system:String>
-        <!--Visit: https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.GridLength?view=winrt-22621-->
-        <GridLength x:Key="CommonColumnWidth">130</GridLength>
 
         <!--#region Style resources-->
         <Style TargetType="TextBlock">

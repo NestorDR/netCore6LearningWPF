@@ -18,7 +18,7 @@ namespace LearningWPF.Models
             set
             {
                 _id = value;
-                RaisePropertyChanged(nameof(Id));
+                NotifyPropertyChanged();
             }
         }
 
@@ -31,7 +31,7 @@ namespace LearningWPF.Models
             set
             {
                 _userName = value;
-                RaisePropertyChanged(nameof(UserName));
+                NotifyPropertyChanged();
             }
         }
 
@@ -43,7 +43,7 @@ namespace LearningWPF.Models
             set
             {
                 _password = value;
-                RaisePropertyChanged(nameof(Password));
+                NotifyPropertyChanged();
             }
         }
 
@@ -56,7 +56,7 @@ namespace LearningWPF.Models
             set
             {
                 _firstName = value;
-                RaisePropertyChanged(nameof(FirstName));
+                NotifyPropertyChanged();
             }
         }
 
@@ -69,7 +69,7 @@ namespace LearningWPF.Models
             set
             {
                 _lastName = value;
-                RaisePropertyChanged(nameof(LastName));
+                NotifyPropertyChanged();
             }
         }
 
@@ -84,7 +84,7 @@ namespace LearningWPF.Models
             set
             {
                 _emailAddress = value;
-                RaisePropertyChanged(nameof(EmailAddress));
+                NotifyPropertyChanged();
             }
         }
 
@@ -96,7 +96,7 @@ namespace LearningWPF.Models
             set
             {
                 _isLoggedIn = value;
-                RaisePropertyChanged(nameof(IsLoggedIn));
+                NotifyPropertyChanged();
             }
         }
     }

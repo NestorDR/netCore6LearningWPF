@@ -15,7 +15,7 @@ namespace CommonLibrary.Helpers
         {
             if (original == null || cloneTo == null) return;
 
-            // Use reflection so the RaisePropertyChanged event is fired for each property
+            // Use reflection so the NotifyPropertyChanged event is fired for each property
             foreach (var prop in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 var value = prop.GetValue(original, null);

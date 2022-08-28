@@ -59,5 +59,5 @@ Add the following NuGet packages
 Override the OnConfiguring method to configure the database, but you must use a literal string to do so.
 
 #### Migrations Tools
-To create migrations, apply migrations, and generate code for a model based on an existing database use [Package Manager Console tools](https://docs.microsoft.com/en-us/ef/core/cli/powershell).
+To create migrations, apply migrations, and generate code for a model based on an existing database use [Package Manager Console tools](https://docs.microsoft.com/en-us/ef/core/cli/powershell). Install it with the following NuGet package
 - Microsoft.EntityFrameworkCore.Tools

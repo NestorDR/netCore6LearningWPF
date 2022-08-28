@@ -17,7 +17,7 @@ namespace CommonLibrary.ViewModels
             set
             {
                 _validationMessages = value;
-                RaisePropertyChanged(nameof(ValidationMessages));
+                NotifyPropertyChanged();
             }
         }
 
@@ -29,7 +29,7 @@ namespace CommonLibrary.ViewModels
             set
             {
                 _isValidationVisible = value;
-                RaisePropertyChanged(nameof(IsValidationVisible));
+                NotifyPropertyChanged();
             }
         }
 
