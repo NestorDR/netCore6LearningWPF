@@ -1,5 +1,8 @@
 ﻿using System.Timers;
+using System.Windows;
 using CommonLibrary.ViewModels;
+using LearningWPF.Models;
+using Newtonsoft.Json.Linq;
 
 namespace LearningWPF.ViewModels
 {
@@ -11,22 +14,14 @@ namespace LearningWPF.ViewModels
         public string LoginMenuHeader
         {
             get => _loginMenuHeader;
-            set
-            {
-                _loginMenuHeader = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _loginMenuHeader, value);
         }
 
         private string? _statusMessage = string.Empty;
         public string? StatusMessage
         {
             get => _statusMessage;
-            set
-            {
-                _statusMessage = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _statusMessage, value);
         }
 
         /// <summary>
@@ -36,11 +31,7 @@ namespace LearningWPF.ViewModels
         public bool IsInfoMessageVisible
         {
             get => _isInfoMessageVisible;
-            set
-            {
-                _isInfoMessageVisible = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _isInfoMessageVisible, value);
         }
 
         /// <summary>
@@ -50,11 +41,7 @@ namespace LearningWPF.ViewModels
         public string? InfoMessage
         {
             get => _infoMessage;
-            set
-            {
-                _infoMessage = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _infoMessage, value);
         }
 
         /// <summary>
@@ -64,28 +51,45 @@ namespace LearningWPF.ViewModels
         public string? InfoMessageTitle
         {
             get => _infoMessageTitle;
-            set
-            {
-                _infoMessageTitle = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _infoMessageTitle, value);
         }
 
         private int _infoMessageTimeout;
         public int InfoMessageTimeout
         {
             get => _infoMessageTimeout;
-            set
-            {
-                _infoMessageTimeout = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _infoMessageTimeout, value);
         }
-        
+
+        private UserModel _userEntity = new();
+        public UserModel UserEntity
+        {
+            get => _userEntity;
+            set => SetProperty(ref _userEntity, value);
+        }
+
+        #endregion
+
+        #region Menu Toggles
+
+        private Visibility _startMenuGroupVisibility = Visibility.Collapsed;
+        public Visibility StartMenuGroupVisibility
+        {
+            get => _startMenuGroupVisibility;
+            set => SetProperty(ref _startMenuGroupVisibility, value);
+        }
+
+        private Visibility _mvvmMenuGroupVisibility = Visibility.Collapsed;
+        public Visibility MvvmMenuGroupVisibility
+        {
+            get => _mvvmMenuGroupVisibility;
+            set => SetProperty(ref _mvvmMenuGroupVisibility, value);
+        }
+
         #endregion
 
         #region ClearInfoMessage Method
-        
+
         public void ClearInfoMessages()
         {
             InfoMessage = string.Empty;

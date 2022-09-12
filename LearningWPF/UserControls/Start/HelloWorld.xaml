@@ -5,26 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LearningWPF.UserControls"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="800" 
              Style="{StaticResource ScreenStyle}"
              Loaded="HelloWorld_Loaded"
              Unloaded="HelloWorld_Unloaded">
-    
+
     <UserControl.Resources>
         <system:String x:Key="UserControlResourceString">Hello World! From User Control Resource</system:String>
-
-        <!--#region Style resources-->
-        <Style TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="0 2"/>
-        </Style>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="2 2"/>
-        </Style>
-        <!--#endregion Style resources-->
     </UserControl.Resources>
 
     <DockPanel x:Name="UserControlMainPanel" Margin="10">
@@ -50,54 +39,73 @@
         -->
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="{DynamicResource CommonColumnWidth}"/>
-                <ColumnDefinition Width="*" MinWidth="200"/>
+                <ColumnDefinition Width="{DynamicResource CommonColumnWidth}"/>
                 <ColumnDefinition Width="{DynamicResource CommonColumnWidth}"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" SharedSizeGroup="row"/>
                 <RowDefinition Height="Auto" SharedSizeGroup="row"/>
+                <RowDefinition Height="Auto" SharedSizeGroup="row"/>
             </Grid.RowDefinitions>
 
             <!--Row 0-->
-            <TextBlock Text="Window title:" Grid.Row="0" Grid.Column="0"/>
-            <TextBox x:Name="WindowTitleTextBox" Grid.Row="0" Grid.Column="1"
+            <TextBox x:Name="WindowTitleTextBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                     materialDesign:HintAssist.Hint="Window title"
                      Text="{Binding Title, UpdateSourceTrigger=Explicit}"
-                     Margin="0, 0, 3, 0"
                      ToolTip="Window Title - UpdateSourceTrigger=Explicit"/>
+
             <Button x:Name="UpdateTitleButton" Content="Update title" Grid.Row="0" Grid.Column="2"
                     Click="UpdateTitleButton_Click" 
-                    HorizontalAlignment="Stretch" Height="20"/>
+                    HorizontalAlignment="Stretch"/>
             <!--Row 1-->
-            <TextBlock Text="Window dimensions W:" Grid.Row="1" Grid.Column="0"/>
-            <WrapPanel Grid.Row="1" Grid.Column="1">
-                <TextBox x:Name="WidthTextBox"
-                         Text="{Binding Width, UpdateSourceTrigger=LostFocus}"
-                         Width="{StaticResource CommonControlWidth}"
-                         LostFocus="WidthHeightTextBox_LostFocus" ToolTip="Window Width - UpdateSourceTrigger=LostFocus"/>
-                <TextBlock Text=" H:" Margin="10 0 5 0" />
-                <TextBox x:Name="HeightTextBox" 
-                         Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                         Width="{StaticResource CommonControlWidth}"
-                         LostFocus="WidthHeightTextBox_LostFocus" ToolTip="Window Height - UpdateSourceTrigger=PropertyChanged"/>
-            </WrapPanel>
+            <TextBox x:Name="WidthTextBox" Grid.Row="1" Grid.Column="0"
+                     materialDesign:HintAssist.Hint="Window width"
+                     Text="{Binding Width, UpdateSourceTrigger=LostFocus}"
+                     HorizontalAlignment="Left"
+                     Width="{StaticResource CommonControlWidth}"
+                     LostFocus="WidthHeightTextBox_LostFocus" ToolTip="Window Width - UpdateSourceTrigger=LostFocus"/>
+            <TextBox x:Name="HeightTextBox" Grid.Row="1" Grid.Column="1"
+                     materialDesign:HintAssist.Hint="Window height"
+                     Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
+                     HorizontalAlignment="Right"
+                     Width="{StaticResource CommonControlWidth}"
+                     LostFocus="WidthHeightTextBox_LostFocus" ToolTip="Window Height - UpdateSourceTrigger=PropertyChanged"/>
 
+            <!--Row 1-->
+            <ComboBox x:Name="ColorsComboBox" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                      materialDesign:HintAssist.Hint="Select a background color"
+                      SelectionChanged="ColorsComboBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Name="PreviousButton" Grid.Row="2" Grid.Column="2" Click="PreviousButton_Click">Previous</Button>
+            <Button Name="NextButton" Grid.Row="2" Grid.Column="3" Click="NextButton_Click" >Next</Button>
+            <Button Name="BlueButton" Grid.Row="2" Grid.Column="4" Click="BlueButton_Click"
+                    Style="{StaticResource PonsTeklaMaterialDesignRaisedAccentButton}">Blue</Button>
         </Grid>
 
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0, 10, 0, 0"
                    Text="Title List - Load the list and select an item"
-                   Style="{StaticResource SubtitleStyle}"/>
+                   Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
 
         <WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
-            <Button x:Name="LoadMeButton" Click="LoadMeButton_Click"  
-                    Height="20" Width="{StaticResource CommonControlWidth}">
+            <Button x:Name="LoadMeButton" Click="LoadMeButton_Click"
+                    Style="{StaticResource PonsTeklaMaterialDesignRaisedAccentButton}">
                 <WrapPanel>
-                    <TextBlock Foreground="Blue" Text="Load"/>
-                    <TextBlock Foreground="Red" Text=" Titles" xml:space="preserve"></TextBlock>
+                    <TextBlock Text="Load"/>
+                    <TextBlock Foreground="LightGreen" Text=" Titles" xml:space="preserve"></TextBlock>
                 </WrapPanel>
             </Button>
-            <Button x:Name="ClearListButton" Content="Clear list" Click="ClearListButton_Click" 
-                    Height="20" Width="{StaticResource CommonControlWidth}"/>
+            <Button x:Name="ClearListButton" Content="Clear list" Click="ClearListButton_Click"/>
         </WrapPanel>
 
         <ListBox x:Name="ResourceListBox" Margin="0, 5, 0, 0"

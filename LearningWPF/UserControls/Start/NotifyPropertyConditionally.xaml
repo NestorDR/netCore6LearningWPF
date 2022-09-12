@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LearningWPF.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800"
              Style="{StaticResource ScreenStyle}">
@@ -11,62 +12,54 @@
     <Grid Background="Transparent" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="*"/> 
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="20" SharedSizeGroup="row"/>
+            <RowDefinition Height="40" SharedSizeGroup="row"/>
+            <RowDefinition Height="Auto" SharedSizeGroup="row"/>
+            <RowDefinition Height="40" SharedSizeGroup="row"/>
+            <RowDefinition Height="Auto" SharedSizeGroup="row"/>
+            <RowDefinition Height="20" SharedSizeGroup="row"/>
         </Grid.RowDefinitions>
 
+        <!--Row 0-->
         <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Style="{StaticResource SubtitleStyle}">Alphabet</TextBlock>
+                   Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Alphabet</TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Style="{StaticResource SubtitleStyle}">Selected letter</TextBlock>
+                   Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Selected letter</TextBlock>
 
         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" xml:space="preserve"
-                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"
-                   >All properties changes of the 1st Letter of the DataContext are notified to the view.  Also <TextBlock FontWeight="DemiBold">A</TextBlock> and <TextBlock FontWeight="DemiBold">M</TextBlock> are propagated to the 2nd letter.</TextBlock>
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                   >All properties changes of the 1st Letter of the DataContext are notified to the view.  Also <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold">A</TextBlock> and <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold">M</TextBlock> are propagated to the 2nd letter.</TextBlock>
 
-        <Grid Grid.Row="2" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="1st Letter" HorizontalAlignment="Center"/>
-            <ComboBox Grid.Column="1" x:Name="FirstAlphabetComboBox" SelectionChanged="FirstAlphabetComboBox_SelectionChanged" HorizontalContentAlignment="Center"/>
-        </Grid>
-        <TextBlock Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left">
-            Object value <TextBlock Foreground="Crimson" FontWeight="Bold" Text="{Binding FirstLetter.Value}"/>
-        </TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right">
-            Char value <TextBlock Foreground="Blue" FontWeight="Bold" Text="{Binding FirstLetterCharValue}"/>
+        <!--Row 1-->
+        <ComboBox x:Name="FirstAlphabetComboBox" Grid.Row="2" Grid.Column="1"
+                  materialDesign:HintAssist.Hint="1st Letter"
+                  SelectionChanged="FirstAlphabetComboBox_SelectionChanged" />
+        <TextBlock Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center">
+            Object value <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold" Foreground="Crimson" Text="{Binding FirstLetter.Value}"/>
+            <LineBreak/>
+            Char value <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold"  Foreground="Blue" Text="{Binding FirstLetterCharValue}"/>
         </TextBlock>
 
+        <!--Row 2-->
         <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" xml:space="preserve"
-                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"
-                   >The properties changes of the 2nd Letter of the DataContext above the threshold letter <TextBlock FontWeight="DemiBold" Text="{Binding ThresholdLetter}"/>, are not notified to the view.</TextBlock>
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+        >The properties changes of the 2nd Letter of the DataContext above the threshold letter <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold" Text="{Binding ThresholdLetter}"/>, are not notified to the view.</TextBlock>
 
-        <Grid Grid.Row="4" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="2nd Letter" HorizontalAlignment="Center"/>
-            <ComboBox Grid.Column="1" x:Name="SecondAlphabetComboBox" SelectionChanged="SecondAlphabetComboBox_SelectionChanged" HorizontalContentAlignment="Center"/>
-        </Grid>
-        
-        <TextBlock Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left">
-            Object value <TextBlock Foreground="Crimson" FontWeight="Bold" Text="{Binding SecondLetter.Value}"/>
-        </TextBlock>
-        <TextBlock Grid.Row="4" Grid.Column="3" HorizontalAlignment="Right">
-            Char value <TextBlock Foreground="Blue" FontWeight="Bold" Text="{Binding SecondLetterCharValue}"/>
+        <!--Row 3-->
+        <ComboBox x:Name="SecondAlphabetComboBox" Grid.Row="4" Grid.Column="1"
+                  materialDesign:HintAssist.Hint="2nd Letter"
+                  SelectionChanged="SecondAlphabetComboBox_SelectionChanged" HorizontalContentAlignment="Center"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center">
+            Object value <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold" Foreground="Crimson" Text="{Binding SecondLetter.Value}"/>
+            <LineBreak/>
+            Char value <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold"  Foreground="Blue" Text="{Binding SecondLetterCharValue}"/>
         </TextBlock>
     </Grid>
     </StackPanel>

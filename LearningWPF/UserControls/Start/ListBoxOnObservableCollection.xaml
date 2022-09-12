@@ -11,15 +11,12 @@
              Unloaded="ListBoxSelection_Unloaded">
 
     <DockPanel Margin="10">
-        <Grid DockPanel.Dock="Right" Margin="10, 0, 0, 0">
+        <Grid DockPanel.Dock="Right">
             <Grid.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="0,0,0,5" />
-                </Style>
             </Grid.Resources>
             
             <StackPanel VerticalAlignment="Top">
-                <TextBlock HorizontalAlignment="Center" Style="{StaticResource SubtitleStyle}">Selection</TextBlock>
+                <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Selection</TextBlock>
                 <Button x:Name="ShowSelectedItemButton" Click="ShowSelectedItemButton_Click">Show selected</Button>
                 <Button x:Name="SelectNextButton" Click="SelectNextButton_Click">Select next</Button>
                 <Button x:Name="SelectLastButton" Click="SelectLastButton_Click">Select last</Button>
@@ -28,7 +25,7 @@
             </StackPanel>
 
             <StackPanel VerticalAlignment="Bottom">
-                <TextBlock HorizontalAlignment="Center" Style="{StaticResource SubtitleStyle}">Actions</TextBlock>
+                <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Actions</TextBlock>
                 <Button x:Name="AddItemButton" Click="AddItemButton_Click">Add task</Button>
                 <Button x:Name="ChangeItemButton" Click="ChangeItemButton_Click" >Change task</Button>
                 <Button x:Name="DeleteItemButton" Click="DeleteItemButton_Click">Delete task</Button>

@@ -75,24 +75,32 @@ namespace LearningWPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
         {
-            var mnu = (MenuItem)sender;
+            var option = (ListBoxItem)sender;
 
             // The Tag property contains a command or the name of a user control to load
-            if (mnu.Tag == null) return;
-            var cmd = mnu.Tag.ToString();
+            if (option.Tag == null) return;
+            var cmd = option.Tag.ToString();
 
             if (cmd!.Contains('.'))
             {
                 // Display a user control
                 LoadUserControl(cmd);
+                MenuToggleButton.IsChecked = false;
+            }
+            else if (cmd!.EndsWith("ToggleMenu"))
+            {
+                // Expand/Collapse menu group
+                ToggleMenuGroup(cmd);
             }
             else
             {
                 // Process special commands
                 ProcessMenuCommands(cmd);
+                MenuToggleButton.IsChecked = false;
             }
+
         }
 
         /// <summary>
@@ -132,6 +140,29 @@ namespace LearningWPF
         public void DisplayUserControl(UserControl uc)
         {
             ContentArea.Children.Add(uc);
+        }
+
+        /// <summary>
+        /// Handles any expand/collapse toggle within the Tag property of the menu items.
+        /// </summary>
+        /// <param name="menuGroupToggle">Command found in Tag property.</param>
+        private void ToggleMenuGroup(string menuGroupToggle)
+        {
+            menuGroupToggle = menuGroupToggle.Replace("ToggleMenu", "");
+
+            static Visibility ToggleVisibility(Visibility currentVisibility) 
+                => currentVisibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+
+            switch (menuGroupToggle.ToLower())
+            {
+                case "start":
+                    _viewModel.StartMenuGroupVisibility = ToggleVisibility(_viewModel.StartMenuGroupVisibility);
+                    break;
+                case "mvvm":
+                    _viewModel.MvvmMenuGroupVisibility = ToggleVisibility(_viewModel.MvvmMenuGroupVisibility);
+                    //;
+                    break;
+            }
         }
 
         /// <summary>
@@ -209,5 +240,10 @@ namespace LearningWPF
             await Delay(1);
         }
         #endregion
+
+        private void MenuToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

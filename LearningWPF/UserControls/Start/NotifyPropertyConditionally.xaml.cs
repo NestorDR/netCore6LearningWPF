@@ -36,6 +36,8 @@ namespace LearningWPF.UserControls.Start
 
         private void FirstAlphabetComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!this.IsLoaded) return;
+            
             _letterContext.FirstLetter.Value = (char)((ComboBox)sender).SelectedItem;
             _letterContext.FirstLetterCharValue = _letterContext.FirstLetter.Value;
             MessageBox.Show($"1º letter:\nObj is {_letterContext.FirstLetter.Value}\nChar is {_letterContext.FirstLetterCharValue}", "1º Letter");
@@ -48,6 +50,8 @@ namespace LearningWPF.UserControls.Start
 
         private void SecondAlphabetComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!this.IsLoaded) return;
+            
             _letterContext.SecondLetter.Value = (char)((ComboBox)sender).SelectedItem;
             _letterContext.SecondLetterCharValue = _letterContext.SecondLetter.Value;
             MessageBox.Show($"2º letter:\nObj is {_letterContext.SecondLetter.Value}\nChar is {_letterContext.SecondLetterCharValue}", "2º Letter");
