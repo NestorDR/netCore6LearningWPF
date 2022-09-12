@@ -15,3 +15,7 @@ Using as a guide:
 ## Development platform
 
 Visual Studio Community 2022 on Windows 11
+
+## UI Library
+
+[Material Design In XAML](http://materialdesigninxaml.net/)
