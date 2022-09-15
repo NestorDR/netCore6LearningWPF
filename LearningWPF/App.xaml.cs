@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.Configuration;
-// --- App modules ---
 using LearningWPF.Common;
 
 namespace LearningWPF

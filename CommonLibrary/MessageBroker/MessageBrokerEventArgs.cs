@@ -16,7 +16,7 @@
         /// <summary>
         /// Get/Set the payload for the message
         /// </summary>
-        public object? MessagePayload { get; set; }
+        public object MessagePayload { get; set; }
 
         #endregion
 
@@ -25,16 +25,9 @@
         /// <summary>
         /// Constructor for MessageBrokerEventArgs class
         /// </summary>
-        public MessageBrokerEventArgs() : base()
-        {
-        }
-
-        /// <summary>
-        /// Constructor for MessageBrokerEventArgs class
-        /// </summary>
         /// <param name="messageName">A Message Name</param>
         /// <param name="payload">The Payload for the Message</param>
-        public MessageBrokerEventArgs(string messageName, object? payload) : base()
+        public MessageBrokerEventArgs(string messageName, object payload) : base()
         {
             MessageName = messageName;
             MessagePayload = payload;

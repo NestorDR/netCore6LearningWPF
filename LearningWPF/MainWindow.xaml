@@ -1,158 +1,188 @@
-﻿<Window x:Class="LearningWPF.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModels="clr-namespace:LearningWPF.ViewModels"
-        xmlns:system="clr-namespace:System;assembly=System.Runtime"
-        mc:Ignorable="d"
-        Title="Learning WPF (Windows Presentation Foundation)"
-        ContentRendered="MainWindow_OnContentRendered"
-        WindowStartupLocation="CenterScreen"
-        Height="700" Width="1200"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Normal"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
-        FontFamily="{DynamicResource MaterialDesignFont}">
+﻿<Window
+    x:Class="LearningWPF.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:viewModels="clr-namespace:LearningWPF.ViewModels"
+    Title="Learning WPF (Windows Presentation Foundation)"
+    Width="1200"
+    Height="700"
+    Background="{DynamicResource MaterialDesignPaper}"
+    ContentRendered="MainWindow_OnContentRendered"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Normal"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Window.Resources>
-        <viewModels:MainWindowViewModel x:Key="ViewModel"
-                                        InfoMessageTitle="Please wait while loading application..."
-                                        InfoMessageTimeout="1000"
-                                        StatusMessage="Learning WPF" />
+        <viewModels:MainWindowViewModel
+            x:Key="ViewModel"
+            InfoMessageTimeout="1000"
+            InfoMessageTitle="Please wait while loading application..."
+            StatusMessage="Learning WPF" />
         <system:String x:Key="WindowResourceString">Hello World! From Window Resource</system:String>
     </Window.Resources>
 
-    <Grid Grid.Column="1" DataContext="{StaticResource ViewModel}">
-        <!-- ViewModel is the resource key where the View Model is referenced. -->
+    <Grid DataContext="{StaticResource ViewModel}">
+        <!--  ViewModel is the resource key where the View Model is referenced.  -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-    
+
+        <!--  Main Area: ColorZone + Host (Menu + Document)  -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <materialDesign:ColorZone Grid.Column="0"
-                                      Mode="PrimaryLight"
-                                      HorizontalAlignment="Stretch"
-                                      VerticalAlignment="Stretch">
-                <StackPanel HorizontalAlignment="Center">
+            <!--  ColorZone Area  -->
+            <materialDesign:ColorZone
+                Grid.Column="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Mode="PrimaryMid">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                     <ToggleButton
                         x:Name="MenuToggleButton"
-                        Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                        AutomationProperties.Name="HamburgerToggleButton"
                         IsChecked="True"
-                        AutomationProperties.Name="HamburgerToggleButton"/>
-                        <!--Selected="MenuToggleButton_Selected"-->
+                        Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                    
+
                 </StackPanel>
 
             </materialDesign:ColorZone>
 
-            <!-- Menu Area -->
-            <materialDesign:DialogHost Grid.Column="1"
-                                       Identifier="RootDialog"
-                                       DialogTheme="Inherit">
-                                       <!--SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}"-->
+            <!--  Host Area  -->
+            <materialDesign:DialogHost
+                Grid.Column="1"
+                DialogTheme="Inherit"
+                Identifier="RootDialog">
 
-                <materialDesign:DrawerHost  x:Name="DrawerHost"
-                                            IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+                <materialDesign:DrawerHost x:Name="DrawerHost" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
 
-                    <!-- Menu Area -->
+                    <!--  Menu Area  -->
                     <materialDesign:DrawerHost.LeftDrawerContent>
-                        <ListBox 
-                            x:Name="ListBoxItemsListBox" 
-                            Margin="0 0 0 10"
+                        <ListBox
+                            x:Name="MenuItemsListBox"
                             MinWidth="300"
-                            Style="{StaticResource PonsTeklaMainNavigationPrimaryListBox}">
+                            Margin="0,0,0,10"
+                            Style="{StaticResource CustomizedMainNavigationPrimaryListBox}">
                             <ListBox.Resources>
-                                <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
+                                <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar" />
                             </ListBox.Resources>
                             <!--
-                                Each control in WPF has a Tag property. This property is of the data type Object and isn't used by WPF. 
+                                Each control in WPF has a Tag property. This property is of the data type Object and isn't used by WPF.
                                 This means that you can use it for whatever you want. You're going to use it for either:
-                                    - a command to execute, or for
-                                    - the name of a user control to create dynamically.
+                                - a command to execute, or for
+                                - the name of a user control to create dynamically.
                             -->
                             <ListBox.Items>
-                                <ListBoxItem Content="{Binding Path=LoginMenuHeader}"
-                                      Selected="ListBoxItem_Selected"
-                                      Tag="login" />
-
-                                <!--#region Start Menu -->
-                                <ListBoxItem Content="Start"
-                                             Selected="ListBoxItem_Selected"
-                                             Tag="StartToggleMenu"
-                                />
-                                <ListBoxItem Content="Hello World!" Margin="8,0,0,0"
-                                             Selected="ListBoxItem_Selected"
-                                             Tag="LearningWPF.UserControls.Start.HelloWorld"
-                                             Visibility="{Binding StartMenuGroupVisibility}"/>
-                                <ListBoxItem Content="Using styles" Margin="8,0,0,0"
-                                      Selected="ListBoxItem_Selected"
-                                      Tag="LearningWPF.UserControls.Start.UsingStyles"
-                                      Visibility="{Binding StartMenuGroupVisibility}"/>
-                                <ListBoxItem Content="ListBox on ObservableCollection" Margin="8,0,0,0"
-                                      Selected="ListBoxItem_Selected"
-                                      Tag="LearningWPF.UserControls.Start.ListBoxOnObservableCollection"
-                                      Visibility="{Binding StartMenuGroupVisibility}"/>
-                                <ListBoxItem Content="Notify property conditionally" Margin="8,0,0,0"
-                                      Selected="ListBoxItem_Selected"
-                                      Tag="LearningWPF.UserControls.Start.NotifyPropertyConditionally"
-                                      Visibility="{Binding StartMenuGroupVisibility}"/>
+                                <!--#region Start Menu-->
+                                <ListBoxItem
+                                    Content="Start"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="StartToggleMenu" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="Hello World!"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="LearningWPF.UserControls.Start.HelloWorld"
+                                    Visibility="{Binding StartMenuGroupVisibility}" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="Using styles"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="LearningWPF.UserControls.Start.UsingStyles"
+                                    Visibility="{Binding StartMenuGroupVisibility}" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="ListBox on ObservableCollection"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="LearningWPF.UserControls.Start.ListBoxOnObservableCollection"
+                                    Visibility="{Binding StartMenuGroupVisibility}" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="Notify property conditionally"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="LearningWPF.UserControls.Start.NotifyPropertyConditionally"
+                                    Visibility="{Binding StartMenuGroupVisibility}" />
                                 <!--#endregion-->
 
-                                <!--#region Model View ViewModel -->
-                                <ListBoxItem Content="MVVM"
-                                             Selected="ListBoxItem_Selected"
-                                             Tag="MvvmToggleMenu"/>
-                                <ListBoxItem Content="Users" Margin="8,0,0,0"
-                                             IsEnabled="{Binding UserEntity.IsLoggedIn}"
-                                             Selected="ListBoxItem_Selected"
-                                             Tag="WPF.Sample.UserControls.UserMaintenanceControl"
-                                             Visibility="{Binding MvvmMenuGroupVisibility}"/>
-                                <ListBoxItem Content="Feedback" Margin="8,0,0,0"
-                                             IsEnabled="{Binding UserEntity.IsLoggedIn}"
-                                             Selected="ListBoxItem_Selected"
-                                             Tag="WPF.Sample.UserControls.UserFeedbackControl"
-                                             Visibility="{Binding MvvmMenuGroupVisibility}"/>
+                                <!--#region Model View ViewModel-->
+                                <ListBoxItem
+                                    Content="MVVM"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="MvvmToggleMenu" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="Users"
+                                    IsEnabled="{Binding UserEntity.IsLoggedIn}"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="WPF.Sample.UserControls.UserMaintenanceControl"
+                                    Visibility="{Binding MvvmMenuGroupVisibility}" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="Feedback"
+                                    IsEnabled="{Binding UserEntity.IsLoggedIn}"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="WPF.Sample.UserControls.UserFeedbackControl"
+                                    Visibility="{Binding MvvmMenuGroupVisibility}" />
                                 <!--#endregion-->
 
                                 <Separator />
 
-                                <ListBoxItem Content="Exit" 
-                                             Selected="ListBoxItem_Selected"
-                                             Tag="exit" />
+                                <ListBoxItem
+                                    Content="{Binding Path=LoginMenuHeader}"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="login" />
+                                <ListBoxItem
+                                    Content="Exit"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="exit" />
                             </ListBox.Items>
                         </ListBox>
                     </materialDesign:DrawerHost.LeftDrawerContent>
 
-                    <!-- Single Document Area -->
+                    <!--  Single Document Area  -->
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <!-- Informational Message Area -->
-                        <StackPanel Grid.Row="2"
-                                Panel.ZIndex="2"
-                                VerticalAlignment="Top" 
-                                Visibility="{Binding Path=IsInfoMessageVisible, Converter={StaticResource VisibilityConverter}}" Margin="0,370,0,0">
-                            <TextBlock FontSize="24" Text="{Binding Path=InfoMessageTitle}" HorizontalAlignment="Right"/>
-                            <TextBlock FontSize="20" Text="{Binding Path=InfoMessage}" HorizontalAlignment="Right"/>
-                        </StackPanel>
 
-                        <!-- Content Area -->
-                        <Grid Grid.Row="0"
-                          Panel.ZIndex="1"
-                          x:Name="ContentArea" Grid.RowSpan="3">
+                        <!--  Content Area  -->
+                        <Grid
+                            x:Name="ContentArea"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Panel.ZIndex="1" >
                         </Grid>
+
+                        <!--  Informational Message Area  -->
+                        <StackPanel
+                            Grid.Row="1"
+                            Margin="0,370,0,0"
+                            VerticalAlignment="Top"
+                            Panel.ZIndex="2"
+                            Visibility="{Binding Path=IsInfoMessageVisible, Converter={StaticResource VisibilityConverter}}">
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                FontSize="24"
+                                Text="{Binding Path=InfoMessageTitle}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                FontSize="20"
+                                Text="{Binding Path=InfoMessage}" />
+                        </StackPanel>
                     </Grid>
 
                 </materialDesign:DrawerHost>
@@ -160,8 +190,8 @@
             </materialDesign:DialogHost>
 
         </Grid>
-        
-        <!-- Status Message Area -->
+
+        <!--  Status Message Area  -->
         <StatusBar Grid.Row="1">
             <StatusBarItem>
                 <TextBlock Text="{Binding Path=StatusMessage}" />

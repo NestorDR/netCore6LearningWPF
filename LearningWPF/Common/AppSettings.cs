@@ -1,6 +1,7 @@
-﻿using CommonLibrary;
-using System.IO;
+﻿using System.IO;
 using Microsoft.Extensions.Configuration;
+// --- App modules ---
+using CommonLibrary;
 
 namespace LearningWPF.Common
 {
@@ -25,11 +26,7 @@ namespace LearningWPF.Common
         public string ConnectionString
         {
             get => _connectionString;
-            set
-            {
-                _connectionString = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _connectionString, value);
         }
 
         #endregion

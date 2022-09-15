@@ -2,39 +2,29 @@
 {
   public class ViewModelAddEditDeleteBase : ViewModelBase
   {
-    #region Private Variables
-    private bool _isListEnabled = true;
-    private bool _isDetailEnabled;
-    private bool _isAddMode;
-    #endregion
-
     #region Public Properties
+
+    private bool _isListEnabled = true;
     public bool IsListEnabled
     {
       get => _isListEnabled;
-      set {
-        _isListEnabled = value;
-        NotifyPropertyChanged();
-      }
+      set => SetProperty(ref _isListEnabled, value);
     }
 
+    private bool _isDetailEnabled;
     public bool IsDetailEnabled
     {
       get => _isDetailEnabled;
-      set {
-        _isDetailEnabled = value;
-        NotifyPropertyChanged();
-      }
+      set => SetProperty(ref _isDetailEnabled, value);
     }
 
+    private bool _isAddMode;
     public bool IsAddMode
     {
       get => _isAddMode;
-      set {
-        _isAddMode = value;
-        NotifyPropertyChanged();
-      }
+      set => SetProperty(ref _isAddMode, value);
     }
+
     #endregion
 
     #region BeginEdit Method

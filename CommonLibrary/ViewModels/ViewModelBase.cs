@@ -10,27 +10,17 @@ namespace CommonLibrary.ViewModels
         #region Public Properties
 
         private ObservableCollection<ValidationMessage> _validationMessages = new();
-
         public ObservableCollection<ValidationMessage> ValidationMessages
         {
             get => _validationMessages;
-            set
-            {
-                _validationMessages = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _validationMessages, value);
         }
 
         private bool _isValidationVisible;
-
         public bool IsValidationVisible
         {
             get => _isValidationVisible;
-            set
-            {
-                _isValidationVisible = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _isValidationVisible, value);
         }
 
         #endregion

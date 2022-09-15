@@ -30,35 +30,46 @@
             <Style BasedOn="{StaticResource ScreenStyle}" TargetType="UserControl" />
             <Style BasedOn="{StaticResource ScreenStyle}" TargetType="Window" />
 
-            <Style x:Key="PonsTeklaMainNavigationPrimaryListBoxItem" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MaterialDesignNavigationPrimaryListBoxItem}">
-                <Setter Property="materialDesign:ListBoxItemAssist.CornerRadius" Value="0"/>
-                <Setter Property="Margin" Value="0"></Setter>
-                <Setter Property="Padding" Value="15"/>
+            <Style
+                x:Key="CustomizedMainNavigationPrimaryListBoxItem"
+                BasedOn="{StaticResource MaterialDesignNavigationPrimaryListBoxItem}"
+                TargetType="{x:Type ListBoxItem}">
+                <Setter Property="materialDesign:ListBoxItemAssist.CornerRadius" Value="0" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="15" />
+            </Style>
+            <Style
+                x:Key="CustomizedMainNavigationPrimaryListBox"
+                BasedOn="{StaticResource MaterialDesignNavigationPrimaryListBox}"
+                TargetType="{x:Type ListBox}">
+                <Setter Property="ItemContainerStyle" Value="{StaticResource CustomizedMainNavigationPrimaryListBoxItem}" />
             </Style>
 
-            <Style x:Key="PonsTeklaMainNavigationPrimaryListBox" TargetType="{x:Type ListBox}" BasedOn="{StaticResource MaterialDesignNavigationPrimaryListBox}">
-                <Setter Property="ItemContainerStyle" Value="{StaticResource PonsTeklaMainNavigationPrimaryListBoxItem}"/>
-            </Style>
-
-            <Style BasedOn="{StaticResource MaterialDesignCaptionTextBlock}" TargetType="TextBlock">
-                <Setter Property="VerticalAlignment" Value="Center"/>
+            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
             <Style BasedOn="{StaticResource MaterialDesignFilledTextBox}" TargetType="TextBox">
+                <Setter Property="Margin" Value="5" />
+            </Style>
+            <Style BasedOn="{StaticResource MaterialDesignFilledPasswordBox}" TargetType="PasswordBox">
                 <Setter Property="Margin" Value="5" />
             </Style>
             <Style BasedOn="{StaticResource MaterialDesignFilledComboBox}" TargetType="ComboBox">
                 <Setter Property="Margin" Value="5" />
             </Style>
+
             <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="Button">
                 <Setter Property="Margin" Value="5" />
                 <Setter Property="Width" Value="{DynamicResource CommonControlWidth}" />
             </Style>
-            <Style x:Key="PonsTeklaMaterialDesignRaisedAccentButton" 
-                   BasedOn="{StaticResource MaterialDesignRaisedAccentButton}" TargetType="Button">
+            <Style
+                x:Key="CustomizedMaterialDesignRaisedAccentButton"
+                BasedOn="{StaticResource MaterialDesignRaisedAccentButton}"
+                TargetType="Button">
                 <Setter Property="Margin" Value="5" />
                 <Setter Property="Width" Value="{DynamicResource CommonControlWidth}" />
             </Style>
-            <!--#endregion-->
+            <!--#endregion Style resources-->
 
             <system:String x:Key="ApplicationResourceString">Hello World! From Application Resource</system:String>
         </ResourceDictionary>

@@ -15,11 +15,7 @@ namespace LearningWPF.Models
         public int Id
         {
             get => _id;
-            set
-            {
-                _id = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _id, value);
         }
 
         private string _userName = string.Empty;
@@ -28,11 +24,7 @@ namespace LearningWPF.Models
         public string UserName
         {
             get => _userName;
-            set
-            {
-                _userName = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _userName, value);
         }
 
         private string _password = string.Empty;
@@ -40,11 +32,7 @@ namespace LearningWPF.Models
         public string Password
         {
             get => _password;
-            set
-            {
-                _password = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _password, value);
         }
 
         private string _firstName = string.Empty;
@@ -53,11 +41,7 @@ namespace LearningWPF.Models
         public string FirstName
         {
             get => _firstName;
-            set
-            {
-                _firstName = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _firstName, value);
         }
 
         private string _lastName = string.Empty;
@@ -66,11 +50,7 @@ namespace LearningWPF.Models
         public string LastName
         {
             get => _lastName;
-            set
-            {
-                _lastName = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _lastName, value);
         }
 
         private string _emailAddress = string.Empty;
@@ -81,11 +61,7 @@ namespace LearningWPF.Models
         public string EmailAddress
         {
             get => _emailAddress;
-            set
-            {
-                _emailAddress = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _emailAddress, value);
         }
 
         private bool _isLoggedIn = false;
@@ -93,11 +69,7 @@ namespace LearningWPF.Models
         public bool IsLoggedIn
         {
             get => _isLoggedIn;
-            set
-            {
-                _isLoggedIn = value;
-                NotifyPropertyChanged();
-            }
+            set => SetProperty(ref _isLoggedIn, value);
         }
     }
 }

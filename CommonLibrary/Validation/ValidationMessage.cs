@@ -8,20 +8,14 @@
     public string PropertyName
     {
       get => _propertyName;
-      set {
-        _propertyName = value;
-        NotifyPropertyChanged();
-      }
+      set => SetProperty(ref _propertyName, value);
     }
 
     private string _message = string.Empty;
     public string Message
     {
       get => _message;
-      set {
-        _message = value;
-        NotifyPropertyChanged();
-      }
+      set => SetProperty(ref _message, value);
     }
 
     #endregion

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CommonLibrary.MessageBroker;
+using LearningWPF.Models;
 using LearningWPF.ViewModels;
 
 namespace LearningWPF
@@ -64,6 +65,16 @@ namespace LearningWPF
                     _viewModel.StatusMessage = e.MessagePayload?.ToString();
                     break;
 
+                case MessageBrokerMessages.LOGIN_SUCCESS:
+                    _viewModel.UserEntity = (UserModel)e.MessagePayload;
+                    _viewModel.LoginMenuHeader = "Logout " + _viewModel.UserEntity.UserName;
+                    break;
+
+                case MessageBrokerMessages.LOGOUT:
+                    _viewModel.UserEntity.IsLoggedIn = false;
+                    _viewModel.LoginMenuHeader = "Login";
+                    break;
+
                 case MessageBrokerMessages.CLOSE_USER_CONTROL:
                     CloseUserControl();
                     break;
@@ -101,6 +112,8 @@ namespace LearningWPF
                 MenuToggleButton.IsChecked = false;
             }
 
+            MenuItemsListBox.SelectedIndex = -1;
+            MenuItemsListBox.SelectedItem = null;
         }
 
         /// <summary>
@@ -178,19 +191,21 @@ namespace LearningWPF
                     break;
 
                 case "login":
-                    /*
-                    // TODO: Login/Logout
+                    // Login/Logout
                     if (_viewModel.UserEntity.IsLoggedIn)
                     {
                         // Logging out, so close any open windows
+                        CloseUserControl();
                         // Reset the user object
+                        _viewModel.UserEntity = new UserModel();
                         // Make menu display Login
+                        _viewModel.LoginMenuHeader = "Login";
                     }
                     else
                     {
                         // Display the login screen
+                        LoadUserControl("LearningWPF.UserControls.Login");
                     }
-                    */
                     break;
             }
         }
@@ -240,10 +255,5 @@ namespace LearningWPF
             await Delay(1);
         }
         #endregion
-
-        private void MenuToggleButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
