@@ -5,8 +5,12 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>PT-Gray.ico</ApplicationIcon>
+    <ApplicationIcon>Microsoft_WPF.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Microsoft_WPF.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CommonLibrary\CommonLibrary.csproj" />

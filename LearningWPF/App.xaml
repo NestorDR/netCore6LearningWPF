@@ -23,12 +23,15 @@
             <system:Double x:Key="CommonControlWidth">130</system:Double>
 
             <!--#region Style resources-->
-            <Style x:Key="ScreenStyle" TargetType="ContentControl">
+            <SolidColorBrush
+                x:Key="PrimaryHueExtraLightBrush"
+                po:Freeze="True"
+                Color="{StaticResource Primary50}" />
+
+            <Style x:Key="CustomizedDesignUserControl" TargetType="UserControl">
                 <!--  Shared Setters  -->
-                <Setter Property="Background" Value="#FFF3E0" />
+                <Setter Property="Background" Value="{StaticResource PrimaryHueExtraLightBrush}" />
             </Style>
-            <Style BasedOn="{StaticResource ScreenStyle}" TargetType="UserControl" />
-            <Style BasedOn="{StaticResource ScreenStyle}" TargetType="Window" />
 
             <Style
                 x:Key="CustomizedMainNavigationPrimaryListBoxItem"

@@ -10,14 +10,8 @@
     Title="Learning WPF (Windows Presentation Foundation)"
     Width="1200"
     Height="700"
-    Background="{DynamicResource MaterialDesignPaper}"
     ContentRendered="MainWindow_OnContentRendered"
-    FontFamily="{DynamicResource MaterialDesignFont}"
-    TextElement.FontSize="13"
-    TextElement.FontWeight="Normal"
-    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-    TextOptions.TextFormattingMode="Ideal"
-    TextOptions.TextRenderingMode="Auto"
+    Style="{DynamicResource MaterialDesignWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>
@@ -48,14 +42,14 @@
                 Grid.Column="0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                Mode="PrimaryMid">
+                Mode="PrimaryDark">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                     <ToggleButton
                         x:Name="MenuToggleButton"
                         AutomationProperties.Name="HamburgerToggleButton"
                         IsChecked="True"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-                    
+
 
                 </StackPanel>
 
@@ -115,6 +109,12 @@
                                     Selected="ListBoxItem_Selected"
                                     Tag="LearningWPF.UserControls.Start.NotifyPropertyConditionally"
                                     Visibility="{Binding StartMenuGroupVisibility}" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="Using IsSharedSizeScope"
+                                    Selected="ListBoxItem_Selected"
+                                    Tag="LearningWPF.UserControls.Start.SharedSizeScope"
+                                    Visibility="{Binding StartMenuGroupVisibility}" />
                                 <!--#endregion-->
 
                                 <!--#region Model View ViewModel-->
@@ -164,8 +164,7 @@
                             x:Name="ContentArea"
                             Grid.Row="0"
                             Grid.RowSpan="2"
-                            Panel.ZIndex="1" >
-                        </Grid>
+                            Panel.ZIndex="1" />
 
                         <!--  Informational Message Area  -->
                         <StackPanel

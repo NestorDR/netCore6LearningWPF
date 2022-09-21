@@ -1,66 +1,123 @@
-﻿<UserControl x:Class="LearningWPF.UserControls.Start.NotifyPropertyConditionally"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LearningWPF.UserControls"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800"
-             Style="{StaticResource ScreenStyle}">
+﻿<UserControl
+    x:Class="LearningWPF.UserControls.Start.NotifyPropertyConditionally"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="500"
+    d:DesignWidth="800"
+    Style="{StaticResource CustomizedDesignUserControl}"
+    mc:Ignorable="d">
     <StackPanel VerticalAlignment="Center">
-    <Grid Background="Transparent" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="*"/> 
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20" SharedSizeGroup="row"/>
-            <RowDefinition Height="40" SharedSizeGroup="row"/>
-            <RowDefinition Height="Auto" SharedSizeGroup="row"/>
-            <RowDefinition Height="40" SharedSizeGroup="row"/>
-            <RowDefinition Height="Auto" SharedSizeGroup="row"/>
-            <RowDefinition Height="20" SharedSizeGroup="row"/>
-        </Grid.RowDefinitions>
+        <Grid Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" SharedSizeGroup="row" />
+                <RowDefinition Height="40" SharedSizeGroup="row" />
+                <RowDefinition Height="Auto" SharedSizeGroup="row" />
+                <RowDefinition Height="40" SharedSizeGroup="row" />
+                <RowDefinition Height="Auto" SharedSizeGroup="row" />
+                <RowDefinition Height="20" SharedSizeGroup="row" />
+            </Grid.RowDefinitions>
 
-        <!--Row 0-->
-        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Alphabet</TextBlock>
-        <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Selected letter</TextBlock>
+            <!--  Row 0  -->
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Style="{StaticResource MaterialDesignSubtitle2TextBlock}">
+                Alphabet
+            </TextBlock>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="3"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Style="{StaticResource MaterialDesignSubtitle2TextBlock}">
+                Selected letter
+            </TextBlock>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" xml:space="preserve"
-                   HorizontalAlignment="Center" VerticalAlignment="Bottom" 
-                   >All properties changes of the 1st Letter of the DataContext are notified to the view.  Also <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold">A</TextBlock> and <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold">M</TextBlock> are propagated to the 2nd letter.</TextBlock>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                xml:space="preserve">All properties changes of the 1st Letter of the DataContext are notified to the view.  Also <TextBlock FontWeight="Bold" Style="{StaticResource MaterialDesignBody2TextBlock}">A</TextBlock> and <TextBlock FontWeight="Bold" Style="{StaticResource MaterialDesignBody2TextBlock}">M</TextBlock> are propagated to the 2nd letter.</TextBlock>
 
-        <!--Row 1-->
-        <ComboBox x:Name="FirstAlphabetComboBox" Grid.Row="2" Grid.Column="1"
-                  materialDesign:HintAssist.Hint="1st Letter"
-                  SelectionChanged="FirstAlphabetComboBox_SelectionChanged" />
-        <TextBlock Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center">
-            Object value <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold" Foreground="Crimson" Text="{Binding FirstLetter.Value}"/>
-            <LineBreak/>
-            Char value <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold"  Foreground="Blue" Text="{Binding FirstLetterCharValue}"/>
-        </TextBlock>
+            <!--  Row 1  -->
+            <ComboBox
+                x:Name="FirstAlphabetComboBox"
+                Grid.Row="2"
+                Grid.Column="1"
+                materialDesign:HintAssist.Hint="1st Letter"
+                SelectionChanged="FirstAlphabetComboBox_SelectionChanged" />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="3"
+                HorizontalAlignment="Center">
+                Object value
+                <TextBlock
+                    FontWeight="Bold"
+                    Foreground="Crimson"
+                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                    Text="{Binding FirstLetter.Value}" />
+                <LineBreak />
+                Char value
+                <TextBlock
+                    FontWeight="Bold"
+                    Foreground="Blue"
+                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                    Text="{Binding FirstLetterCharValue}" />
+            </TextBlock>
 
-        <!--Row 2-->
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" xml:space="preserve"
-                   HorizontalAlignment="Center" VerticalAlignment="Bottom" 
-        >The properties changes of the 2nd Letter of the DataContext above the threshold letter <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold" Text="{Binding ThresholdLetter}"/>, are not notified to the view.</TextBlock>
+            <!--  Row 2  -->
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                xml:space="preserve">The properties changes of the 2nd Letter of the DataContext above the threshold letter <TextBlock
+                    FontWeight="Bold"
+                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                    Text="{Binding ThresholdLetter}" />, are not notified to the view.</TextBlock>
 
-        <!--Row 3-->
-        <ComboBox x:Name="SecondAlphabetComboBox" Grid.Row="4" Grid.Column="1"
-                  materialDesign:HintAssist.Hint="2nd Letter"
-                  SelectionChanged="SecondAlphabetComboBox_SelectionChanged" HorizontalContentAlignment="Center"/>
+            <!--  Row 3  -->
+            <ComboBox
+                x:Name="SecondAlphabetComboBox"
+                Grid.Row="4"
+                Grid.Column="1"
+                HorizontalContentAlignment="Center"
+                materialDesign:HintAssist.Hint="2nd Letter"
+                SelectionChanged="SecondAlphabetComboBox_SelectionChanged" />
 
-        <TextBlock Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center">
-            Object value <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold" Foreground="Crimson" Text="{Binding SecondLetter.Value}"/>
-            <LineBreak/>
-            Char value <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" FontWeight="Bold"  Foreground="Blue" Text="{Binding SecondLetterCharValue}"/>
-        </TextBlock>
-    </Grid>
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="3"
+                HorizontalAlignment="Center">
+                Object value
+                <TextBlock
+                    FontWeight="Bold"
+                    Foreground="Crimson"
+                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                    Text="{Binding SecondLetter.Value}" />
+                <LineBreak />
+                Char value
+                <TextBlock
+                    FontWeight="Bold"
+                    Foreground="Blue"
+                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                    Text="{Binding SecondLetterCharValue}" />
+            </TextBlock>
+        </Grid>
     </StackPanel>
 </UserControl>
