@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using CommonLibrary.MessageBroker;
 using LearningWPF.Models;
 using LearningWPF.ViewModels;
@@ -82,15 +83,24 @@ namespace LearningWPF
         }
 
         /// <summary>
-        /// Determines whether to process a command or load a user control.
+        /// Identifies list box item selected
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        private void ListBoxItem_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            var option = (ListBoxItem)sender;
+            var option = sender as ListBoxItem;
+            if (option?.Tag == null) return;
+            ListBoxItem_Selected(option);
+        }
 
-            // The Tag property contains a command or the name of a user control to load
+        /// <summary>
+        /// Determines whether to load a user control, toggle a menu, or process a command
+        /// </summary>
+        /// <param name="option"></param>
+        private void ListBoxItem_Selected(FrameworkElement option)
+        {
+            // The Tag property contains the name of a user control to load, or could be submenu header, or has a command to process
             if (option.Tag == null) return;
             var cmd = option.Tag.ToString();
 
@@ -111,9 +121,6 @@ namespace LearningWPF
                 ProcessMenuCommands(cmd);
                 MenuToggleButton.IsChecked = false;
             }
-
-            MenuItemsListBox.SelectedIndex = -1;
-            MenuItemsListBox.SelectedItem = null;
         }
 
         /// <summary>

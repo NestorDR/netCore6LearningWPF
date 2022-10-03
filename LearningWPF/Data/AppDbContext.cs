@@ -59,6 +59,6 @@ namespace LearningWPF.Data
          The DbSet enables to perform CRUD operations on the entity set.
         */
         // Entity sets
-        public virtual DbSet<UserModel> Users { get; set; }
+        public virtual DbSet<UserModel>? Users { get; set; }
     }
 }

@@ -11,12 +11,12 @@
         /// Get/Set a Unique Message Name.
         /// This property will help the receiver of the message know what is in the MessagePayload property.
         /// </summary>
-        public string MessageName { get; set; } = string.Empty;
+        public string MessageName { get; set; }
 
         /// <summary>
         /// Get/Set the payload for the message
         /// </summary>
-        public object MessagePayload { get; set; }
+        public object? MessagePayload { get; set; }
 
         #endregion
 
@@ -27,7 +27,7 @@
         /// </summary>
         /// <param name="messageName">A Message Name</param>
         /// <param name="payload">The Payload for the Message</param>
-        public MessageBrokerEventArgs(string messageName, object payload) : base()
+        public MessageBrokerEventArgs(string messageName, object? payload) : base()
         {
             MessageName = messageName;
             MessagePayload = payload;

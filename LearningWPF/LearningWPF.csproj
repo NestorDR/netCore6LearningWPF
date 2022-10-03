@@ -5,11 +5,11 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Microsoft_WPF.ico</ApplicationIcon>
+    <ApplicationIcon>education.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Microsoft_WPF.ico" />
+    <Content Include="education.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +35,10 @@
     <None Update="appsettings.*.json">
       <DependentUpon>appsettings.json</DependentUpon>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UserControls\MVVM\" />
   </ItemGroup>
 
 </Project>

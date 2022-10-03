@@ -83,36 +83,36 @@
                                 <!--#region Start Menu-->
                                 <ListBoxItem
                                     Content="Start"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="StartToggleMenu" />
                                 <ListBoxItem
                                     Margin="8,0,0,0"
                                     Content="Hello World!"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="LearningWPF.UserControls.Start.HelloWorld"
                                     Visibility="{Binding StartMenuGroupVisibility}" />
                                 <ListBoxItem
                                     Margin="8,0,0,0"
                                     Content="Using styles"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="LearningWPF.UserControls.Start.UsingStyles"
                                     Visibility="{Binding StartMenuGroupVisibility}" />
                                 <ListBoxItem
                                     Margin="8,0,0,0"
                                     Content="ListBox on ObservableCollection"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="LearningWPF.UserControls.Start.ListBoxOnObservableCollection"
                                     Visibility="{Binding StartMenuGroupVisibility}" />
                                 <ListBoxItem
                                     Margin="8,0,0,0"
                                     Content="Notify property conditionally"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="LearningWPF.UserControls.Start.NotifyPropertyConditionally"
                                     Visibility="{Binding StartMenuGroupVisibility}" />
                                 <ListBoxItem
                                     Margin="8,0,0,0"
                                     Content="Using IsSharedSizeScope"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="LearningWPF.UserControls.Start.SharedSizeScope"
                                     Visibility="{Binding StartMenuGroupVisibility}" />
                                 <!--#endregion-->
@@ -120,20 +120,20 @@
                                 <!--#region Model View ViewModel-->
                                 <ListBoxItem
                                     Content="MVVM"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="MvvmToggleMenu" />
                                 <ListBoxItem
                                     Margin="8,0,0,0"
                                     Content="Users"
                                     IsEnabled="{Binding UserEntity.IsLoggedIn}"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="WPF.Sample.UserControls.UserMaintenanceControl"
                                     Visibility="{Binding MvvmMenuGroupVisibility}" />
                                 <ListBoxItem
                                     Margin="8,0,0,0"
                                     Content="Feedback"
                                     IsEnabled="{Binding UserEntity.IsLoggedIn}"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="WPF.Sample.UserControls.UserFeedbackControl"
                                     Visibility="{Binding MvvmMenuGroupVisibility}" />
                                 <!--#endregion-->
@@ -142,11 +142,11 @@
 
                                 <ListBoxItem
                                     Content="{Binding Path=LoginMenuHeader}"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="login" />
                                 <ListBoxItem
                                     Content="Exit"
-                                    Selected="ListBoxItem_Selected"
+                                    MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="exit" />
                             </ListBox.Items>
                         </ListBox>
