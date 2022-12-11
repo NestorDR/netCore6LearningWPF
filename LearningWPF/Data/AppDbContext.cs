@@ -27,7 +27,7 @@ namespace LearningWPF.Data
                 connectionString =
                     "Server=localhost\\DEV2019;Database=learningWPF;Trusted_Connection=True;MultipleActiveResultSets=true";
             */
-            
+
             optionsBuilder.UseSqlServer(connectionString);
         }
 
@@ -36,7 +36,7 @@ namespace LearningWPF.Data
             // Retrieve the error messages from EF Core
             var sb = new StringBuilder();
             sb.AppendLine($"{ex.GetType().Name} error details - {ex.InnerException?.InnerException?.Message}.");
-            
+
             foreach (EntityEntry entityEntry in ex.Entries)
             {
                 sb.AppendLine(
@@ -58,7 +58,11 @@ namespace LearningWPF.Data
          In a database, a group of similar entities is called an Entity Set (DbSet<TEntity> are called entity sets).
          The DbSet enables to perform CRUD operations on the entity set.
         */
-        // Entity sets
+
+        #region Entity sets
+
         public virtual DbSet<UserModel>? Users { get; set; }
+
+        #endregion Entity sets
     }
 }

@@ -15,13 +15,17 @@ namespace LearningWPF
     public partial class MainWindow : Window
     {
         #region Private variables
+
         // Main window's view model class
         private readonly MainWindowViewModel _viewModel;
+
         // Hold the main window's original status message
         private readonly string? _originalMessage;
+
         #endregion
 
         #region Constructor
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +40,7 @@ namespace LearningWPF
             MessageBroker.Instance.MessageReceived += Instance_MessageReceived;
 
         }
+
         #endregion
 
         private async void MainWindow_OnContentRendered(object? sender, EventArgs e)
@@ -170,7 +175,7 @@ namespace LearningWPF
         {
             menuGroupToggle = menuGroupToggle.Replace("ToggleMenu", "");
 
-            static Visibility ToggleVisibility(Visibility currentVisibility) 
+            static Visibility ToggleVisibility(Visibility currentVisibility)
                 => currentVisibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
 
             switch (menuGroupToggle.ToLower())
@@ -213,6 +218,7 @@ namespace LearningWPF
                         // Display the login screen
                         LoadUserControl("LearningWPF.UserControls.Login");
                     }
+
                     break;
             }
         }
@@ -250,9 +256,10 @@ namespace LearningWPF
         }
 
         #region LoadApplication Method
+
         public async Task LoadApplication()
         {
-            static async Task Delay(float seconds) => await Task.Delay((int) (seconds * 1000));
+            static async Task Delay(float seconds) => await Task.Delay((int)(seconds * 1000));
 
             _viewModel.InfoMessage = "Simulating the loading of some kind of object...";
             // Use the System.Windows.Threading.Dispatcher class to call the LoadObjectTypes() method in the view model.
@@ -261,6 +268,7 @@ namespace LearningWPF
             _viewModel.InfoMessage = "Simulating another load...";
             await Delay(1);
         }
+
         #endregion
     }
 }

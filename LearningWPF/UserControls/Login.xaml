@@ -46,7 +46,7 @@
                 Click="LoginButton_Click"
                 Content="Login"
                 IsDefault="True"
-                Style="{StaticResource CustomizedMaterialDesignRaisedAccentButton}"
+                Style="{StaticResource CustomizedDesignRaisedAccentButton}"
                 ToolTip="Login to Application" />
         </WrapPanel>
         <!--  Validation Message Area  -->

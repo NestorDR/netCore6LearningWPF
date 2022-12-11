@@ -1,15 +1,17 @@
-﻿<UserControl x:Class="LearningWPF.UserControls.Start.HelloWorld"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="800" 
-             Style="{StaticResource CustomizedDesignUserControl}"
-             Loaded="HelloWorld_Loaded"
-             Unloaded="HelloWorld_Unloaded">
+﻿<UserControl
+    x:Class="LearningWPF.UserControls.Start.HelloWorld"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    d:DesignHeight="500"
+    d:DesignWidth="800"
+    Loaded="HelloWorld_Loaded"
+    Style="{StaticResource CustomizedDesignUserControl}"
+    Unloaded="HelloWorld_Unloaded"
+    mc:Ignorable="d">
 
     <UserControl.Resources>
         <system:String x:Key="UserControlResourceString">Hello World! From User Control Resource</system:String>
@@ -21,8 +23,8 @@
         </DockPanel.Resources>
 
         <!--
-          Binding - Visit: https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/?view=netdesktop-6.0
-         In this example: DataContext = Parent window of this user control.
+        Binding - Visit: https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/?view=netdesktop-6.0
+        In this example: DataContext = Parent window of this user control.
 
             ┌───────────────────────────────┐                      ┌─────────────────────────────────┐
             │ UIElement TARGET              │<────── OneWay ───────┤ SOURCE                          │
@@ -30,85 +32,143 @@
             │  Dependency Property:  Text   ├── OneWayToSource ───>│  Value path       :  Property   │
             └───────────────────────────────┘                      └─────────────────────────────────┘
 
-        The most properties default value for BindingMode is OneWay, but some dependency properties, 
+        The most properties default value for BindingMode is OneWay, but some dependency properties,
           typically properties of user-editable controls such as:
-              - TextBox.Text, and 
-              - CheckBox.IsChecked 
+              - TextBox.Text, and
+              - CheckBox.IsChecked
           have as default value to TwoWay binding.
         -->
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="{DynamicResource CommonColumnWidth}"/>
-                <ColumnDefinition Width="{DynamicResource CommonColumnWidth}"/>
-                <ColumnDefinition Width="{DynamicResource CommonColumnWidth}"/>
+                <ColumnDefinition Width="{StaticResource CommonColumnWidth}" />
+                <ColumnDefinition Width="{StaticResource CommonColumnWidth}" />
+                <ColumnDefinition Width="{StaticResource CommonColumnWidth}" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" SharedSizeGroup="row"/>
-                <RowDefinition Height="Auto" SharedSizeGroup="row"/>
-                <RowDefinition Height="Auto" SharedSizeGroup="row"/>
+                <RowDefinition Height="Auto" SharedSizeGroup="row" />
+                <RowDefinition Height="Auto" SharedSizeGroup="row" />
+                <RowDefinition Height="Auto" SharedSizeGroup="row" />
             </Grid.RowDefinitions>
 
-            <!--Row 0-->
-            <TextBox x:Name="WindowTitleTextBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                     materialDesign:HintAssist.Hint="Window title"
-                     Text="{Binding Title, UpdateSourceTrigger=Explicit}"
-                     ToolTip="Window Title - UpdateSourceTrigger=Explicit"/>
+            <!--  Row 0  -->
+            <TextBox
+                x:Name="WindowTitleTextBox"
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                materialDesign:HintAssist.Hint="Window title"
+                Text="{Binding Title, UpdateSourceTrigger=Explicit}"
+                ToolTip="Window Title - UpdateSourceTrigger=Explicit" />
 
-            <Button x:Name="UpdateTitleButton" Content="Update title" Grid.Row="0" Grid.Column="2"
-                    Click="UpdateTitleButton_Click" 
-                    HorizontalAlignment="Stretch"/>
-            <!--Row 1-->
-            <TextBox x:Name="WidthTextBox" Grid.Row="1" Grid.Column="0"
-                     materialDesign:HintAssist.Hint="Window width"
-                     Text="{Binding Width, UpdateSourceTrigger=LostFocus}"
-                     HorizontalAlignment="Left"
-                     Width="{StaticResource CommonControlWidth}"
-                     LostFocus="WidthHeightTextBox_LostFocus" ToolTip="Window Width - UpdateSourceTrigger=LostFocus"/>
-            <TextBox x:Name="HeightTextBox" Grid.Row="1" Grid.Column="1"
-                     materialDesign:HintAssist.Hint="Window height"
-                     Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                     HorizontalAlignment="Right"
-                     Width="{StaticResource CommonControlWidth}"
-                     LostFocus="WidthHeightTextBox_LostFocus" ToolTip="Window Height - UpdateSourceTrigger=PropertyChanged"/>
+            <Button
+                x:Name="UpdateTitleButton"
+                Grid.Row="0"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                Click="UpdateTitleButton_Click"
+                Content="Update title" />
+            <!--  Row 1  -->
+            <TextBox
+                x:Name="WidthTextBox"
+                Grid.Row="1"
+                Grid.Column="0"
+                Width="{StaticResource CommonControlWidth}"
+                HorizontalAlignment="Left"
+                materialDesign:HintAssist.Hint="Window width"
+                LostFocus="WidthHeightTextBox_LostFocus"
+                Text="{Binding Width, UpdateSourceTrigger=LostFocus}"
+                ToolTip="Window Width - UpdateSourceTrigger=LostFocus" />
+            <TextBox
+                x:Name="HeightTextBox"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="{StaticResource CommonControlWidth}"
+                HorizontalAlignment="Right"
+                materialDesign:HintAssist.Hint="Window height"
+                LostFocus="WidthHeightTextBox_LostFocus"
+                Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="Window Height - UpdateSourceTrigger=PropertyChanged" />
 
-            <!--Row 1-->
-            <ComboBox x:Name="ColorsComboBox" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                      materialDesign:HintAssist.Hint="Select a background color"
-                      SelectionChanged="ColorsComboBox_SelectionChanged">
+            <!--  Row 1  -->
+            <ComboBox
+                x:Name="ColorsComboBox"
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                materialDesign:HintAssist.Hint="Select a background color"
+                SelectionChanged="ColorsComboBox_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                            <Rectangle
+                                Width="16"
+                                Height="16"
+                                Margin="0,2,5,2"
+                                Fill="{Binding Name}" />
                             <TextBlock Text="{Binding Name}" />
                         </StackPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Name="PreviousButton" Grid.Row="2" Grid.Column="2" Click="PreviousButton_Click">Previous</Button>
-            <Button Name="NextButton" Grid.Row="2" Grid.Column="3" Click="NextButton_Click" >Next</Button>
-            <Button Name="BlueButton" Grid.Row="2" Grid.Column="4" Click="BlueButton_Click"
-                    Style="{StaticResource CustomizedMaterialDesignRaisedAccentButton}">Blue</Button>
+            <Button
+                Name="PreviousButton"
+                Grid.Row="2"
+                Grid.Column="2"
+                Click="PreviousButton_Click">
+                Previous
+            </Button>
+            <Button
+                Name="NextButton"
+                Grid.Row="2"
+                Grid.Column="3"
+                Click="NextButton_Click">
+                Next
+            </Button>
+            <Button
+                Name="BlueButton"
+                Grid.Row="2"
+                Grid.Column="4"
+                Click="BlueButton_Click"
+                Style="{StaticResource CustomizedDesignRaisedAccentButton}">
+                Blue
+            </Button>
         </Grid>
 
-        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0, 10, 0, 0"
-                   Text="Title List - Load the list and select an item"
-                   Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+        <TextBlock
+            Margin="0,10,0,0"
+            HorizontalAlignment="Center"
+            DockPanel.Dock="Top"
+            Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+            Text="Title List - Load the list and select an item" />
 
-        <WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
-            <Button x:Name="LoadMeButton" Click="LoadMeButton_Click"
-                    Style="{StaticResource CustomizedMaterialDesignRaisedAccentButton}">
+        <WrapPanel
+            Margin="0,10,0,0"
+            HorizontalAlignment="Center"
+            DockPanel.Dock="Bottom">
+            <Button
+                x:Name="LoadMeButton"
+                Click="LoadMeButton_Click"
+                Style="{StaticResource CustomizedDesignRaisedAccentButton}">
                 <WrapPanel>
-                    <TextBlock Text="Load"/>
-                    <TextBlock Foreground="LightGreen" Text=" Titles" xml:space="preserve" />
+                    <TextBlock Text="Load" />
+                    <TextBlock
+                        xml:space="preserve"
+                        Foreground="LightGreen"
+                        Text=" Titles" />
                 </WrapPanel>
             </Button>
-            <Button x:Name="ClearListButton" Content="Clear list" Click="ClearListButton_Click"/>
+            <Button
+                x:Name="ClearListButton"
+                Click="ClearListButton_Click"
+                Content="Clear list" />
         </WrapPanel>
 
-        <ListBox x:Name="ResourceListBox" Margin="0, 5, 0, 0"
-                 SelectionChanged="ResourceListBox_SelectionChanged">
+        <ListBox
+            x:Name="ResourceListBox"
+            Margin="0,5,0,0"
+            SelectionChanged="ResourceListBox_SelectionChanged">
             <ListBox.Resources>
                 <system:String x:Key="ListBoxResourceString">Hello World! From List Box Resource</system:String>
             </ListBox.Resources>

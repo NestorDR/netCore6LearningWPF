@@ -1,3 +1,110 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:converters="clr-namespace:LearningWPF.Converters">
+
+    <!--#region Converters-->
     <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+    <converters:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter" />
+    <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    <!--#endregion-->
+
+    <!--  Visit: https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.GridLength?view=winrt-22621  -->
+    <GridLength x:Key="CommonColumnWidth">140</GridLength>
+    <system:Double x:Key="CommonControlWidth">130</system:Double>
+
+    <!--#region Style resources-->
+    <SolidColorBrush
+        x:Key="PrimaryHueExtraLightBrush"
+        po:Freeze="True"
+        Color="{StaticResource Primary50}" />
+
+    <Style x:Key="CustomizedDesignUserControl" TargetType="UserControl">
+        <!--  Shared Setters  -->
+        <Setter Property="Background" Value="{StaticResource PrimaryHueExtraLightBrush}" />
+    </Style>
+
+    <!--#region Main Navigation-->
+    <Style
+        x:Key="CustomizedMainNavigationPrimaryListBoxItem"
+        BasedOn="{StaticResource MaterialDesignNavigationPrimaryListBoxItem}"
+        TargetType="{x:Type ListBoxItem}">
+        <Setter Property="materialDesign:ListBoxItemAssist.CornerRadius" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="15" />
+    </Style>
+    <Style
+        x:Key="CustomizedMainNavigationPrimaryListBox"
+        BasedOn="{StaticResource MaterialDesignNavigationPrimaryListBox}"
+        TargetType="{x:Type ListBox}">
+        <Setter Property="ItemContainerStyle" Value="{StaticResource CustomizedMainNavigationPrimaryListBoxItem}" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region Button-->
+    <Style BasedOn="{StaticResource MaterialDesignRaisedButton}" TargetType="Button">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Width" Value="{DynamicResource CommonControlWidth}" />
+    </Style>
+    <Style
+        x:Key="CustomizedDesignRaisedAccentButton"
+        BasedOn="{StaticResource MaterialDesignRaisedAccentButton}"
+        TargetType="Button">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Width" Value="{DynamicResource CommonControlWidth}" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region ComboBox-->
+    <Style BasedOn="{StaticResource MaterialDesignFilledComboBox}" TargetType="ComboBox">
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region DataGrid-->
+    <Style
+        x:Key="CustomizedDesignIconDataGridCell"
+        BasedOn="{StaticResource MaterialDesignDataGridCell}"
+        TargetType="{x:Type DataGridCell}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <ContentPresenter Margin="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+
+    <!--#region ItemsControl-->
+    <Style
+        x:Key="ValidationItemsControl"
+        BasedOn="{StaticResource {x:Type ItemsControl}}"
+        TargetType="ItemsControl">
+        <Setter Property="Foreground" Value="{StaticResource MaterialDesignValidationErrorBrush}" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region PasswordBox-->
+    <Style BasedOn="{StaticResource MaterialDesignFilledPasswordBox}" TargetType="PasswordBox">
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region TextBlock-->
+    <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region TextBox-->
+    <Style BasedOn="{StaticResource MaterialDesignFilledTextBox}" TargetType="TextBox">
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <!--#endregion-->
+    <!--#endregion Style resources-->
+
 </ResourceDictionary>

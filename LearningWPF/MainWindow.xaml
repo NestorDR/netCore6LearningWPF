@@ -127,7 +127,7 @@
                                     Content="Users"
                                     IsEnabled="{Binding UserEntity.IsLoggedIn}"
                                     MouseUp="ListBoxItem_OnMouseUp"
-                                    Tag="WPF.Sample.UserControls.UserMaintenanceControl"
+                                    Tag="LearningWPF.UserControls.MVVM.UserMaintenance"
                                     Visibility="{Binding MvvmMenuGroupVisibility}" />
                                 <ListBoxItem
                                     Margin="8,0,0,0"
