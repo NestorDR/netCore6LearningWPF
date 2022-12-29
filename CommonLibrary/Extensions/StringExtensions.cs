@@ -8,6 +8,19 @@ namespace CommonLibrary.Extensions
     /// </summary>
     public static class StringExtensions
     {
+        /// <summary>
+        ///  Gets the words of the string that are in the list.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static IEnumerable<string> Intersect(this string s, string[] list)
+        {
+            string[] sourceList = s.Split(' ');
+            IEnumerable<string> words = sourceList.Intersect(list, StringComparer.OrdinalIgnoreCase);
+            return words;
+        }
+
         public static DateTime ToDate(this string s, bool throwExceptionIfFailed = false)
         {
             var valid = DateTime.TryParse(s, out var result);
