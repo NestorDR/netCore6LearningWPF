@@ -16,7 +16,7 @@
         <viewModels:UserMaintenanceViewModel x:Key="ViewModel" />
     </UserControl.Resources>
 
-    <Grid>
+    <Grid DataContext="{StaticResource ViewModel}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MinWidth="480" />
             <ColumnDefinition Width="280" />
@@ -29,16 +29,15 @@
                 Grid.Column="0"
                 Margin="0,0,14,0"
                 AllowDrop="True"
+                Drop="UsersDataGrid_Drop"
+                IsEnabled="{Binding IsAddMode, Converter={StaticResource InverseBooleanConverter}}"
                 IsReadOnly="True"
                 ItemsSource="{Binding Users}"
-                SelectedItem="{Binding UserSelectedItem}">
-                <!--
-                    Drop="UsersDataGrid_OnDrop"
-                    LoadingRow="UsersDataGrid_LoadingRow"
-                    PreviewKeyDown="UsersDataGrid_OnPreviewKeyDown"
-                    PreviewMouseDown="UsersDataGrid_OnPreviewMouseDown"
-                -->
-
+                LoadingRow="UsersDataGrid_LoadingRow"
+                PreviewKeyDown="UsersDataGrid_PreviewKeyDown"
+                PreviewMouseDown="UsersDataGrid_PreviewMouseDown"
+                SelectedItem="{Binding UserSelectedItem}"
+                SelectionChanged="UsersDataGrid_SelectionChanged">
                 <DataGrid.Resources>
                     <!--  MaterialDesignTextBoxBorder set to transparent to show the cells without border after selection.  -->
                     <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent" />
@@ -55,7 +54,7 @@
                         Binding="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                         ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                        Header="UserName" />
+                        Header="Username" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"
@@ -68,13 +67,17 @@
                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                         ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                         Header="Last Name" />
+                    <DataGridCheckBoxColumn
+                        Binding="{Binding Active, UpdateSourceTrigger=PropertyChanged}"
+                        EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                        ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                        Header="Active" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding EmailAddress, UpdateSourceTrigger=PropertyChanged}"
                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                         ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                        Header="Email" />
-
+                        Header="Email Address" />
                     <!--#endregion-->
                     <!--#region Button columns-->
                     <DataGridTemplateColumn
@@ -84,14 +87,11 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                                    <StackPanel.Resources>
-                                        <Style BasedOn="{StaticResource CustomizedDesignDataGridCellIcon}" TargetType="{x:Type materialDesign:PackIcon}" />
-                                    </StackPanel.Resources>
                                     <StackPanel
                                         x:Name="RowStackPanel"
                                         Width="Auto"
                                         Orientation="Horizontal"
-                                        Visibility="{Binding IsReadOnly, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Converter={StaticResource ParametrizedBooleanToVisibilityConverter}, ConverterParameter=true}">
+                                        Visibility="{Binding IsReadOnly, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Converter={StaticResource VisibilityConverter}}">
                                         <StackPanel.Resources>
                                             <Style BasedOn="{StaticResource CustomizedDesignSmallButton}" TargetType="{x:Type Button}" />
                                         </StackPanel.Resources>
@@ -106,7 +106,7 @@
                                             VerticalAlignment="Center"
                                             AllowDrop="True"
                                             Cursor="Hand"
-                                            PreviewMouseMove="ReorderIcon_OnPreviewMouseMove"
+                                            PreviewMouseMove="ReorderIcon_PreviewMouseMove"
                                             ToolTip="{DynamicResource Icon.Reorder}">
                                             <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueDarkBrush}" Kind="MouseMoveVertical" />
                                             <!--  Kind="ArrowUpDownBold|MouseMoveVertical|PanVertical|ReorderHorizontal|SwapVertical|SwapVerticalBold" />  -->
@@ -122,20 +122,103 @@
             </DataGrid>
         </Grid>
 
+        <!--  2º Column - Add/Edit  -->
         <StackPanel Grid.Column="1">
             <!--#region Fields-->
-            <StackPanel IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBooleanConverter}}" />
+            <StackPanel IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBooleanConverter}}">
+                <StackPanel.Resources>
+                    <Style BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}" TargetType="ComboBox" />
+                    <Style BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="TextBox" />
+                </StackPanel.Resources>
+                <TextBlock
+                    Margin="4"
+                    Style="{StaticResource CustomizedDesignSubtitle1TextBlock}"
+                    Text="Users" />
+                <TextBox
+                    x:Name="UserNameTextBox"
+                    Margin="4"
+                    Padding="8"
+                    materialDesign:HintAssist.Hint="Username"
+                    MaxLength="50">
+                    <Binding Path="UserSelectedItem.UserName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <viewModels:NotEmptyValidationRule />
+                            <!--  Optionally ValidatesOnTargetUpdated="True" indicates that the validation rule runs when the target of the Binding is updated.  -->
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox
+                    Margin="4"
+                    Padding="8"
+                    materialDesign:HintAssist.Hint="First Name"
+                    LostFocus="NameTextBox_LostFocus"
+                    MaxLength="50">
+                    <Binding Path="UserSelectedItem.FirstName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <viewModels:NotEmptyValidationRule />
+                            <!--  Optionally ValidatesOnTargetUpdated="True" indicates that the validation rule runs when the target of the Binding is updated.  -->
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox
+                    Margin="4"
+                    Padding="8"
+                    materialDesign:HintAssist.Hint="Last Name"
+                    LostFocus="NameTextBox_LostFocus"
+                    MaxLength="50">
+                    <Binding Path="UserSelectedItem.LastName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <viewModels:NotEmptyValidationRule />
+                            <!--  Optionally ValidatesOnTargetUpdated="True" indicates that the validation rule runs when the target of the Binding is updated.  -->
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="4"
+                        Padding="8"
+                        Style="{StaticResource CustomizedLabelTextBlock}">
+                        <TextBlock Text="Active" Visibility="{Binding UserSelectedItem.Active, Converter={StaticResource VisibilityConverter}}" />
+                        <TextBlock Text="Inactive" Visibility="{Binding UserSelectedItem.Active, Converter={StaticResource InverseVisibilityConverter}}" />
+                    </TextBlock>
+                    <ToggleButton
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding UserSelectedItem.Active, UpdateSourceTrigger=PropertyChanged}"
+                        IsTabStop="False" />
+                </Grid>
+                <TextBox
+                    Margin="4"
+                    Padding="8"
+                    materialDesign:HintAssist.Hint="Email Address"
+                    LostFocus="NameTextBox_LostFocus"
+                    MaxLength="100">
+                    <Binding Path="UserSelectedItem.EmailAddress" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <viewModels:NotEmptyValidationRule />
+                            <!--  Optionally ValidatesOnTargetUpdated="True" indicates that the validation rule runs when the target of the Binding is updated.  -->
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+
+            </StackPanel>
             <!--#endregion-->
             <!--#region Buttons-->
-            <WrapPanel Margin="0,9" HorizontalAlignment="Right">
+            <WrapPanel Margin="0,16" HorizontalAlignment="Right">
                 <Button
                     x:Name="EditButton"
                     Click="EditButton_Click"
                     Tag="FormButton">
-                    <!--  Visibility="{Binding IsReadOnly, Converter={StaticResource ParametrizedBooleanToVisibilityConverter}, ConverterParameter=false}">  -->
                     <TextBlock>
-                        <TextBlock Text="Edit" Visibility="{Binding IsReadOnly, Converter={StaticResource ParametrizedBooleanToVisibilityConverter}, ConverterParameter=true}" />
-                        <TextBlock Text="Cancel" Visibility="{Binding IsReadOnly, Converter={StaticResource ParametrizedBooleanToVisibilityConverter}, ConverterParameter=false}" />
+                        <TextBlock Text="Edit" Visibility="{Binding IsReadOnly, Converter={StaticResource VisibilityConverter}}" />
+                        <TextBlock Text="Cancel" Visibility="{Binding IsReadOnly, Converter={StaticResource InverseVisibilityConverter}}" />
                     </TextBlock>
                 </Button>
                 <Button
@@ -143,8 +226,8 @@
                     Click="AddButton_Click"
                     Style="{StaticResource CustomizedDesignRaisedAccentButton}">
                     <TextBlock>
-                        <TextBlock Text="New" Visibility="{Binding IsReadOnly, Converter={StaticResource ParametrizedBooleanToVisibilityConverter}, ConverterParameter=true}" />
-                        <TextBlock Text="Save" Visibility="{Binding IsReadOnly, Converter={StaticResource ParametrizedBooleanToVisibilityConverter}, ConverterParameter=false}" />
+                        <TextBlock Text="New" Visibility="{Binding IsReadOnly, Converter={StaticResource VisibilityConverter}}" />
+                        <TextBlock Text="Save" Visibility="{Binding IsReadOnly, Converter={StaticResource InverseVisibilityConverter}}" />
                     </TextBlock>
                 </Button>
             </WrapPanel>

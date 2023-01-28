@@ -36,13 +36,13 @@ namespace LearningWPF.ViewModels
         {
             Entity.IsLoggedIn = false;
 
-            ValidationMessages.Clear();
+            TroubleMessages.Clear();
             if (string.IsNullOrWhiteSpace(Entity.UserName))
-                AddValidationMessage("UserName", "User Name Must Be Filled In");
+                AddTroubleMessage("UserName", "User Name Must Be Filled In");
             if (string.IsNullOrWhiteSpace(Entity.Password))
-                AddValidationMessage("Password", "Password Must Be Filled In");
+                AddTroubleMessage("Password", "Password Must Be Filled In");
 
-            return (ValidationMessages.Count == 0);
+            return (TroubleMessages.Count == 0);
         }
 
         /// <summary>
@@ -59,13 +59,13 @@ namespace LearningWPF.ViewModels
 
                 // NOTE: It will be necessary to hash and secure your password.
                 if (Entity.Password == "1234" 
-                    || db.Users.Where(u => u.UserName == Entity.UserName && u.Password == Entity.Password).Count() > 0)
+                    || db.Users!.Any(u => u.UserName == Entity.UserName && u.Password == Entity.Password))
                 {
                     result = true;
                 }
                 else
                 {
-                    AddValidationMessage("LoginFailed", "Invalid User Name and/or Password.");
+                    AddTroubleMessage("LoginFailed", "Invalid User Name and/or Password.");
                 }
             }
             catch (Exception ex)

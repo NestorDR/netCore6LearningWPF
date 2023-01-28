@@ -54,7 +54,7 @@
             Grid.Row="4"
             Grid.Column="2"
             DisplayMemberPath="Message"
-            ItemsSource="{Binding ValidationMessages}"
-            Visibility="{Binding IsValidationVisible, Converter={StaticResource VisibilityConverter}}" />
+            ItemsSource="{Binding TroubleMessages}"
+            Visibility="{Binding IsTroubleVisible, Converter={StaticResource VisibilityConverter}}" />
     </StackPanel>
 </UserControl>

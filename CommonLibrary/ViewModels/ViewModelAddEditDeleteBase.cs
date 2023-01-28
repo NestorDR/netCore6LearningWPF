@@ -4,20 +4,6 @@
   {
     #region Public Properties
 
-    private bool _isListEnabled = true;
-    public bool IsListEnabled
-    {
-      get => _isListEnabled;
-      set => SetProperty(ref _isListEnabled, value);
-    }
-
-    private bool _isDetailEnabled;
-    public bool IsDetailEnabled
-    {
-      get => _isDetailEnabled;
-      set => SetProperty(ref _isDetailEnabled, value);
-    }
-
     private bool _isAddMode;
     public bool IsAddMode
     {
@@ -25,40 +11,50 @@
       set => SetProperty(ref _isAddMode, value);
     }
 
+    private bool _isReadOnly = true;
+    public virtual bool IsReadOnly
+    {
+        get => _isReadOnly;
+        set => SetProperty(ref _isReadOnly, value);
+    }
+
     #endregion
 
     #region BeginEdit Method
+
     public virtual void BeginEdit(bool isAddMode = false)
     {
-      IsListEnabled = false;
-      IsDetailEnabled = true;
-      IsAddMode = isAddMode;
+        IsAddMode = isAddMode;
     }
+
     #endregion
 
     #region CancelEdit Method
+
     public virtual void CancelEdit()
     {
-      base.Clear();
-
-      IsListEnabled = true;
-      IsDetailEnabled = false;
-      IsAddMode = false;
+        base.Clear();
+        IsAddMode = false;
     }
+
     #endregion
 
     #region Save Method
+
     public virtual bool Save()
     {
-      return true;
+        return true;
     }
+
     #endregion
 
     #region Delete Method
+
     public virtual bool Delete()
     {
-      return true;
+        return true;
     }
+
     #endregion
   }
 }

@@ -1,13 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+// App modules
 using CommonLibrary;
+using LearningWPF.Helper;
 
 namespace LearningWPF.Models
 {
     // Visit https://odetocode.com/blogs/scott/archive/2011/06/29/manual-validation-with-data-annotations.aspx
-
-    [Table("User", Schema = "dbo")]
-    public class UserModel : CommonBase
+    [Table("Users", Schema = "dbo")]
+    public class UserModel : CommonBase, IEntityInterface
     {
         private int _id;
         [Required]
@@ -20,6 +22,7 @@ namespace LearningWPF.Models
 
         private string _userName = string.Empty;
         [Column(TypeName = "nvarchar")]
+        [MaxLength(50)]
         [Required]
         public string UserName
         {
@@ -28,6 +31,7 @@ namespace LearningWPF.Models
         }
 
         private string _password = string.Empty;
+        [MaxLength(20)]
         [Required]
         public string Password
         {
@@ -37,6 +41,7 @@ namespace LearningWPF.Models
 
         private string _firstName = string.Empty;
         [Column(TypeName = "nvarchar")]
+        [MaxLength(50)]
         [Required]
         public string FirstName
         {
@@ -46,11 +51,20 @@ namespace LearningWPF.Models
 
         private string _lastName = string.Empty;
         [Column(TypeName = "nvarchar")]
+        [MaxLength(50)]
         [Required]
         public string LastName
         {
             get => _lastName;
             set => SetProperty(ref _lastName, value);
+        }
+
+        private bool _active = true;
+        [Required]
+        public bool Active
+        {
+            get => _active;
+            set => SetProperty(ref _active, value);
         }
 
         private string _emailAddress = string.Empty;
@@ -64,6 +78,14 @@ namespace LearningWPF.Models
             set => SetProperty(ref _emailAddress, value);
         }
 
+        public string? CreatedBy { get; set; } = string.Empty;
+
+        public DateTime? CreatedOn { get; set; } = DateTime.Now;
+
+        public string? UpdatedBy { get; set; } = string.Empty;
+
+        public DateTime? UpdatedOn { get; set; } = null;
+
         private bool _isLoggedIn = false;
         [NotMapped]
         public bool IsLoggedIn
@@ -71,5 +93,23 @@ namespace LearningWPF.Models
             get => _isLoggedIn;
             set => SetProperty(ref _isLoggedIn, value);
         }
+
+        private bool _isReadOnly = true;
+        [NotMapped]
+        public bool IsReadOnly
+        {
+            get => _isReadOnly;
+            set => SetProperty(ref _isReadOnly, value);
+        }
+
+        private EnumHelper.DragRowEffect _dragRowEffect;
+
+        [NotMapped]
+        internal EnumHelper.DragRowEffect DragRowEffect
+        {
+            get => _dragRowEffect;
+            set => SetProperty(ref _dragRowEffect, value);
+        }
+
     }
 }

@@ -72,8 +72,11 @@ namespace LearningWPF
                     break;
 
                 case MessageBrokerMessages.LOGIN_SUCCESS:
-                    _viewModel.UserEntity = (UserModel)e.MessagePayload;
-                    _viewModel.LoginMenuHeader = "Logout " + _viewModel.UserEntity.UserName;
+                    if (e.MessagePayload is UserModel user)
+                    {
+                        _viewModel.UserEntity = user;
+                        _viewModel.LoginMenuHeader = "Logout " + _viewModel.UserEntity.UserName;
+                    }
                     break;
 
                 case MessageBrokerMessages.LOGOUT:

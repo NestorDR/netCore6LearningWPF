@@ -1,19 +1,20 @@
-﻿<UserControl x:Class="LearningWPF.UserControls.Start.ListBoxOnObservableCollection"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800"
-             Style="{StaticResource CustomizedDesignUserControl}"
-             Loaded="ListBoxSelection_Loaded"
-             Unloaded="ListBoxSelection_Unloaded">
+﻿<UserControl
+    x:Class="LearningWPF.UserControls.Start.ListBoxOnObservableCollection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="500"
+    d:DesignWidth="800"
+    Loaded="ListBoxSelection_Loaded"
+    Style="{StaticResource CustomizedDesignUserControl}"
+    Unloaded="ListBoxSelection_Unloaded"
+    mc:Ignorable="d">
 
     <DockPanel Margin="10">
         <Grid DockPanel.Dock="Right">
-            <Grid.Resources>
-            </Grid.Resources>
-            
+            <Grid.Resources />
+
             <StackPanel VerticalAlignment="Top">
                 <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Selection</TextBlock>
                 <Button x:Name="ShowSelectedItemButton" Click="ShowSelectedItemButton_Click">Show selected</Button>
@@ -26,16 +27,18 @@
             <StackPanel VerticalAlignment="Bottom">
                 <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Actions</TextBlock>
                 <Button x:Name="AddItemButton" Click="AddItemButton_Click">Add task</Button>
-                <Button x:Name="ChangeItemButton" Click="ChangeItemButton_Click" >Change task</Button>
+                <Button x:Name="ChangeItemButton" Click="ChangeItemButton_Click">Change task</Button>
                 <Button x:Name="DeleteItemButton" Click="DeleteItemButton_Click">Delete task</Button>
             </StackPanel>
 
         </Grid>
 
-        <!-- SelectionMode="Extended" allows multi-selection -->
-        <ListBox x:Name="TaskListBox" HorizontalContentAlignment="Stretch" 
-                 SelectionMode="Extended" 
-                 SelectionChanged="TaskListBox_SelectionChanged">
+        <!--  SelectionMode="Extended" allows multi-selection  -->
+        <ListBox
+            x:Name="TaskListBox"
+            HorizontalContentAlignment="Stretch"
+            SelectionChanged="TaskListBox_SelectionChanged"
+            SelectionMode="Extended">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -44,9 +47,14 @@
                             <ColumnDefinition Width="100" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Title}" />
-                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding Completion}" />
+                        <ProgressBar
+                            Grid.Column="1"
+                            Maximum="100"
+                            Minimum="0"
+                            Value="{Binding Completion}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </DockPanel></UserControl>
+    </DockPanel>
+</UserControl>

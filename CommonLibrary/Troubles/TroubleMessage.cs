@@ -1,6 +1,6 @@
-﻿namespace CommonLibrary.Validation
+﻿namespace CommonLibrary.Troubles
 {
-  public class ValidationMessage : CommonBase
+  public class TroubleMessage : CommonBase
   {
     #region Public Properties
 

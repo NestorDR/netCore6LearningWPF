@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CommonLibrary.Exceptions;
 using CommonLibrary.MessageBroker;
-using CommonLibrary.Validation;
+using CommonLibrary.Troubles;
 
 namespace CommonLibrary.ViewModels
 {
@@ -9,29 +9,33 @@ namespace CommonLibrary.ViewModels
     {
         #region Public Properties
 
-        private ObservableCollection<ValidationMessage> _validationMessages = new();
-        public ObservableCollection<ValidationMessage> ValidationMessages
+        private ObservableCollection<TroubleMessage> _troubleMessages = new();
+        public ObservableCollection<TroubleMessage> TroubleMessages
         {
-            get => _validationMessages;
-            set => SetProperty(ref _validationMessages, value);
+            get => _troubleMessages;
+            set => SetProperty(ref _troubleMessages, value);
         }
 
-        private bool _isValidationVisible;
-        public bool IsValidationVisible
+        public bool HasTroubles => _troubleMessages.Any();
+
+        private bool _isTroubleVisible;
+        public bool IsTroubleVisible
         {
-            get => _isValidationVisible;
-            set => SetProperty(ref _isValidationVisible, value);
+            get => _isTroubleVisible;
+            set => SetProperty(ref _isTroubleVisible, value);
         }
 
         #endregion
 
-        #region AddBusinessRuleMessage Method
+        #region Business Rule Message Methods
 
-        public virtual void AddValidationMessage(string propertyName, string message)
+        public virtual void AddTroubleMessage(string propertyName, string message)
         {
-            _validationMessages.Add(new ValidationMessage { Message = message, PropertyName = propertyName });
-            IsValidationVisible = true;
+            _troubleMessages.Add(new TroubleMessage { Message = message, PropertyName = propertyName });
+            IsTroubleVisible = true;
         }
+
+        public virtual bool IsValid() => TroubleMessages.Count == 0;
 
         #endregion
 
@@ -39,8 +43,8 @@ namespace CommonLibrary.ViewModels
 
         public virtual void Clear()
         {
-            ValidationMessages.Clear();
-            IsValidationVisible = false;
+            TroubleMessages.Clear();
+            IsTroubleVisible = false;
         }
 
         #endregion
