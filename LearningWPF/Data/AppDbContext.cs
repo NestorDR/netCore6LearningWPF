@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Data.SqlClient;
 // --- App modules ---
+using CommonLibrary.Exceptions;
 using CommonLibrary.Troubles;
 using LearningWPF.Common;
 using LearningWPF.Models;
-using CommonLibrary.Exceptions;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 
 namespace LearningWPF.Data
 {
@@ -29,8 +28,8 @@ namespace LearningWPF.Data
             if (string.IsNullOrWhiteSpace(connectionString))
                 connectionString =
                     "Server=localhost\\DEV2019;Database=learningWPF;Trusted_Connection=True;MultipleActiveResultSets=true";
-             */
             optionsBuilder.UseSqlServer(connectionString);
+            */
         }
 
         /// <summary>
@@ -104,6 +103,7 @@ namespace LearningWPF.Data
         #region Entity sets
 
         public virtual DbSet<UserModel>? Users { get; set; }
+        public virtual DbSet<UserRoleModel>? UserRoles { get; set; }
 
         #endregion Entity sets
     }

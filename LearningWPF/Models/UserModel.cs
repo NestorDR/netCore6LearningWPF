@@ -59,6 +59,26 @@ namespace LearningWPF.Models
             set => SetProperty(ref _lastName, value);
         }
 
+        // Fully defined One-to-Many relationship at both ends
+        // Visit: topic "Convention 4" in
+        //        https://www.entityframeworktutorial.net/efcore/one-to-many-conventions-entity-framework-core.aspx
+        //        https://www.entityframeworktutorial.net/code-first/configure-one-to-many-relationship-in-code-first.aspx#conventions-for-one-to-many-ef6
+        private int _userRoleId = (int) EnumHelper.UserRole.User;
+        /// <summary>
+        /// Fully defined One-to-Many relationship at both ends (dependent entity is Relationships, and principal entity is UserRoleModel)
+        /// </summary>
+        public int UserRoleId
+        {
+            get => _userRoleId;
+            set => SetProperty(ref _userRoleId, value);
+        }
+
+        // Reference Navigation property: is a property of another entity type
+        /// <summary>
+        /// Navigation property of type UserRole Reference. UserRole is the principal entity.
+        /// </summary>
+        public UserRoleModel? UserRole { get; set; }        // One-to-Many relationship
+
         private bool _active = true;
         [Required]
         public bool Active

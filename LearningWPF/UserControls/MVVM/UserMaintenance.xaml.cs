@@ -30,8 +30,8 @@ namespace LearningWPF.UserControls.MVVM
 
             // Connect to instance of the view model created by the XAML
             _viewModel = (UserMaintenanceViewModel)Resources["ViewModel"];
-
         }
+
         private void UserMaintenanceControl_Loaded(object sender, RoutedEventArgs e)
         {
             _viewModel.LoadUsers();

@@ -72,6 +72,18 @@
                         EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
                         ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                         Header="Active" />
+                    <DataGridComboBoxColumn
+                        Width="*"
+                        DisplayMemberPath="Name"
+                        Header="Role"
+                        SelectedValueBinding="{Binding UserRoleId}"
+                        SelectedValuePath="Id">
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding DataContext.UserRoles, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+                    </DataGridComboBoxColumn>
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding EmailAddress, UpdateSourceTrigger=PropertyChanged}"
@@ -126,21 +138,20 @@
         <StackPanel Grid.Column="1">
             <!--#region Fields-->
             <StackPanel IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBooleanConverter}}">
-                <StackPanel.Resources>
-                    <Style BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}" TargetType="ComboBox" />
-                    <Style BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="TextBox" />
-                </StackPanel.Resources>
                 <TextBlock
                     Margin="4"
                     Style="{StaticResource CustomizedDesignSubtitle1TextBlock}"
                     Text="Users" />
                 <TextBox
                     x:Name="UserNameTextBox"
-                    Margin="4"
+                    Margin="4,12"
                     Padding="8"
                     materialDesign:HintAssist.Hint="Username"
                     MaxLength="50">
-                    <Binding Path="UserSelectedItem.UserName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding
+                        FallbackValue=""
+                        Path="UserSelectedItem.UserName"
+                        UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <viewModels:NotEmptyValidationRule />
                             <!--  Optionally ValidatesOnTargetUpdated="True" indicates that the validation rule runs when the target of the Binding is updated.  -->
@@ -148,12 +159,15 @@
                     </Binding>
                 </TextBox>
                 <TextBox
-                    Margin="4"
+                    Margin="4,12"
                     Padding="8"
                     materialDesign:HintAssist.Hint="First Name"
                     LostFocus="NameTextBox_LostFocus"
                     MaxLength="50">
-                    <Binding Path="UserSelectedItem.FirstName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding
+                        FallbackValue=""
+                        Path="UserSelectedItem.FirstName"
+                        UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <viewModels:NotEmptyValidationRule />
                             <!--  Optionally ValidatesOnTargetUpdated="True" indicates that the validation rule runs when the target of the Binding is updated.  -->
@@ -161,12 +175,15 @@
                     </Binding>
                 </TextBox>
                 <TextBox
-                    Margin="4"
+                    Margin="4,12"
                     Padding="8"
                     materialDesign:HintAssist.Hint="Last Name"
                     LostFocus="NameTextBox_LostFocus"
                     MaxLength="50">
-                    <Binding Path="UserSelectedItem.LastName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding
+                        FallbackValue=""
+                        Path="UserSelectedItem.LastName"
+                        UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <viewModels:NotEmptyValidationRule />
                             <!--  Optionally ValidatesOnTargetUpdated="True" indicates that the validation rule runs when the target of the Binding is updated.  -->
@@ -175,32 +192,43 @@
                 </TextBox>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="1.2*" />
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock
                         Grid.Row="0"
                         Grid.Column="0"
                         Margin="4"
-                        Padding="8"
+                        Padding="8,12"
                         Style="{StaticResource CustomizedLabelTextBlock}">
-                        <TextBlock Text="Active" Visibility="{Binding UserSelectedItem.Active, Converter={StaticResource VisibilityConverter}}" />
-                        <TextBlock Text="Inactive" Visibility="{Binding UserSelectedItem.Active, Converter={StaticResource InverseVisibilityConverter}}" />
+                        <TextBlock Text="Active" Visibility="{Binding UserSelectedItem.Active, FallbackValue=True, Converter={StaticResource VisibilityConverter}}" />
+                        <TextBlock Text="Inactive" Visibility="{Binding UserSelectedItem.Active, FallbackValue=True, Converter={StaticResource InverseVisibilityConverter}}" />
                     </TextBlock>
                     <ToggleButton
                         Grid.Row="0"
                         Grid.Column="1"
                         HorizontalAlignment="Left"
-                        IsChecked="{Binding UserSelectedItem.Active, UpdateSourceTrigger=PropertyChanged}"
+                        IsChecked="{Binding UserSelectedItem.Active, FallbackValue=True, UpdateSourceTrigger=PropertyChanged}"
                         IsTabStop="False" />
                 </Grid>
+                <ComboBox
+                    Margin="4"
+                    Padding="8,12"
+                    materialDesign:HintAssist.Hint="Role"
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding UserRoles}"
+                    SelectedValue="{Binding UserSelectedItem.UserRoleId, UpdateSourceTrigger=PropertyChanged, FallbackValue=1}"
+                    SelectedValuePath="Id" />
                 <TextBox
                     Margin="4"
                     Padding="8"
                     materialDesign:HintAssist.Hint="Email Address"
                     LostFocus="NameTextBox_LostFocus"
                     MaxLength="100">
-                    <Binding Path="UserSelectedItem.EmailAddress" UpdateSourceTrigger="PropertyChanged">
+                    <Binding
+                        FallbackValue=""
+                        Path="UserSelectedItem.EmailAddress"
+                        UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <viewModels:NotEmptyValidationRule />
                             <!--  Optionally ValidatesOnTargetUpdated="True" indicates that the validation rule runs when the target of the Binding is updated.  -->
@@ -215,7 +243,8 @@
                 <Button
                     x:Name="EditButton"
                     Click="EditButton_Click"
-                    Tag="FormButton">
+                    Tag="FormButton"
+                    Visibility="{Binding HasEditable, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock>
                         <TextBlock Text="Edit" Visibility="{Binding IsReadOnly, Converter={StaticResource VisibilityConverter}}" />
                         <TextBlock Text="Cancel" Visibility="{Binding IsReadOnly, Converter={StaticResource InverseVisibilityConverter}}" />

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CommonLibrary.Troubles;
 // App modules
 using CommonLibrary.ViewModels;
+using CommonLibrary.Troubles;
 using LearningWPF.Data;
 using LearningWPF.Helper;
 using LearningWPF.Models;
@@ -13,6 +13,8 @@ namespace LearningWPF.ViewModels
 {
     public class UserMaintenanceViewModel : ViewModelAddEditDeleteBase
     {
+        #region Properties
+
         private ObservableCollection<UserModel> _users = new();
 
         public ObservableCollection<UserModel> Users
@@ -37,11 +39,21 @@ namespace LearningWPF.ViewModels
 
         public bool HasEditable => UserSelectedItem != null;
 
+        private ObservableCollection<UserRoleModel> _userRoles = new();
+        public ObservableCollection<UserRoleModel> UserRoles
+        {
+            get => _userRoles;
+            set => SetProperty(ref _userRoles, value);
+        }
+
+        #endregion Properties
+
         public virtual void LoadUsers()
         {
             try
             {
                 var db = new AppDbContext();
+                UserRoles = new ObservableCollection<UserRoleModel>(db.UserRoles!);
                 Users = new ObservableCollection<UserModel>(db.Users!);
             }
             catch (Exception ex)
@@ -154,8 +166,8 @@ namespace LearningWPF.ViewModels
 
             try
             {
-                ServiceBase rollerService = new();
-                if (rollerService.Delete(UserSelectedItem))
+                ServiceBase UserRoleService = new();
+                if (UserRoleService.Delete(UserSelectedItem))
                 {
                     result = true;
 
@@ -177,7 +189,7 @@ namespace LearningWPF.ViewModels
                 else
                 {
                     TroubleMessages =
-                        new ObservableCollection<TroubleMessage>(rollerService.TroubleMessages);
+                        new ObservableCollection<TroubleMessage>(UserRoleService.TroubleMessages);
                     IsTroubleVisible = true;
                 }
             }

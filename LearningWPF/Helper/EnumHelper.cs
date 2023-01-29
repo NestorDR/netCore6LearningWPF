@@ -11,5 +11,11 @@
             Before,
             After
         }
+
+        public enum UserRole
+        {
+            Admin,
+            User
+        }
     }
 }
