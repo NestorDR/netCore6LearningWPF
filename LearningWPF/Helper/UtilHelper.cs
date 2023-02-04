@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls.Primitives;
+﻿using System.Diagnostics;
+using System.Reflection;
+using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -8,6 +10,12 @@ namespace LearningWPF.Helper
 {
     internal static class UtilHelper
     {
+        public static string ApplicationFullPath() => Assembly.GetEntryAssembly()?.Location!;
+
+        public static FileVersionInfo ApplicationVersionInfo() => FileVersionInfo.GetVersionInfo(ApplicationFullPath());
+
+        public static string GetApplicationName() => ApplicationVersionInfo().ProductName!;
+
         /// <summary>
         /// After click the [Edit] data row button, focus to the 1º editable cell/column of the data row and starts editing.
         /// </summary>

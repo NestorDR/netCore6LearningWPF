@@ -201,14 +201,14 @@
                         Margin="4"
                         Padding="8,12"
                         Style="{StaticResource CustomizedLabelTextBlock}">
-                        <TextBlock Text="Active" Visibility="{Binding UserSelectedItem.Active, FallbackValue=True, Converter={StaticResource VisibilityConverter}}" />
-                        <TextBlock Text="Inactive" Visibility="{Binding UserSelectedItem.Active, FallbackValue=True, Converter={StaticResource InverseVisibilityConverter}}" />
+                        <TextBlock Text="Active" Visibility="{Binding UserSelectedItem.Active, FallbackValue=Visible, Converter={StaticResource VisibilityConverter}}" />
+                        <TextBlock Text="Inactive" Visibility="{Binding UserSelectedItem.Active, FallbackValue=Collapsed, Converter={StaticResource InverseVisibilityConverter}}" />
                     </TextBlock>
                     <ToggleButton
                         Grid.Row="0"
                         Grid.Column="1"
                         HorizontalAlignment="Left"
-                        IsChecked="{Binding UserSelectedItem.Active, FallbackValue=True, UpdateSourceTrigger=PropertyChanged}"
+                        IsChecked="{Binding UserSelectedItem.Active, FallbackValue=true, UpdateSourceTrigger=PropertyChanged}"
                         IsTabStop="False" />
                 </Grid>
                 <ComboBox
@@ -217,7 +217,7 @@
                     materialDesign:HintAssist.Hint="Role"
                     DisplayMemberPath="Name"
                     ItemsSource="{Binding UserRoles}"
-                    SelectedValue="{Binding UserSelectedItem.UserRoleId, UpdateSourceTrigger=PropertyChanged, FallbackValue=1}"
+                    SelectedValue="{Binding UserSelectedItem.UserRoleId, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}"
                     SelectedValuePath="Id" />
                 <TextBox
                     Margin="4"
@@ -264,8 +264,8 @@
             <!--#region Trouble Messages-->
             <ItemsControl
                 Margin="0,14,0,0"
-                ItemsSource="{Binding ValidationMessage}"
-                Style="{StaticResource ValidationItemsControl}"
+                ItemsSource="{Binding TroubleMessages}"
+                Style="{StaticResource TroubleItemsControl}"
                 Visibility="{Binding IsTroubleVisible, Converter={StaticResource VisibilityConverter}}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

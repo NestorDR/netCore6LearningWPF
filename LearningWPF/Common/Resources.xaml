@@ -142,7 +142,7 @@
 
     <!--#region ItemsControl-->
     <Style
-        x:Key="ValidationItemsControl"
+        x:Key="TroubleItemsControl"
         BasedOn="{StaticResource {x:Type ItemsControl}}"
         TargetType="ItemsControl">
         <Setter Property="Foreground" Value="{StaticResource MaterialDesignValidationErrorBrush}" />

@@ -4,10 +4,10 @@ using System.Linq;
 // App modules
 using CommonLibrary.ViewModels;
 using CommonLibrary.Troubles;
-using LearningWPF.Data;
 using LearningWPF.Helper;
 using LearningWPF.Models;
 using LearningWPF.Services;
+using static LearningWPF.Helper.EnumHelper;
 
 namespace LearningWPF.ViewModels
 {
@@ -52,14 +52,45 @@ namespace LearningWPF.ViewModels
         {
             try
             {
-                var db = new AppDbContext();
-                UserRoles = new ObservableCollection<UserRoleModel>(db.UserRoles!);
-                Users = new ObservableCollection<UserModel>(db.Users!);
+                ServiceBase service = new();
+                UserRoles = new ObservableCollection<UserRoleModel>(service.Get<UserRoleModel>());
+
+                if (!UserRoles.Any())
+                {
+                    this.Clear();
+
+                    // The UserRole data table is empty, initialize it.
+                    foreach (int id in Enum.GetValues(typeof(UserRole)))
+                    {
+                        UserRoles.Add(
+                            new UserRoleModel
+                            {
+                                Id = id, 
+                                Name = $"{Enum.GetName(typeof(UserRole), id)}"
+                            });
+                    }
+
+                    if (!service.Save(UserRoles.ToList(), isAddMode:true))
+                    {
+                        TroubleMessages =
+                            new ObservableCollection<TroubleMessage>(service.TroubleMessages);
+                        IsTroubleVisible = true;
+                    }
+
+                    //UserRoles.Add(new UserRoleModel{Id = (int)EnumHelper.UserRole.Guest, Name = "Guest"});
+                    //UserRoles.Add(new UserRoleModel{Id = (int)EnumHelper.UserRole.Admin, Name = "Admin"});
+                    //UserRoles.Add(new UserRoleModel{Id = (int)EnumHelper.UserRole.User, Name = "User"});
+                }
+                
+                if (!HasTroubles) Users = new ObservableCollection<UserModel>(service.Get<UserModel>());
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                PublishException(ex);
+                throw;
             }
+
+
         }
 
         /// <summary>
@@ -118,6 +149,7 @@ namespace LearningWPF.ViewModels
                         user.LastName = UserSelectedItem.LastName;
                         user.Active = UserSelectedItem.Active;
                         user.EmailAddress = UserSelectedItem.EmailAddress;
+                        if (string.IsNullOrWhiteSpace(user.Password)) user.Password = UserModel.EXAMPLE_PASSWORD;
                     }
                     else
                     {

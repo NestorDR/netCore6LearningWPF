@@ -68,7 +68,7 @@ namespace LearningWPF.Services
             return null;
         }
 
-        public virtual bool Save<TEntity>(List<TEntity> list) where TEntity : CommonBase, IEntityInterface
+        public virtual bool Save<TEntity>(List<TEntity> list, bool isAddMode) where TEntity : CommonBase, IEntityInterface
         {
             bool result = false;
 
@@ -76,7 +76,7 @@ namespace LearningWPF.Services
             {
                 foreach (TEntity entity in list)
                 {
-                    if (entity.Id == 0)
+                    if (entity.Id == 0 || isAddMode)
                     {
                         // Add new entity to EF entities collection - Insert
                         Db.Set<TEntity>().Add(entity);

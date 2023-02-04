@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 // App modules
 using CommonLibrary;
 using LearningWPF.Helper;
+using static LearningWPF.Helper.EnumHelper;
 
 namespace LearningWPF.Models
 {
@@ -11,6 +12,9 @@ namespace LearningWPF.Models
     [Table("Users", Schema = "dbo")]
     public class UserModel : CommonBase, IEntityInterface
     {
+        // Generic password to get extremely simple example code
+        public const string EXAMPLE_PASSWORD = "1234";
+
         private int _id;
         [Required]
         [Key]
@@ -77,7 +81,10 @@ namespace LearningWPF.Models
         /// <summary>
         /// Navigation property of type UserRole Reference. UserRole is the principal entity.
         /// </summary>
-        public UserRoleModel? UserRole { get; set; }        // One-to-Many relationship
+        public UserRoleModel? UserRole { get; set; }    // One-to-Many relationship
+
+        [NotMapped]
+        public string RoleName => UserRole != null ? UserRole.Name : $"{Enum.GetName(typeof(UserRole), UserRoleId)}";
 
         private bool _active = true;
         [Required]

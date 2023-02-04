@@ -14,6 +14,7 @@
 
         public enum UserRole
         {
+            Guest, 
             Admin,
             User
         }

@@ -28,8 +28,9 @@ namespace LearningWPF.Data
             if (string.IsNullOrWhiteSpace(connectionString))
                 connectionString =
                     "Server=localhost\\DEV2019;Database=learningWPF;Trusted_Connection=True;MultipleActiveResultSets=true";
-            optionsBuilder.UseSqlServer(connectionString);
             */
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         /// <summary>
@@ -106,5 +107,6 @@ namespace LearningWPF.Data
         public virtual DbSet<UserRoleModel>? UserRoles { get; set; }
 
         #endregion Entity sets
+
     }
 }
