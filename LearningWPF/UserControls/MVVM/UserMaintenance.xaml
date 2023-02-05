@@ -213,7 +213,7 @@
                         IsTabStop="False" />
                 </Grid>
                 <ComboBox
-                    Margin="4"
+                    Margin="4,4,4,20"
                     Padding="8,12"
                     materialDesign:HintAssist.Hint="Role"
                     DisplayMemberPath="Name"
