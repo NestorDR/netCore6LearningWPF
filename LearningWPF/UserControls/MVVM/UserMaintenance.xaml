@@ -76,7 +76,6 @@
                         ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                         Header="Active" />
                     <DataGridComboBoxColumn
-                        Width="*"
                         DisplayMemberPath="Name"
                         Header="Role"
                         SelectedValueBinding="{Binding UserRoleId}"
@@ -123,8 +122,7 @@
                                             Cursor="Hand"
                                             PreviewMouseMove="ReorderIcon_PreviewMouseMove"
                                             ToolTip="{DynamicResource Icon.Reorder}">
-                                            <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueDarkBrush}" Kind="MouseMoveVertical" />
-                                            <!--  Kind="ArrowUpDownBold|MouseMoveVertical|PanVertical|ReorderHorizontal|SwapVertical|SwapVerticalBold" />  -->
+                                            <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueDarkBrush}" Kind="ReorderHorizontal" />
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
