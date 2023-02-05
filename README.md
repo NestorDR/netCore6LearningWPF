@@ -28,3 +28,10 @@ The Visual Studio project properties Debug / General tab provides an Open debug 
 ## UI Library
 
 [Material Design In XAML](http://materialdesigninxaml.net/)
+
+
+## O/RM Framework
+
+[Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
+
+
