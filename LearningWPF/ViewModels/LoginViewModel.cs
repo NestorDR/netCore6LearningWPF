@@ -11,7 +11,7 @@ using LearningWPF.Services;
 
 namespace LearningWPF.ViewModels
 {
-    public sealed class LoginViewModel : ViewModelBase
+    internal sealed class LoginViewModel : ViewModelBase
     {
         private UserModel _entity = null!;
 

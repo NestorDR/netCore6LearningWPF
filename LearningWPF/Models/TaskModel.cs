@@ -8,7 +8,7 @@ namespace LearningWPF.Models
           to alert the UI layer of changes in their properties.
         Visit https://wpf-tutorial.com/data-binding/responding-to-changes/
     */
-    public class TaskModel : INotifyPropertyChanged
+    internal class TaskModel : INotifyPropertyChanged
     {
         private string _title = "";
 

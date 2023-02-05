@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LearningWPF.Models
 {
-    public class UserRoleModel : CommonBase, IEntityInterface
+    internal class UserRoleModel : CommonBase, IEntityInterface
     {
         private int _id;
         [Required]

@@ -42,6 +42,9 @@
                     <!--  MaterialDesignTextBoxBorder set to transparent to show the cells without border after selection.  -->
                     <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent" />
                 </DataGrid.Resources>
+                <DataGrid.RowStyle>
+                    <Style BasedOn="{StaticResource CustomizedDesignDraggableDataGridRow}" TargetType="{x:Type DataGridRow}" />
+                </DataGrid.RowStyle>
                 <DataGrid.Columns>
                     <!--#region Field columns-->
                     <DataGridTextColumn

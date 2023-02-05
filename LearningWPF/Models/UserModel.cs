@@ -10,7 +10,7 @@ namespace LearningWPF.Models
 {
     // Visit https://odetocode.com/blogs/scott/archive/2011/06/29/manual-validation-with-data-annotations.aspx
     [Table("Users", Schema = "dbo")]
-    public class UserModel : CommonBase, IEntityInterface
+    internal class UserModel : CommonBase, IEntityInterface
     {
         // Generic password to get extremely simple example code
         // NOTE: It will be necessary to hash and secure your password.
@@ -130,10 +130,9 @@ namespace LearningWPF.Models
             set => SetProperty(ref _isReadOnly, value);
         }
 
-        private EnumHelper.DragRowEffect _dragRowEffect;
-
+        private DragRowEffect _dragRowEffect;
         [NotMapped]
-        internal EnumHelper.DragRowEffect DragRowEffect
+        public DragRowEffect DragRowEffect
         {
             get => _dragRowEffect;
             set => SetProperty(ref _dragRowEffect, value);

@@ -11,7 +11,7 @@ using static LearningWPF.Helper.EnumHelper;
 
 namespace LearningWPF.ViewModels
 {
-    public class UserMaintenanceViewModel : ViewModelAddEditDeleteBase
+    internal class UserMaintenanceViewModel : ViewModelAddEditDeleteBase
     {
         #region Properties
 

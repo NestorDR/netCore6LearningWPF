@@ -138,6 +138,22 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style
+        x:Key="CustomizedDesignDraggableDataGridRow"
+        BasedOn="{StaticResource MaterialDesignDataGridRow}"
+        TargetType="{x:Type DataGridRow}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding DragRowEffect, FallbackValue=0}" Value="1">
+                <Setter Property="BorderBrush" Value="DimGray" />
+                <Setter Property="BorderThickness" Value="0,2,0,0" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding DragRowEffect, FallbackValue=0}" Value="2">
+                <Setter Property="BorderBrush" Value="DimGray" />
+                <Setter Property="BorderThickness" Value="0,0,0,2" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
     <!--#endregion-->
 
     <!--#region ItemsControl-->
