@@ -63,6 +63,10 @@ namespace LearningWPF.ViewModels
                 // NOTE: It will be necessary to hash and secure your password.
                 if (db.Users!.Any(u => u.UserName == Entity.UserName && u.Password == Entity.Password))
                 {
+                    // Set the application security
+                    SetAppIdentity();
+
+                    // Success
                     result = true;
                 }
                 else if (Entity.Password == UserModel.EXAMPLE_PASSWORD)
@@ -70,7 +74,10 @@ namespace LearningWPF.ViewModels
                     // Complete user data
                     Entity.FirstName = Entity.UserName;
                     Entity.UserRoleId = (int)EnumHelper.UserRole.User;
-                    Entity.EmailAddress = Entity.UserName;
+                    Entity.EmailAddress = "";
+
+                    // Set the application security
+                    SetAppIdentity();       
 
                     // Save new user if UserRole data table has saved records
                     ServiceBase service = new(db);
@@ -80,8 +87,6 @@ namespace LearningWPF.ViewModels
                 {
                     AddTroubleMessage("LoginFailed", "Invalid User Name and/or Password.");
                 }
-
-                if (result) SetAppIdentity();
             }
             catch (Exception ex)
             {
@@ -130,12 +135,20 @@ namespace LearningWPF.ViewModels
 
             // Create a generic user identity object based on the logged user and
             // the current Windows identity name and authentication type.
-            string userName = Entity.UserName;
-            string fullyQualifiedUserName = $"{Environment.UserDomainName}\\{userName}";
-            string authenticationType =
-                fullyQualifiedUserName == windowsIdentity.Name && windowsIdentity.AuthenticationType != null
-                    ? windowsIdentity.AuthenticationType
-                    : UtilHelper.GetApplicationName();
+            string fullyQualifiedUserName = $"{Environment.UserDomainName}\\{Entity.UserName}";
+            string userName;
+            string authenticationType;
+            if (fullyQualifiedUserName == windowsIdentity.Name && windowsIdentity.AuthenticationType != null)
+            {
+                userName = fullyQualifiedUserName;
+                authenticationType = windowsIdentity.AuthenticationType;
+
+            }
+            else
+            {
+                authenticationType = UtilHelper.GetApplicationName();
+                userName = $"{authenticationType}\\{Entity.UserName}";
+            }
 
             GenericIdentity applicationIdentity = new(userName, authenticationType);
 

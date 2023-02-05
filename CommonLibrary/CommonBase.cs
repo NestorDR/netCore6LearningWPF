@@ -57,6 +57,7 @@ namespace CommonLibrary
             // Use reflection so the NotifyPropertyChanged event is fired for each property
             foreach (var prop in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
+                if (prop.GetSetMethod() == null) continue;
                 var value = prop.GetValue(original, null);
                 prop.SetValue(cloneTo, value, null);
             }

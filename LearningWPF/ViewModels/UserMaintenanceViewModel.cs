@@ -147,6 +147,7 @@ namespace LearningWPF.ViewModels
                         user.UserName = UserSelectedItem.UserName;
                         user.FirstName = UserSelectedItem.FirstName;
                         user.LastName = UserSelectedItem.LastName;
+                        user.UserRoleId = UserSelectedItem.UserRoleId;
                         user.Active = UserSelectedItem.Active;
                         user.EmailAddress = UserSelectedItem.EmailAddress;
                         if (string.IsNullOrWhiteSpace(user.Password)) user.Password = UserModel.EXAMPLE_PASSWORD;
@@ -198,8 +199,8 @@ namespace LearningWPF.ViewModels
 
             try
             {
-                ServiceBase UserRoleService = new();
-                if (UserRoleService.Delete(UserSelectedItem))
+                ServiceBase service = new();
+                if (service.Delete(UserSelectedItem))
                 {
                     result = true;
 
@@ -221,7 +222,7 @@ namespace LearningWPF.ViewModels
                 else
                 {
                     TroubleMessages =
-                        new ObservableCollection<TroubleMessage>(UserRoleService.TroubleMessages);
+                        new ObservableCollection<TroubleMessage>(service.TroubleMessages);
                     IsTroubleVisible = true;
                 }
             }

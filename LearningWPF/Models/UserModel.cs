@@ -13,6 +13,7 @@ namespace LearningWPF.Models
     public class UserModel : CommonBase, IEntityInterface
     {
         // Generic password to get extremely simple example code
+        // NOTE: It will be necessary to hash and secure your password.
         public const string EXAMPLE_PASSWORD = "1234";
 
         private int _id;
