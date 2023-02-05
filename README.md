@@ -2,7 +2,7 @@
 
 ## Description
 
-Learning [WPF (Windows Presentation Foundation)](https://github.com/dotnet/wpf) from scratch, with a focus on [data binding](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/?view=netdesktop-6.0#what-is-data-binding).
+Learning [WPF (Windows Presentation Foundation)](https://github.com/dotnet/wpf) from scratch, with a focus on [data binding](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/?view=netdesktop-6.0#what-is-data-binding) and Model-View-ViewModel ([MVVM](https://www.c-sharpcorner.com/uploadfile/nipuntomar/mvvm-in-wpf/)) design pattern.
 
 <div align="center">
   <img width="500" height="175" src="Assets/databinding-dataflow.png" alt="DataBinding">
@@ -11,6 +11,26 @@ Learning [WPF (Windows Presentation Foundation)](https://github.com/dotnet/wpf) 
 Using as a guide:
 - [The complete WPF tutorial](https://www.wpf-tutorial.com/)
 - [A Design Pattern for Building WPF Business Applications](https://www.codemag.com/Article/1905031/A-Design-Pattern-for-Building-WPF-Business-Applications-Part-1)
+
+
+## Screenshots
+
+<div align="center">
+  <img width="545" height="346" src="Assets/menu.png" alt="MainMenu">
+</div>
+
+<div align="center">
+  <img width="545" height="346" src="Assets/hello-world.png" alt="HelloWorld">
+</div>
+
+<div align="center">
+  <img width="545" height="346" src="Assets/login.png" alt="Login">
+</div>
+
+<div align="center">
+  <img width="545" height="346" src="Assets/datagrid.png" alt="Datagrid">
+</div>
+
 
 ## Development platform
 
@@ -33,5 +53,3 @@ The Visual Studio project properties Debug / General tab provides an Open debug 
 ## O/RM Framework
 
 [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
-
-
