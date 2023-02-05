@@ -230,8 +230,9 @@
                         Path="UserSelectedItem.EmailAddress"
                         UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
-                            <viewModels:NotEmptyValidationRule />
                             <!--  Optionally ValidatesOnTargetUpdated="True" indicates that the validation rule runs when the target of the Binding is updated.  -->
+                            <viewModels:NotEmptyValidationRule />
+                            <viewModels:RegexValidationRule Pattern="^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-*)|(\w+\.))*\w+\.[a-zA-Z]{2,6}$"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
