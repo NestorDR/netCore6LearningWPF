@@ -17,12 +17,12 @@ namespace LearningWPF.UserControls.Start
         {
             ListBoxItem li = (ListBoxItem)(sender as ListBox)!.SelectedItem;
 
-            ButtonsStackPanel.Orientation =
+            ElementsStackPanel.Orientation =
                 li.Content.ToString() switch
                 {
                     "Horizontal" => Orientation.Horizontal,
                     "Vertical" => Orientation.Vertical,
-                    _ => ButtonsStackPanel.Orientation
+                    _ => ElementsStackPanel.Orientation
                 };
         }
 
@@ -30,14 +30,14 @@ namespace LearningWPF.UserControls.Start
         {
             ListBoxItem li = (ListBoxItem)(sender as ListBox)!.SelectedItem;
 
-            ButtonsStackPanel.HorizontalAlignment =
+            ElementsStackPanel.HorizontalAlignment =
                 li.Content.ToString() switch
                 {
                     "Left" => HorizontalAlignment.Left,
                     "Right" => HorizontalAlignment.Right,
                     "Center" => HorizontalAlignment.Center,
                     "Stretch" => HorizontalAlignment.Stretch,
-                    _ => ButtonsStackPanel.HorizontalAlignment
+                    _ => ElementsStackPanel.HorizontalAlignment
                 };
         }
 
@@ -45,14 +45,14 @@ namespace LearningWPF.UserControls.Start
         {
             ListBoxItem li = (ListBoxItem)(sender as ListBox)!.SelectedItem;
 
-            ButtonsStackPanel.VerticalAlignment =
+            ElementsStackPanel.VerticalAlignment =
                 li.Content.ToString() switch
                 {
                     "Top" => VerticalAlignment.Top,
                     "Bottom" => VerticalAlignment.Bottom,
                     "Center" => VerticalAlignment.Center,
                     "Stretch" => VerticalAlignment.Stretch,
-                    _ => ButtonsStackPanel.VerticalAlignment
+                    _ => ElementsStackPanel.VerticalAlignment
                 };
         }
     }

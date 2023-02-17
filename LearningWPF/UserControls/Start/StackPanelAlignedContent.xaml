@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:LearningWPF.UserControls.Start"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     d:DesignHeight="500"
     d:DesignWidth="800"
     Style="{StaticResource CustomizedDesignUserControl}"
@@ -83,17 +84,18 @@
         </ListBox>
 
         <StackPanel
-            Name="ButtonsStackPanel"
+            Name="ElementsStackPanel"
             Grid.Row="3"
             Grid.Column="0"
-            Grid.ColumnSpan="5">
+            Grid.ColumnSpan="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
             <Button>Button One</Button>
             <Button>Button Two</Button>
+            <TextBox Width="{DynamicResource CommonControlWidth}" materialDesign:HintAssist.Hint="Input text box One"/>
+            <TextBox Width="{DynamicResource CommonControlWidth}" materialDesign:HintAssist.Hint="Input text box Two"/>
             <Button>Button Three</Button>
-            <TextBox Width="{DynamicResource CommonControlWidth}" />
             <Button>Button Four</Button>
-            <Button>Button Five</Button>
-            <Button>Button Six</Button>
-        </StackPanel>
+            </StackPanel>
     </Grid>
 </UserControl>
