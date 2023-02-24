@@ -11,6 +11,7 @@
     Style="{StaticResource CustomizedDesignUserControl}"
     mc:Ignorable="d">
     <UserControl.Resources>
+
         <DrawingImage x:Key="FrogLookingLeftDrawingImage">
             <DrawingImage.Drawing>
                 <DrawingGroup ClipGeometry="M0,0 V170 H200 V0 H0 Z">
@@ -44,7 +45,15 @@
                 </DrawingGroup>
             </DrawingImage.Drawing>
         </DrawingImage>
+
+        <Style x:Key="DefaultViewBox" TargetType="{x:Type Viewbox}">
+            <Setter Property="Height" Value="{StaticResource ExtraSmallSize}" />
+            <Setter Property="Width" Value="{StaticResource ExtraSmallSize}" />
+            <Setter Property="Stretch" Value="Uniform" />
+        </Style>
+
     </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -55,24 +64,22 @@
             Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
-            <!--  Visit: https://9to5answer.com/wpf-what-is-the-correct-way-of-using-svg-files-as-icons-in-wpf  -->
+            <!--
+                Visit:
+                https://9to5answer.com/wpf-what-is-the-correct-way-of-using-svg-files-as-icons-in-wpf
+                https://stackoverflow.com/questions/43512657/how-to-add-personal-icons-in-materialdesigninxamltoolkit
+            -->
             <Button
                 x:Name="TrashCanButton"
                 Content="{materialDesign:PackIcon TrashCanOutline}"
                 Style="{StaticResource CustomizedDesignSmallButton}" />
             <Button x:Name="FrogLookingLeft" Style="{StaticResource CustomizedDesignSmallButton}">
-                <Viewbox
-                    Width="16"
-                    Height="16"
-                    Stretch="Uniform">
+                <Viewbox Style="{StaticResource DefaultViewBox}">
                     <Image Source="{StaticResource FrogLookingLeftDrawingImage}" />
                 </Viewbox>
             </Button>
             <Button x:Name="FrogLookingRightButton" Style="{StaticResource CustomizedDesignSmallButton}">
-                <Viewbox
-                    Width="16"
-                    Height="16"
-                    Stretch="Uniform">
+                <Viewbox Style="{StaticResource DefaultViewBox}">
                     <Image Source="{StaticResource FrogLookingRightDrawingImage}" />
                 </Viewbox>
             </Button>
