@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 // App modules
 using CommonLibrary;
 using LearningWPF.Helper;
-using static LearningWPF.Helper.EnumHelper;
 
 namespace LearningWPF.Models
 {
@@ -68,7 +67,7 @@ namespace LearningWPF.Models
         // Visit: topic "Convention 4" in
         //        https://www.entityframeworktutorial.net/efcore/one-to-many-conventions-entity-framework-core.aspx
         //        https://www.entityframeworktutorial.net/code-first/configure-one-to-many-relationship-in-code-first.aspx#conventions-for-one-to-many-ef6
-        private int _userRoleId = (int) EnumHelper.UserRole.User;
+        private int _userRoleId = (int)Helper.UserRole.User;
         /// <summary>
         /// Fully defined One-to-Many relationship at both ends (dependent entity is Relationships, and principal entity is UserRoleModel)
         /// </summary>

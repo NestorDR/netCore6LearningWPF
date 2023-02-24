@@ -79,6 +79,13 @@ namespace LearningWPF.ViewModels
             set => SetProperty(ref _startMenuGroupVisibility, value);
         }
 
+        private Visibility _imagesMenuGroupVisibility = Visibility.Collapsed;
+        public Visibility ImagesMenuGroupVisibility
+        {
+            get => _imagesMenuGroupVisibility;
+            set => SetProperty(ref _imagesMenuGroupVisibility, value);
+        }
+        
         private Visibility _mvvmMenuGroupVisibility = Visibility.Collapsed;
         public Visibility MvvmMenuGroupVisibility
         {

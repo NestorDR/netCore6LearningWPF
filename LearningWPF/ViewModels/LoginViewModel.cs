@@ -73,7 +73,7 @@ namespace LearningWPF.ViewModels
                 {
                     // Complete user data
                     Entity.FirstName = Entity.UserName;
-                    Entity.UserRoleId = (int)EnumHelper.UserRole.User;
+                    Entity.UserRoleId = (int)UserRole.User;
                     Entity.EmailAddress = "";
 
                     // Set the application security

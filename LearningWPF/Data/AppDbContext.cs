@@ -27,7 +27,7 @@ namespace LearningWPF.Data
             /* Required to use Migrations
             if (string.IsNullOrWhiteSpace(connectionString))
                 connectionString =
-                    "Server=localhost\\DEV2019;Database=learningWPF;Trusted_Connection=True;MultipleActiveResultSets=true";
+                    "Server=localhost\\DEV2019;Database=learningWPF;Trusted_Connection=True;Trust Server Certificate=true;MultipleActiveResultSets=true";
             */
 
             optionsBuilder.UseSqlServer(connectionString);

@@ -8,7 +8,6 @@ using System.Windows.Threading;
 using LearningWPF.Helper;
 using LearningWPF.Models;
 using LearningWPF.ViewModels;
-using static LearningWPF.Helper.EnumHelper;
 
 namespace LearningWPF.UserControls.MVVM
 {

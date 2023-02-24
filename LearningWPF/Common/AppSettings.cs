@@ -43,7 +43,7 @@ namespace LearningWPF.Common
 
             Configuration = builder.Build();
 
-            ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            ConnectionString = Configuration.GetConnectionString("DefaultConnection")!;
         }
 
         #endregion

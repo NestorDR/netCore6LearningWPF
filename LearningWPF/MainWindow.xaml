@@ -123,7 +123,20 @@
                                     Visibility="{Binding StartMenuGroupVisibility}" />
                                 <!--#endregion-->
 
-                                <!--#region Model View ViewModel-->
+                                <!--#region Images Menu-->
+                                <ListBoxItem
+                                    Content="Images"
+                                    MouseUp="ListBoxItem_OnMouseUp"
+                                    Tag="ImagesToggleMenu" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="Converted from SVG"
+                                    MouseUp="ListBoxItem_OnMouseUp"
+                                    Tag="LearningWPF.UserControls.Images.ConvertedFromSVG"
+                                    Visibility="{Binding ImagesMenuGroupVisibility}" />
+                                <!--#endregion-->
+
+                                <!--#region Model View ViewModel Menu-->
                                 <ListBoxItem
                                     Content="MVVM"
                                     MouseUp="ListBoxItem_OnMouseUp"

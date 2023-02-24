@@ -186,9 +186,11 @@ namespace LearningWPF
                 case "start":
                     _viewModel.StartMenuGroupVisibility = ToggleVisibility(_viewModel.StartMenuGroupVisibility);
                     break;
+                case "images":
+                    _viewModel.ImagesMenuGroupVisibility = ToggleVisibility(_viewModel.ImagesMenuGroupVisibility);
+                    break;
                 case "mvvm":
                     _viewModel.MvvmMenuGroupVisibility = ToggleVisibility(_viewModel.MvvmMenuGroupVisibility);
-                    //;
                     break;
             }
         }

@@ -7,7 +7,6 @@ using CommonLibrary.Troubles;
 using LearningWPF.Helper;
 using LearningWPF.Models;
 using LearningWPF.Services;
-using static LearningWPF.Helper.EnumHelper;
 
 namespace LearningWPF.ViewModels
 {
@@ -98,8 +97,8 @@ namespace LearningWPF.ViewModels
         /// </summary>
         public void RemoveDragRowEffects()
         {
-            foreach (UserModel user in Users.Where(r => r.DragRowEffect != EnumHelper.DragRowEffect.None))
-                user.DragRowEffect = EnumHelper.DragRowEffect.None;
+            foreach (UserModel user in Users.Where(r => r.DragRowEffect != DragRowEffect.None))
+                user.DragRowEffect = DragRowEffect.None;
         }
 
         /// <summary>
