@@ -52,7 +52,6 @@ Using as a guide:
 
 Visual Studio Community 2022 on Windows 11
 
-
 ### Development and launchSettings.json
 
 The Visual Studio project properties Debug / General tab provides an Open debug launch profiles UI link. This link opens a Launch Profiles dialog that lets you edit the environment variable settings in the launchSettings.json file. Make sure you have the **DOTNET_ENVIRONMENT = Development** variable set. You can then make use of the appsettings.Development.json configuration file.
@@ -61,15 +60,19 @@ The Visual Studio project properties Debug / General tab provides an Open debug 
   <img width="600" height="392" src="Assets/development.png" alt="Development and launchSettings.json">
 </div>
 
+
 ## UI Library
 
 [Material Design In XAML](http://materialdesigninxaml.net/)
-[SvgToXaml](https://github.com/BerndK/SvgToXaml) tool to convert SVG to XAML.
+
 
 ## O/RM Framework
 
 [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
 
+
 ## Thanks
 
 [Convertio](https://convertio.co) file converter (in my case from PNG to SVG)
+
+[SvgToXaml](https://github.com/BerndK/SvgToXaml) tool to convert SVG to XAML.
