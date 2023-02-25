@@ -25,7 +25,9 @@ Using as a guide:
 - PNG to SVG to XAML images conversion
 - MVVM
 - Entity Framework Core
+- Login user
 - Datagrid - Drag and drop to reorder
+
 
 ## Screenshots
 
