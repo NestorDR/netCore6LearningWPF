@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using LearningWPF.Helper;
 using LearningWPF.Models;
 using LearningWPF.ViewModels;
+using System.Windows.Data;
 
 namespace LearningWPF.UserControls.MVVM
 {
@@ -219,7 +220,10 @@ namespace LearningWPF.UserControls.MVVM
 
         private void NameTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            if (sender is not TextBox txt) return;
 
+            // Capitalize: Proper Case
+            txt.Text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txt.Text.ToLower());
         }
     }
 }

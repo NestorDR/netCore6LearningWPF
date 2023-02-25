@@ -12,6 +12,20 @@ Using as a guide:
 - [The complete WPF tutorial](https://www.wpf-tutorial.com/)
 - [A Design Pattern for Building WPF Business Applications](https://www.codemag.com/Article/1905031/A-Design-Pattern-for-Building-WPF-Business-Applications-Part-1)
 
+### Topics covered
+
+- DataContext
+- Styles 
+- Use of Material Design In XAML
+- Resources
+- Listbox on ObservableCollection
+- Notify property changes
+- SharedSizeGroup property in Grid panel
+- Alignment
+- PNG to SVG to XAML images conversion
+- MVVM
+- Entity Framework Core
+- Datagrid - Drag and drop to reorder
 
 ## Screenshots
 
