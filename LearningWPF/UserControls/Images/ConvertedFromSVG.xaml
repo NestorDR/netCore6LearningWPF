@@ -11,7 +11,6 @@
     Style="{StaticResource CustomizedDesignUserControl}"
     mc:Ignorable="d">
     <UserControl.Resources>
-
         <DrawingImage x:Key="FrogLookingLeftDrawingImage">
             <DrawingImage.Drawing>
                 <DrawingGroup ClipGeometry="M0,0 V170 H200 V0 H0 Z">
@@ -59,16 +58,73 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Viewbox
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="5"
+            Stretch="Uniform">
+            <Image Source="/frog.png" />
+        </Viewbox>
+
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalAlignment="Center">
+            <TextBlock
+                Margin="5,10,0,5"
+                HorizontalAlignment="Center"
+                xml:space="preserve"
+                TextWrapping="Wrap"><Hyperlink NavigateUri="https://convertio.co" RequestNavigate="Hyperlink_RequestNavigate">Convertio</Hyperlink>: file converter from PNG to SVG</TextBlock>
+            <TextBlock
+                Margin="5,5,0,5"
+                HorizontalAlignment="Center"
+                xml:space="preserve"
+                TextWrapping="Wrap">Change path thickness in a SVG <Hyperlink NavigateUri="https://graphicdesign.stackexchange.com/questions/126796/how-do-i-change-the-thickness-of-paths-in-an-svg-using-sketch?newreg=92b22fa05a2d4e3da9f3c85518e2257b" RequestNavigate="Hyperlink_RequestNavigate">stroke-width="Put HERE your WIDTH"</Hyperlink></TextBlock>
+            <TextBlock
+                Margin="5,5,0,10"
+                HorizontalAlignment="Center"
+                xml:space="preserve"
+                TextWrapping="Wrap"><Hyperlink NavigateUri="https://github.com/BerndK/SvgToXaml" RequestNavigate="Hyperlink_RequestNavigate">SvgToXaml</Hyperlink>: converts SVG to XAML</TextBlock>
+        </StackPanel>
+
+        <Viewbox
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="5"
+            Stretch="Uniform">
+            <Image Source="{StaticResource FrogLookingRightDrawingImage}" />
+        </Viewbox>
 
         <WrapPanel
+            Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
             <!--
                 Visit:
-                https://9to5answer.com/wpf-what-is-the-correct-way-of-using-svg-files-as-icons-in-wpf
+                
+                * How do I change the thickness of paths in an SVG?
+                https://graphicdesign.stackexchange.com/questions/126796/how-do-i-change-the-thickness-of-paths-in-an-svg-using-sketch?newreg=92b22fa05a2d4e3da9f3c85518e2257b
+                
+                * SvgToXaml - Convert SVG to XAML for use in .NET
+                https://github.com/BerndK/SvgToXaml
+                
+                * How to add personal icons in MaterialDesignInXamlToolkit?
                 https://stackoverflow.com/questions/43512657/how-to-add-personal-icons-in-materialdesigninxamltoolkit
+                
+                * What is the correct way of using SVG files as icons in WPF?
+                https://9to5answer.com/wpf-what-is-the-correct-way-of-using-svg-files-as-icons-in-wpf
             -->
+            <Button x:Name="FrogLookingRightButton" Style="{StaticResource CustomizedDesignSmallButton}">
+                <Viewbox Style="{StaticResource DefaultViewBox}">
+                    <Image Source="{StaticResource FrogLookingRightDrawingImage}" />
+                </Viewbox>
+            </Button>
             <Button
                 x:Name="TrashCanButton"
                 Content="{materialDesign:PackIcon TrashCanOutline}"
@@ -78,15 +134,6 @@
                     <Image Source="{StaticResource FrogLookingLeftDrawingImage}" />
                 </Viewbox>
             </Button>
-            <Button x:Name="FrogLookingRightButton" Style="{StaticResource CustomizedDesignSmallButton}">
-                <Viewbox Style="{StaticResource DefaultViewBox}">
-                    <Image Source="{StaticResource FrogLookingRightDrawingImage}" />
-                </Viewbox>
-            </Button>
         </WrapPanel>
-
-        <Viewbox Grid.Column="0" Stretch="Uniform">
-            <Image Source="{StaticResource FrogLookingRightDrawingImage}" />
-        </Viewbox>
     </Grid>
 </UserControl>
