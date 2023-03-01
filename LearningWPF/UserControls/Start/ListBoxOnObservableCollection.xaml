@@ -46,7 +46,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="100" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Title}" />
+                        <TextBlock Text="{Binding Name}" />
                         <ProgressBar
                             Grid.Column="1"
                             Maximum="100"

@@ -4,6 +4,7 @@ using System.Windows.Controls;
 // --- App modules ---
 using LearningWPF.Dialogs;
 using LearningWPF.Models;
+using LearningWPF.Services;
 
 namespace LearningWPF.UserControls.Start
 {
@@ -24,15 +25,17 @@ namespace LearningWPF.UserControls.Start
             InitializeComponent();
 
             // Initialize listbox setting its data source
-            _items = new ObservableCollection<TaskModel>
+            _items = new ObservableCollection<TaskModel>(new TaskService().Get());
+            /*
             {
-                new () { Title = "Learning how to develop", Completion = 30 },
-                new () { Title = "Learn C#", Completion = 50 },
-                new () { Title = "Learning WPF", Completion = 75 },
-                new () { Title = "Wash the car", Completion = 85 },
-                new () { Title = "Buy beer", Completion = 90 },
-                new () { Title = "Enjoy it!", Completion = 100 }
+                new () { Name = "Learning how to develop", Completion = 30 },
+                new () { Name = "Learn C#", Completion = 50 },
+                new () { Name = "Learning WPF", Completion = 75 },
+                new () { Name = "Wash the car", Completion = 85 },
+                new () { Name = "Buy beer", Completion = 90 },
+                new () { Name = "Enjoy it!", Completion = 100 }
             };
+            */
             TaskListBox.ItemsSource = _items;
         }
 
@@ -52,7 +55,7 @@ namespace LearningWPF.UserControls.Start
         private void TaskListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_parentWindow != null && TaskListBox.SelectedItem != null)
-                _parentWindow.Title = ((TaskModel)TaskListBox.SelectedItem).Title;
+                _parentWindow.Title = ((TaskModel)TaskListBox.SelectedItem).Name;
         }
 
         #region Selection
@@ -60,7 +63,7 @@ namespace LearningWPF.UserControls.Start
         private void ShowSelectedItemButton_Click(object sender, RoutedEventArgs e)
         {
             foreach (var o in TaskListBox.SelectedItems)
-                MessageBox.Show(((TaskModel)o).Title, _parentWindow?.Title);
+                MessageBox.Show(((TaskModel)o).Name, _parentWindow?.Title);
         }
 
         private void SelectNextButton_Click(object sender, RoutedEventArgs e)
@@ -88,7 +91,7 @@ namespace LearningWPF.UserControls.Start
             TaskListBox.SelectedItems.Clear();
             foreach (var o in TaskListBox.Items)
             {
-                if (o is not TaskModel item || !item.Title.Contains("C#")) continue;
+                if (o is not TaskModel item || !item.Name.Contains("C#")) continue;
                 TaskListBox.SelectedItem = item;
                 break;
             }
@@ -106,23 +109,24 @@ namespace LearningWPF.UserControls.Start
         
         private void AddItemButton_Click(object sender, RoutedEventArgs e)
         {
-            Task taskDialog = new(new TaskModel());
+            Task taskDialog = new(new TaskModel { Id = _items.Count + 1 } );
             taskDialog.ShowDialog();        // Show it as a modal dialog
-            if (taskDialog.DataContext is TaskModel taskModel) _items.Add(taskModel);
+            if (taskDialog.DataContext is not TaskModel taskModel) return;
+            // Add new item
+            _items.Add(taskModel);
         }
 
         private void ChangeItemButton_Click(object sender, RoutedEventArgs e)
         {
-            // Before: ((TaskModel)TaskListBox.SelectedItem).Title = "Changed TaskModel";
+            // Before: ((TaskModel)TaskListBox.SelectedItem).Name = "Changed TaskModel";
             if (TaskListBox.SelectedItem is not TaskModel selectedTask) return;
             
-            Task taskDialog = new(new TaskModel { Title = selectedTask.Title, Completion = selectedTask.Completion});
-            taskDialog.ShowDialog(); // Show it as a modal dialog
-            if (taskDialog.DataContext is TaskModel taskModel)
-            {
-                selectedTask.Title = taskModel.Title;
-                selectedTask.Completion = taskModel.Completion;
-            }
+            Task taskDialog = new(new TaskModel { Id = selectedTask.Id, Name = selectedTask.Name, Completion = selectedTask.Completion });
+            taskDialog.ShowDialog();        // Show it as a modal dialog
+            if (taskDialog.DataContext is not TaskModel taskModel) return;
+            // Modify item
+            selectedTask.Name = taskModel.Name;
+            selectedTask.Completion = taskModel.Completion;
         }
 
         private void DeleteItemButton_Click(object sender, RoutedEventArgs e)

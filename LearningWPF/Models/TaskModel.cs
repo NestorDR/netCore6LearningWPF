@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
 namespace LearningWPF.Models
@@ -10,15 +11,17 @@ namespace LearningWPF.Models
     */
     internal class TaskModel : INotifyPropertyChanged
     {
-        private string _title = "";
+        [Key]
+        public int Id { get; set; }
 
-        public string Title
+        private string _name = "";
+        public string Name
         {
-            get => _title;
+            get => _name;
             set
             {
-                if (_title == value) return;
-                _title = value;
+                if (_name == value) return;
+                _name = value;
                 NotifyPropertyChanged();
             }
         }
@@ -34,6 +37,8 @@ namespace LearningWPF.Models
                 NotifyPropertyChanged();
             }
         }
+
+        public bool Checked { get; set; } = false;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

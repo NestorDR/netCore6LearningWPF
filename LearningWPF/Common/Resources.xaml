@@ -39,6 +39,10 @@
         po:Freeze="True"
         Color="{StaticResource Primary50}" />
 
+    <Style x:Key="CustomizedDesignWindow" TargetType="Window">
+        <!--  Shared Setters  -->
+        <Setter Property="Background" Value="{StaticResource PrimaryHueExtraLightBrush}" />
+    </Style>
     <Style x:Key="CustomizedDesignUserControl" TargetType="UserControl">
         <!--  Shared Setters  -->
         <Setter Property="Background" Value="{StaticResource PrimaryHueExtraLightBrush}" />

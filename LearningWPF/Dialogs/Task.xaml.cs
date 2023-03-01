@@ -8,7 +8,6 @@ namespace LearningWPF.Dialogs
     /// </summary>
     public partial class Task : Window
     {
-
         internal Task(TaskModel taskModel)
         {
             InitializeComponent();
