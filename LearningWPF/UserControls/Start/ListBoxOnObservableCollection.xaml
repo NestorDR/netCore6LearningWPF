@@ -7,7 +7,7 @@
     d:DesignHeight="500"
     d:DesignWidth="800"
     Loaded="ListBoxSelection_Loaded"
-    Style="{StaticResource CustomizedDesignUserControl}"
+    Style="{StaticResource CustomizedDesignContentControl}"
     Unloaded="ListBoxSelection_Unloaded"
     mc:Ignorable="d">
 

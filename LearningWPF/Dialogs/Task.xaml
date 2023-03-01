@@ -9,7 +9,7 @@
     Title="Task"
     Width="400"
     Height="240"
-    Style="{StaticResource CustomizedDesignWindow}"
+    Style="{StaticResource CustomizedDesignContentControl}"
     mc:Ignorable="d">
 
     <StackPanel Margin="20">

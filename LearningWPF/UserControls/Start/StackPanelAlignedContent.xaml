@@ -8,7 +8,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     d:DesignHeight="500"
     d:DesignWidth="800"
-    Style="{StaticResource CustomizedDesignUserControl}"
+    Style="{StaticResource CustomizedDesignContentControl}"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>

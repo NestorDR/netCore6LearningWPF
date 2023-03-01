@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="500"
     d:DesignWidth="800"
-    Style="{StaticResource CustomizedDesignUserControl}"
+    Style="{StaticResource CustomizedDesignContentControl}"
     mc:Ignorable="d">
     <DockPanel
         Name="MainPanel"

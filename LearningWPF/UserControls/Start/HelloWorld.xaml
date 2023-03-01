@@ -9,7 +9,7 @@
     d:DesignHeight="500"
     d:DesignWidth="800"
     Loaded="HelloWorld_Loaded"
-    Style="{StaticResource CustomizedDesignUserControl}"
+    Style="{StaticResource CustomizedDesignContentControl}"
     Unloaded="HelloWorld_Unloaded"
     mc:Ignorable="d">
 

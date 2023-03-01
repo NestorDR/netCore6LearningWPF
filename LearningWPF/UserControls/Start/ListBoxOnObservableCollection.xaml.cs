@@ -109,7 +109,7 @@ namespace LearningWPF.UserControls.Start
         
         private void AddItemButton_Click(object sender, RoutedEventArgs e)
         {
-            Task taskDialog = new(new TaskModel { Id = _items.Count + 1 } );
+            Task taskDialog = new(new TaskModel { Id = _items.Count + 1 });
             taskDialog.ShowDialog();        // Show it as a modal dialog
             if (taskDialog.DataContext is not TaskModel taskModel) return;
             // Add new item
@@ -120,8 +120,9 @@ namespace LearningWPF.UserControls.Start
         {
             // Before: ((TaskModel)TaskListBox.SelectedItem).Name = "Changed TaskModel";
             if (TaskListBox.SelectedItem is not TaskModel selectedTask) return;
-            
-            Task taskDialog = new(new TaskModel { Id = selectedTask.Id, Name = selectedTask.Name, Completion = selectedTask.Completion });
+
+            Task taskDialog = new(new TaskModel
+                { Id = selectedTask.Id, Name = selectedTask.Name, Completion = selectedTask.Completion });
             taskDialog.ShowDialog();        // Show it as a modal dialog
             if (taskDialog.DataContext is not TaskModel taskModel) return;
             // Modify item

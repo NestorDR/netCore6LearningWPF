@@ -99,12 +99,6 @@
                                     Visibility="{Binding StartMenuGroupVisibility}" />
                                 <ListBoxItem
                                     Margin="8,0,0,0"
-                                    Content="ListBox on ObservableCollection"
-                                    MouseUp="ListBoxItem_OnMouseUp"
-                                    Tag="LearningWPF.UserControls.Start.ListBoxOnObservableCollection"
-                                    Visibility="{Binding StartMenuGroupVisibility}" />
-                                <ListBoxItem
-                                    Margin="8,0,0,0"
                                     Content="Notify property conditionally"
                                     MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="LearningWPF.UserControls.Start.NotifyPropertyConditionally"
@@ -120,6 +114,18 @@
                                     Content="Align Content in a StackPanel"
                                     MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="LearningWPF.UserControls.Start.StackPanelAlignedContent"
+                                    Visibility="{Binding StartMenuGroupVisibility}" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="ListBox on ObservableCollection"
+                                    MouseUp="ListBoxItem_OnMouseUp"
+                                    Tag="LearningWPF.UserControls.Start.ListBoxOnObservableCollection"
+                                    Visibility="{Binding StartMenuGroupVisibility}" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="Multiple selection on ComboBox"
+                                    MouseUp="ListBoxItem_OnMouseUp"
+                                    Tag="LearningWPF.UserControls.Start.MultiSelectComboBox"
                                     Visibility="{Binding StartMenuGroupVisibility}" />
                                 <!--#endregion-->
 
