@@ -27,6 +27,7 @@ namespace LearningWPF.Models
         }
 
         private int _completion;
+
         public int Completion
         {
             get => _completion;
@@ -38,7 +39,17 @@ namespace LearningWPF.Models
             }
         }
 
-        public bool Checked { get; set; } = false;
+        private bool _checked = false;
+        public bool Checked
+        {
+            get => _checked;
+            set
+            {
+                if (_checked == value) return; 
+                _checked = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

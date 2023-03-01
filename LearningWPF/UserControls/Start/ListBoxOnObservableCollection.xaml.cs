@@ -24,18 +24,10 @@ namespace LearningWPF.UserControls.Start
         {
             InitializeComponent();
 
-            // Initialize listbox setting its data source
+            // Initialize listbox
+            // Get item list to display into listbox
             _items = new ObservableCollection<TaskModel>(new TaskService().Get());
-            /*
-            {
-                new () { Name = "Learning how to develop", Completion = 30 },
-                new () { Name = "Learn C#", Completion = 50 },
-                new () { Name = "Learning WPF", Completion = 75 },
-                new () { Name = "Wash the car", Completion = 85 },
-                new () { Name = "Buy beer", Completion = 90 },
-                new () { Name = "Enjoy it!", Completion = 100 }
-            };
-            */
+            // Bind listbox: set its data source
             TaskListBox.ItemsSource = _items;
         }
 
