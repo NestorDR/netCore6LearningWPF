@@ -10,6 +10,33 @@
     d:DesignWidth="800"
     Style="{StaticResource CustomizedDesignContentControl}"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="CustomizedDesignMultiSelectComboBoxItemTemplate">
+            <CheckBox
+                x:Name="ItemCheckBox"
+                Width="315"
+                HorizontalAlignment="Left"
+                Checked="ItemCheckBox_CheckedAndUnchecked"
+                CommandParameter="{Binding Id}"
+                Content="{Binding Name}"
+                IsChecked="{Binding Selected}"
+                Unchecked="ItemCheckBox_CheckedAndUnchecked" />
+        </DataTemplate>
+
+        <Style
+            x:Key="MultiSelectComboBox"
+            BasedOn="{StaticResource {x:Type ComboBox}}"
+            TargetType="ComboBox">
+            <Setter Property="ItemTemplate" Value="{StaticResource CustomizedDesignMultiSelectComboBoxItemTemplate}" />
+            <Setter Property="IsEditable" Value="True" />
+            <Setter Property="IsTextSearchEnabled" Value="False" />
+            <Setter Property="StaysOpenOnEdit" Value="True" />
+            <EventSetter Event="PreviewKeyDown" Handler="TaskComboBox_PreviewKeyDown" />
+            <EventSetter Event="PreviewKeyUp" Handler="TaskComboBox_PreviewKeyUp" />
+            <EventSetter Event="SelectionChanged" Handler="TaskComboBox_SelectionChanged" />
+        </Style>
+    </UserControl.Resources>
+
     <StackPanel
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
@@ -41,40 +68,20 @@
                 HorizontalAlignment="Right"
                 Content="Allow text search"
                 IsChecked="False" />
-
         </Grid>
-
 
         <ComboBox
             x:Name="TaskComboBox"
             Width="350"
             Margin="25,8,25,8"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Task list"
             DropDownClosed="TaskComboBox_DropDownClosed"
-            DropDownOpened="TaskComboBox_OnDropDownOpened"
-            IsEditable="{Binding ElementName=EditingEnabledCheckBox, Path=IsChecked}"
-            IsTextSearchEnabled="{Binding ElementName=TextSearchEnabledCheckBox, Path=IsChecked, FallbackValue=True}"
-            PreviewKeyDown="TaskComboBox_PreviewKeyDown"
-            PreviewKeyUp="TaskComboBox_PreviewKeyUp"
-            SelectionChanged="TaskComboBox_SelectionChanged"
-            StaysOpenOnEdit="{Binding ElementName=EditingEnabledCheckBox, Path=IsChecked, FallbackValue=False}"
-            TextBoxBase.TextChanged="TaskComboBox_TextChanged">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <CheckBox
-                        x:Name="ItemCheckBox"
-                        Width="315"
-                        HorizontalAlignment="Left"
-                        Checked="ItemCheckBox_CheckedAndUnchecked"
-                        CommandParameter="{Binding Id}"
-                        Content="{Binding Name}"
-                        IsChecked="{Binding Selected}"
-                        Unchecked="ItemCheckBox_CheckedAndUnchecked" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+            DropDownOpened="TaskComboBox_DropDownOpened"
+            IsEditable="{Binding ElementName=EditingEnabledCheckBox, Path=IsChecked, FallbackValue=True}"
+            IsTextSearchEnabled="{Binding ElementName=TextSearchEnabledCheckBox, Path=IsChecked, FallbackValue=False}"
+            StaysOpenOnEdit="{Binding ElementName=EditingEnabledCheckBox, Path=IsChecked, FallbackValue=True}"
+            Style="{StaticResource MultiSelectComboBox}"
+            TextBoxBase.TextChanged="TaskComboBox_TextChanged" />
 
         <Button
             x:Name="RandomSelectButton"

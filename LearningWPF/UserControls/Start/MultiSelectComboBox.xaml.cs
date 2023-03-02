@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using LearningWPF.Dialogs;
 // --- App modules ---
 using LearningWPF.Models;
 using LearningWPF.Services;
@@ -83,7 +84,7 @@ namespace LearningWPF.UserControls.Start
         {
             Debug.WriteLine("TaskComboBox_PreviewKeyUp");
             Debug.WriteLine($"  e.Key .......: {e.Key}");
-            if (e.Key == Key.Tab) return;
+            if (e.Key is Key.Tab or Key.System) return;
 
             int index = GetSelectedIndex(out int selectedCount);
             Debug.WriteLine($"  selectedCount: {index} de {selectedCount}");
@@ -123,7 +124,7 @@ namespace LearningWPF.UserControls.Start
         /// <summary>
         /// Selects properly item in combobox
         /// </summary>
-        private void TaskComboBox_OnDropDownOpened(object? sender, EventArgs e)
+        private void TaskComboBox_DropDownOpened(object? sender, EventArgs e)
         {
             SetSelectedIndex(GetSelectedIndex(out _));
         }
