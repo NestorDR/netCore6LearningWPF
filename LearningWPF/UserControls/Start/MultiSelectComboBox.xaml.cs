@@ -142,7 +142,6 @@ namespace LearningWPF.UserControls.Start
         /// <summary>
         /// Select one and only one item in the combobox
         /// </summary>
-        /// <param name="index"></param>
         private void SelectOneItem(int index)
         {
             // Select one and only one item in the item list
@@ -174,7 +173,6 @@ namespace LearningWPF.UserControls.Start
         /// <summary>
         /// Select item in combobox through index
         /// </summary>
-        /// <param name="index"></param>
         private void SetSelectedIndex(int index)
         {
             TaskComboBox.SelectionChanged -= TaskComboBox_SelectionChanged;
