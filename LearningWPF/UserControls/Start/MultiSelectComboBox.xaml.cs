@@ -71,7 +71,7 @@ namespace LearningWPF.UserControls.Start
         {
             Debug.WriteLine("TaskComboBox_PreviewKeyDown");
             Debug.WriteLine($"  e.Key .......: {e.Key}");
-            if (e.Key == Key.Tab) return;
+            if (e.Key is Key.Tab or Key.Escape or Key.System or >= Key.F1 and <= Key.RightAlt) return;
 
             // Prevent the edition depending on whether TextSearch is allowed
             e.Handled = !TaskComboBox.IsTextSearchEnabled;
@@ -84,7 +84,7 @@ namespace LearningWPF.UserControls.Start
         {
             Debug.WriteLine("TaskComboBox_PreviewKeyUp");
             Debug.WriteLine($"  e.Key .......: {e.Key}");
-            if (e.Key is Key.Tab or Key.System) return;
+            if (e.Key is Key.Tab or Key.Escape) return;
 
             int index = GetSelectedIndex(out int selectedCount);
             Debug.WriteLine($"  selectedCount: {index} de {selectedCount}");

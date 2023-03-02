@@ -14,8 +14,7 @@
         <DataTemplate x:Key="CustomizedDesignMultiSelectComboBoxItemTemplate">
             <CheckBox
                 x:Name="ItemCheckBox"
-                Width="315"
-                HorizontalAlignment="Left"
+                HorizontalAlignment="Stretch"
                 Checked="ItemCheckBox_CheckedAndUnchecked"
                 CommandParameter="{Binding Id}"
                 Content="{Binding Name}"
