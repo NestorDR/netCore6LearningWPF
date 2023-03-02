@@ -98,7 +98,10 @@ namespace LearningWPF.UserControls.Start
                 };
                 
                 Debug.WriteLine($"  increment ...: {increment}");
-                if (increment != 0) SelectOneItem(index + increment);
+                if (increment != 0) 
+                    SelectOneItem(index + increment);
+                else
+                    DisplaySelectedItems();
 
                 // Prevent the edition depending on whether TextSearch is allowed
                 e.Handled = !TaskComboBox.IsTextSearchEnabled;
