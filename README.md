@@ -18,10 +18,11 @@ Using as a guide:
 - Styles 
 - Use of Material Design In XAML
 - Resources
-- Listbox on ObservableCollection
 - Notify property changes
 - SharedSizeGroup property in Grid panel
 - Alignment
+- Listbox on ObservableCollection
+- Multiple selection on ComboBox (MultiSelectComboBox)
 - PNG to SVG to XAML images conversion
 - MVVM
 - Entity Framework Core
