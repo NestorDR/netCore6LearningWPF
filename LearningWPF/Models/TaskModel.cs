@@ -39,14 +39,14 @@ namespace LearningWPF.Models
             }
         }
 
-        private bool _checked = false;
-        public bool Checked
+        private bool _selected = false;
+        public bool Selected
         {
-            get => _checked;
+            get => _selected;
             set
             {
-                if (_checked == value) return; 
-                _checked = value;
+                if (_selected == value) return; 
+                _selected = value;
                 NotifyPropertyChanged();
             }
         }
