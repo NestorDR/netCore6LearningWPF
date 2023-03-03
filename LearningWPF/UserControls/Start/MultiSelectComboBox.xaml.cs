@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using LearningWPF.Dialogs;
 // --- App modules ---
 using LearningWPF.Models;
 using LearningWPF.Services;

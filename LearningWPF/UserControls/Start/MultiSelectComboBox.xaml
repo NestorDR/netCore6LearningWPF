@@ -43,42 +43,44 @@
 
         <TextBox
             x:Name="SelectedItemsControlTextBox"
-            Width="350"
+            Width="400"
             Margin="25"
             materialDesign:HintAssist.Hint="Selected tasks"
             IsReadOnly="True" />
 
         <!--  IsEditable="True"  IsTextSearchEnabled="True"  -->
-        <Grid Margin="25,25,25,5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <WrapPanel Width="400" Margin="25,25,25,5">
 
             <CheckBox
                 x:Name="EditingEnabledCheckBox"
-                Grid.Column="0"
+                HorizontalAlignment="Left"
                 Content="Allow editing"
                 IsChecked="True" />
 
             <CheckBox
+                x:Name="StaysOpenOnEditCheckBox"
+                Margin="25,0"
+                HorizontalAlignment="Center"
+                Content="Opened on editing"
+                IsChecked="True" />
+
+            <CheckBox
                 x:Name="TextSearchEnabledCheckBox"
-                Grid.Column="1"
                 HorizontalAlignment="Right"
                 Content="Allow text search"
                 IsChecked="False" />
-        </Grid>
+        </WrapPanel>
 
         <ComboBox
             x:Name="TaskComboBox"
-            Width="350"
+            Width="400"
             Margin="25,8,25,8"
             materialDesign:HintAssist.Hint="Task list"
             DropDownClosed="TaskComboBox_DropDownClosed"
             DropDownOpened="TaskComboBox_DropDownOpened"
             IsEditable="{Binding ElementName=EditingEnabledCheckBox, Path=IsChecked, FallbackValue=True}"
             IsTextSearchEnabled="{Binding ElementName=TextSearchEnabledCheckBox, Path=IsChecked, FallbackValue=False}"
-            StaysOpenOnEdit="{Binding ElementName=EditingEnabledCheckBox, Path=IsChecked, FallbackValue=True}"
+            StaysOpenOnEdit="{Binding ElementName=StaysOpenOnEditCheckBox, Path=IsChecked, FallbackValue=True}"
             Style="{StaticResource MultiSelectComboBox}"
             TextBoxBase.TextChanged="TaskComboBox_TextChanged" />
 
