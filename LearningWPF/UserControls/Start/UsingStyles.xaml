@@ -51,6 +51,7 @@
         <TextBlock Grid.Row="0" Grid.Column="1">TextBlock2</TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="2">TextBlock3</TextBlock>
 
+
         <TextBlock Grid.Row="1" Grid.Column="0">TextBlock4</TextBlock>
         <TextBlock
             Grid.Row="1"
@@ -58,6 +59,19 @@
             Style="{StaticResource DescriptionStyle}">
             TextBlock5 - Col Width 1* - Row Height 1*
         </TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0">TextBlock4</TextBlock>
+
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            VerticalAlignment="Stretch"
+            Background="LightGray"
+            BorderBrush="DarkSlateGray"
+            BorderThickness="1">
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                TextBlock5 - Col Width 1* - Row Height 1*
+            </TextBlock>
+        </Border>
         <TextBlock Grid.Row="1" Grid.Column="2">TextBlock6</TextBlock>
 
         <TextBlock Grid.Row="2" Grid.Column="0">TextBlock7</TextBlock>
