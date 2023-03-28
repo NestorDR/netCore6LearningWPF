@@ -88,6 +88,7 @@
             Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="5"
+            Background="AliceBlue"
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
             <Button>Button One</Button>
