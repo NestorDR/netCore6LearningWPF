@@ -35,9 +35,11 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
@@ -48,39 +50,39 @@
             Style="{StaticResource DescriptionStyle}">
             TextBlock1 - Col Width 2* - Row Height 2*
         </TextBlock>
-        <TextBlock Grid.Row="0" Grid.Column="1">TextBlock2</TextBlock>
-        <TextBlock Grid.Row="0" Grid.Column="2">TextBlock3</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="2">TextBlock2</TextBlock>
 
 
-        <TextBlock Grid.Row="1" Grid.Column="0">TextBlock4</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1">TextBlock3</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="3">TextBlock4</TextBlock>
+
+
         <TextBlock
-            Grid.Row="1"
-            Grid.Column="1"
+            Grid.Row="2"
+            Grid.Column="0"
             Style="{StaticResource DescriptionStyle}">
-            TextBlock5 - Col Width 1* - Row Height 1*
+            TextBlock5 - Col Width 2* - Row Height 1*
         </TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="0">TextBlock4</TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="2">TextBlock6</TextBlock>
 
         <Border
-            Grid.Row="1"
+            Grid.Row="3"
             Grid.Column="1"
             VerticalAlignment="Stretch"
             Background="LightGray"
             BorderBrush="DarkSlateGray"
             BorderThickness="1">
             <TextBlock Style="{StaticResource DescriptionStyle}">
-                TextBlock5 - Col Width 1* - Row Height 1*
+                TextBlock7 - Col Width 1* - Row Height 1*
             </TextBlock>
         </Border>
-        <TextBlock Grid.Row="1" Grid.Column="2">TextBlock6</TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="3">TextBlock8</TextBlock>
 
-        <TextBlock Grid.Row="2" Grid.Column="0">TextBlock7</TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="1">TextBlock8</TextBlock>
-        <TextBlock
-            Grid.Row="2"
+        <Border
+            Grid.Row="0"
+            Grid.RowSpan="4"
             Grid.Column="2"
-            Style="{StaticResource DescriptionStyle}">
-            TextBlock9 - Col Width 1* - Row Height 1*
-        </TextBlock>
+            BorderBrush="{StaticResource SecondaryHueMidBrush}"
+            BorderThickness="0,0,1,0" />
     </Grid>
 </UserControl>
