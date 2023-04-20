@@ -31,7 +31,6 @@
                 AllowDrop="True"
                 Drop="UsersDataGrid_Drop"
                 IsEnabled="{Binding IsAddMode, Converter={StaticResource InverseBooleanConverter}}"
-                IsReadOnly="True"
                 ItemsSource="{Binding Users}"
                 LoadingRow="UsersDataGrid_LoadingRow"
                 PreviewKeyDown="UsersDataGrid_PreviewKeyDown"

@@ -196,6 +196,7 @@ namespace LearningWPF.UserControls.MVVM
         {
             if (_viewModel.IsReadOnly) return;
             // While data grid is in edit mode, prevent row change
+            // But the right mouse button is not trapped, so you must also code the SelectionChanged event.
             var nextDataRow = (FrameworkElement)e.OriginalSource;
             e.Handled = nextDataRow.DataContext != UsersDataGrid.SelectedItem;
         }
@@ -205,7 +206,8 @@ namespace LearningWPF.UserControls.MVVM
         /// </summary>
         private void UsersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_viewModel.IsReadOnly || e.RemovedItems.Count == 0 || e.RemovedItems[0] == null || sender is not DataGrid dg) return;
+            if (_viewModel.IsReadOnly || e.RemovedItems.Count == 0 || e.RemovedItems[0] == null 
+                || e.OriginalSource != sender || sender is not DataGrid dg) return;
 
             // If the PreviewKey and PreviewMouse methods failed to trap the row change in the data grid during editing,
             // undo the row change by returning to the item being edited.
