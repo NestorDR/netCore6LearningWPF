@@ -23,6 +23,7 @@ Using as a guide:
 - Alignment
 - Listbox on ObservableCollection
 - Multiple selection on ComboBox (MultiSelectComboBox)
+- FlowDocumentReader
 - PNG to SVG to XAML images conversion
 - MVVM
 - Entity Framework Core
