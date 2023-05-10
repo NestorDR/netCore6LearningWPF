@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace LearningWPF.UserControls.Start
 {
@@ -10,12 +9,8 @@ namespace LearningWPF.UserControls.Start
     {
         public FlowPageLayout()
         {
+            // Visit: https://weblogs.asp.net/andreaszenker/flowdocument-pagewidth-pagepadding-and-columnwidth-oh-my
             InitializeComponent();
-        }
-
-        private void ReaderWidthText_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (this.Reader != null) this.Width = this.Reader.Width + 80;
         }
     }
 }

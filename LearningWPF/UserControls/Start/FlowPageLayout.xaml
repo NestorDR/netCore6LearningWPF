@@ -69,7 +69,7 @@
             BorderThickness="1">
             <FlowDocument
                 Name="MainDocument"
-                Background="White"
+                Background="WhiteSmoke"
                 ColumnWidth="{Binding ElementName=ColumnWidthText, Path=Text}"
                 FontFamily="Arial"
                 FontSize="10"
