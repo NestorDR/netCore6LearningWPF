@@ -1,0 +1,110 @@
+﻿<UserControl
+    x:Class="LearningWPF.UserControls.Start.FlowPageLayout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:LearningWPF.UserControls.Start"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="500"
+    d:DesignWidth="800"
+    Style="{StaticResource CustomizedDesignContentControl}"
+    mc:Ignorable="d">
+
+    <!--
+        Visit: https://weblogs.asp.net/andreaszenker/flowdocument-pagewidth-pagepadding-and-columnwidth-oh-my
+    -->
+
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox" />
+    </UserControl.Resources>
+
+    <DockPanel>
+        <Grid Margin="10" DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.3*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox
+                Name="ReaderWidthText"
+                Grid.Column="0"
+                materialDesign:HintAssist.Hint="Reader (Paper) Width"
+                Text="760" />
+
+            <TextBox
+                Name="PageWidthText"
+                Grid.Column="1"
+                materialDesign:HintAssist.Hint="PageWidth (Pixels)"
+                Text="760" />
+
+            <TextBox
+                Name="PagePaddingText"
+                Grid.Column="2"
+                materialDesign:HintAssist.Hint="PagePadding (Pixels)"
+                Text="30" />
+
+            <TextBox
+                Name="ColumnWidthText"
+                Grid.Column="3"
+                materialDesign:HintAssist.Hint="ColumnWidth (Pixels)"
+                Text="150" />
+
+            <WrapPanel
+                Grid.Column="4"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <TextBlock Margin="8" Text="IsColumnWidthFlexible" />
+                <ToggleButton Name="FlexibleChecked" IsChecked="True" />
+            </WrapPanel>
+        </Grid>
+        <FlowDocumentReader
+            Name="Reader"
+            Width="{Binding ElementName=ReaderWidthText, Path=Text, UpdateSourceTrigger=LostFocus}"
+            Margin="10"
+            BorderBrush="Gray"
+            BorderThickness="1">
+            <FlowDocument
+                Name="MainDocument"
+                Background="White"
+                ColumnWidth="{Binding ElementName=ColumnWidthText, Path=Text}"
+                FontFamily="Arial"
+                FontSize="10"
+                IsColumnWidthFlexible="{Binding ElementName=FlexibleChecked, Path=IsChecked}"
+                PagePadding="{Binding ElementName=PagePaddingText, Path=Text}"
+                PageWidth="{Binding ElementName=PageWidthText, Path=Text}">
+
+                <Paragraph>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim accumsan purus, ut faucibus turpis ultricies vel. Phasellus quis orci eu massa vulputate placerat. Nunc congue varius lacus in tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec ut lorem ante, sed faucibus ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pharetra, mauris vitae mollis congue, tortor libero sollicitudin justo, id posuere arcu arcu sed lorem.
+                </Paragraph>
+
+                <Paragraph>
+                    Phasellus molestie dui id lorem cursus luctus. Nulla molestie urna vulputate est sodales sed tempus leo posuere. Suspendisse pharetra, odio et eleifend pulvinar, enim felis faucibus lectus, sit amet consequat turpis magna eget nunc. Aenean eget urna quis justo vestibulum rutrum vel non ligula. Donec blandit dolor quis orci vulputate pulvinar blandit diam dignissim. Nam nec sapien magna. Phasellus faucibus urna eu quam fermentum mollis. Quisque sit amet dolor nulla, eget vehicula nulla.
+                </Paragraph>
+                <Paragraph>
+                    Nam magna metus, vulputate nec condimentum non, pellentesque in ante. Etiam et enim vel massa semper luctus ac ut quam. Nulla libero nisi, molestie eu lacinia ac, tincidunt non mi. Etiam ornare mi lobortis nunc adipiscing non interdum metus pretium. Morbi felis nulla, dignissim ut blandit vestibulum, euismod ut ipsum. Mauris interdum commodo nisi, vitae pharetra lacus scelerisque eget. Aliquam vel neque nisi. Vivamus consequat scelerisque dignissim. Maecenas lobortis suscipit massa, quis feugiat tortor pulvinar vel. Proin sagittis felis sit amet nunc dignissim semper. Quisque lacinia, tellus sed placerat sagittis, velit justo consectetur est, id aliquam nunc est ac nisl. Curabitur convallis elementum ligula eu ullamcorper.
+                </Paragraph>
+
+                <Paragraph>
+                    Suspendisse ac hendrerit enim. Curabitur non lacus sapien, a consequat magna. Mauris tempor, eros ac mollis dapibus, sem lacus facilisis mi, et tristique arcu felis quis ipsum. Nam lobortis, nisl at commodo feugiat, risus enim bibendum odio, quis feugiat libero neque nec quam. Nullam auctor, nibh in sodales adipiscing, tortor odio tristique diam, at molestie lorem eros eget tortor. Cras at velit et lectus malesuada faucibus id sit amet augue. Aliquam rutrum turpis velit. Nunc sit amet faucibus erat.
+                </Paragraph>
+
+                <Paragraph>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu elit a ipsum malesuada imperdiet vitae nec libero. Donec sagittis quam vitae leo consequat id rutrum lacus rutrum. Nullam euismod, velit sit amet porta malesuada, sem libero tempor leo, egestas dignissim diam dolor faucibus massa. Suspendisse vel urna leo, sed vulputate dui. Pellentesque rutrum auctor dolor, blandit lobortis ligula hendrerit eget. In laoreet porttitor mollis. Nam et ligula est. Proin vel nisl quam. Donec posuere, sem a venenatis commodo, lorem massa pulvinar nisi, eget porta quam tellus nec turpis. Donec fringilla tincidunt nibh ut porttitor. Ut lacinia justo nulla. Maecenas ac nisi iaculis metus hendrerit tempus ac vel ante. Aliquam nec erat enim. Aenean turpis turpis, fringilla et auctor id, ullamcorper eget velit. Duis et dui odio, eget tincidunt metus.
+                </Paragraph>
+
+                <Paragraph>
+                    Fusce aliquam nisi nec felis aliquam convallis. Pellentesque laoreet molestie nibh, nec cursus sem tempor eu. Donec sit amet purus orci. Pellentesque vehicula neque nec orci pulvinar elementum. Curabitur massa tellus, imperdiet sit amet rutrum ut, posuere porttitor urna. Aliquam condimentum lobortis felis. In sed feugiat ante. Praesent at diam nibh, sit amet blandit lorem. Nam consequat tellus non arcu porta aliquet. Vivamus orci ante, elementum vitae cursus eget, pulvinar nec mi. Curabitur eu lorem justo. Ut facilisis fringilla metus id tristique.
+                </Paragraph>
+
+                <Paragraph>
+                    Aliquam sed nibh odio, et cursus augue. Aliquam tempor scelerisque eros, tempor scelerisque orci eleifend quis. Nullam vehicula nunc tortor. Donec id suscipit tellus. Etiam venenatis, ipsum vel porttitor porttitor, mi dui consectetur purus, at consequat nunc elit eget elit. Cras nec nibh sit amet ligula ullamcorper imperdiet. Sed hendrerit tempus eleifend. Sed blandit aliquet pretium. Ut porttitor, lacus quis pharetra imperdiet, neque nisl mollis velit, a dapibus erat lectus posuere turpis. In cursus rutrum erat. Nam mauris nisi, posuere quis mollis non, scelerisque ac sem. Phasellus vitae orci velit, id auctor quam.
+                </Paragraph>
+            </FlowDocument>
+
+        </FlowDocumentReader>
+    </DockPanel>
+</UserControl>

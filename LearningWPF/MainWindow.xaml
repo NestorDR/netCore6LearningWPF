@@ -127,6 +127,12 @@
                                     MouseUp="ListBoxItem_OnMouseUp"
                                     Tag="LearningWPF.UserControls.Start.MultiSelectComboBox"
                                     Visibility="{Binding StartMenuGroupVisibility}" />
+                                <ListBoxItem
+                                    Margin="8,0,0,0"
+                                    Content="FlowDocument: width, padding, column width"
+                                    MouseUp="ListBoxItem_OnMouseUp"
+                                    Tag="LearningWPF.UserControls.Start.FlowPageLayout"
+                                    Visibility="{Binding StartMenuGroupVisibility}" />
                                 <!--#endregion-->
 
                                 <!--#region Images Menu-->
