@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Input;
 using Microsoft.Extensions.Configuration;
 using LearningWPF.Common;
 
@@ -37,8 +39,29 @@ namespace LearningWPF
         /// <param name="e"></param>
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("An unhandled exception just occurred: " + e.Exception.Message, 
+            // Extract the exception that was raised while executing code
+            Exception? ex = e.Exception;
+
+            // Identify the line and method where the exception originated
+            string sourceLine = "";
+            if (ex.StackTrace is { Length: > 0 })
+            {
+                string[] stackTrace = ex.StackTrace.Split('\n');
+                foreach (string stackItem in stackTrace)
+                {
+                    sourceLine = stackItem.Trim();
+                    if (sourceLine.StartsWith("at") &&  sourceLine.Contains(":line ")) break;
+                }
+            }
+            if (!sourceLine.EndsWith(".")) sourceLine += ".";
+
+            // Restore normal mouse cursor (preemptively)
+            Mouse.OverrideCursor = null;
+            string message = $"{ex.Message + (ex.Message.EndsWith(".") ? "" : ".")}\n\n{sourceLine}";
+            // Show exception message
+            MessageBox.Show("An unhandled exception just occurred: " + message, 
                 "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            // All is done. Prevent the base classes from doing any further handling of the event.
             e.Handled = true;
         }
     }
