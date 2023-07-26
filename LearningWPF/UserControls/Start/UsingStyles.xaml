@@ -68,10 +68,10 @@
         <Border
             Grid.Row="3"
             Grid.Column="1"
-            VerticalAlignment="Stretch"
             Background="LightGray"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1">
+            BorderThickness="0"
+            ToolTip="This is the tooltip content when the mouse enters the border.">
             <TextBlock Style="{StaticResource DescriptionStyle}">
                 TextBlock7 - Col Width 1* - Row Height 1*
             </TextBlock>
