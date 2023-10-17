@@ -15,10 +15,12 @@
             <CheckBox
                 x:Name="ItemCheckBox"
                 HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 Checked="ItemCheckBox_CheckedAndUnchecked"
                 CommandParameter="{Binding Id}"
                 Content="{Binding Name}"
                 IsChecked="{Binding Selected}"
+                PreviewMouseDown="ItemCheckBox_OnPreviewMouseDown"
                 Unchecked="ItemCheckBox_CheckedAndUnchecked" />
         </DataTemplate>
 
@@ -50,7 +52,6 @@
 
         <!--  IsEditable="True"  IsTextSearchEnabled="True"  -->
         <WrapPanel Width="400" Margin="25,25,25,5">
-
             <CheckBox
                 x:Name="EditingEnabledCheckBox"
                 HorizontalAlignment="Left"

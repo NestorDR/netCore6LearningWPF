@@ -19,7 +19,6 @@ namespace LearningWPF.UserControls.Start
     public partial class MultiSelectComboBox : UserControl
     {
         private readonly ObservableCollection<TaskModel> _items;
-        private string _list = string.Empty;
 
         public MultiSelectComboBox()
         {
@@ -45,8 +44,6 @@ namespace LearningWPF.UserControls.Start
         /// <summary>
         /// Reduces the items source based on user requirements 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void TaskComboBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Debug.WriteLine("TaskComboBox_TextChanged");
@@ -61,6 +58,16 @@ namespace LearningWPF.UserControls.Start
         {
             SetSelectedIndex(GetSelectedIndex(out _));
             DisplaySelectedItems();
+        }
+        /// <summary>
+        /// Toggle check value and prevents the combobox from closing after the selection
+        /// </summary>
+        private void ItemCheckBox_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Visit https://stackoverflow.com/questions/65671234/how-can-i-disable-the-selection-event-on-this-wpf-combobox-without-disabling-it
+            if (sender is not CheckBox checkBox) return;
+            checkBox.IsChecked = !checkBox.IsChecked;
+            e.Handled = true;
         }
 
         /// <summary>
@@ -174,6 +181,7 @@ namespace LearningWPF.UserControls.Start
         /// </summary>
         private void SetSelectedIndex(int index)
         {
+            if (TaskComboBox.SelectedIndex == index) return;
             TaskComboBox.SelectionChanged -= TaskComboBox_SelectionChanged;
             TaskComboBox.SelectedIndex = index;
             TaskComboBox.SelectionChanged += TaskComboBox_SelectionChanged;
@@ -184,17 +192,15 @@ namespace LearningWPF.UserControls.Start
         /// </summary>
         private void DisplaySelectedItems()
         {
-            _list = string.Empty;
-            foreach (TaskModel task in _items)
-                if (task.Selected) _list += (_list.Length > 0 ? ", " : "") + task.Name;
+            string list = string.Join(", ", _items.Where(item => item.Selected).Select(i => i.Name));
 
-            SelectedItemsControlTextBox.Text = _list;
+            SelectedItemsControlTextBox.Text = list;
 
             if (TaskComboBox.IsEditable &&
                 TaskComboBox.Template.FindName("PART_EditableTextBox", TaskComboBox) is TextBox txt)
-                txt.Text = _list;
+                txt.Text = list;
 
-            TaskComboBox.Text = _list;
+            TaskComboBox.Text = list;
         }
     }
 }

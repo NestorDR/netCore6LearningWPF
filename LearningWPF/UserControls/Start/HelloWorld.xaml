@@ -97,6 +97,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
+                StaysOpenOnEdit="True"
                 materialDesign:HintAssist.Hint="Select a background color"
                 SelectionChanged="ColorsComboBox_SelectionChanged">
                 <ComboBox.ItemTemplate>
