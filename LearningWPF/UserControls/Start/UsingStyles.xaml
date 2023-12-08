@@ -68,14 +68,17 @@
         <Border
             Grid.Row="3"
             Grid.Column="1"
-            Background="LightGray"
+            Grid.ColumnSpan="2"
+            Background="GreenYellow"
             BorderBrush="DarkSlateGray"
-            BorderThickness="0"
-            ToolTip="This is the tooltip content when the mouse enters the border.">
-            <TextBlock Style="{StaticResource DescriptionStyle}">
-                TextBlock7 - Col Width 1* - Row Height 1*
-            </TextBlock>
-        </Border>
+            BorderThickness="0,1,0,0"
+            ToolTip="This is the tooltip content when the mouse enters the border." />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="1"
+            Style="{StaticResource DescriptionStyle}">
+            TextBlock7 - Col Width 1* - Row Height 1*
+        </TextBlock>
         <TextBlock Grid.Row="3" Grid.Column="3">TextBlock8</TextBlock>
 
         <Border

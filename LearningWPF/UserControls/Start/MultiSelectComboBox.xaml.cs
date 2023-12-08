@@ -60,13 +60,14 @@ namespace LearningWPF.UserControls.Start
             DisplaySelectedItems();
         }
         /// <summary>
-        /// Toggle check value and prevents the combobox from closing after the selection
+        /// Toggles check value and prevents combo box from closing after selection
         /// </summary>
         private void ItemCheckBox_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             // Visit https://stackoverflow.com/questions/65671234/how-can-i-disable-the-selection-event-on-this-wpf-combobox-without-disabling-it
             if (sender is not CheckBox checkBox) return;
             checkBox.IsChecked = !checkBox.IsChecked;
+            // Prevent auto-close of the combobox
             e.Handled = true;
         }
 
