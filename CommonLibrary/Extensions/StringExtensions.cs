@@ -11,7 +11,14 @@ namespace CommonLibrary.Extensions
         /// <summary>
         /// Capitalizes the first character of the string while keeping the rest the same
         /// </summary>
-        public static string CapitalizeFirst(this string s) => char.ToUpper(s[0]) + s[1..];
+        public static string CapitalizeFirst(this string s)
+        {
+            // Check for empty string.  
+            if (string.IsNullOrEmpty(s)) return string.Empty;
+
+            // Return char and concat substring.  
+            return char.ToUpper(s[0]) + s[1..];
+        }
         
         /// <summary>
         ///  Gets the words of the string that are in the list.
