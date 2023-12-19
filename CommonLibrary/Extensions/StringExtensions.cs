@@ -9,6 +9,11 @@ namespace CommonLibrary.Extensions
     public static class StringExtensions
     {
         /// <summary>
+        /// Capitalizes the first character of the string while keeping the rest the same
+        /// </summary>
+        public static string CapitalizeFirst(this string s) => char.ToUpper(s[0]) + s[1..];
+        
+        /// <summary>
         ///  Gets the words of the string that are in the list.
         /// </summary>
         /// <param name="s"></param>
@@ -68,7 +73,7 @@ namespace CommonLibrary.Extensions
             if (Regex.Match(s, "[0-9A-Z]+$").Success)
                 return s;
             // add a space before each capital letter, but not the first one.
-            var result = Regex.Replace(s, "(\\B[A-Z])", " $1");
+            string result = Regex.Replace(s, "(\\B[A-Z])", " $1");
             return result;
         }
 
@@ -113,7 +118,8 @@ namespace CommonLibrary.Extensions
         /// <returns>True if the string passed in is all lower case, otherwise false.</returns>
         public static bool IsAllLowerCase(this string s)
         {
-            return new Regex(@"^([^A-Z])+$").IsMatch(s);
+            Match match = Regex.Match(s, @"^([^A-Z])+$");
+            return match.Success;
         }
 
         /// <summary>
@@ -123,12 +129,13 @@ namespace CommonLibrary.Extensions
         /// <returns>True if the string passed in is all upper case, otherwise false.</returns>
         public static bool IsAllUpperCase(this string s)
         {
-            return new Regex(@"^([^a-z])+$").IsMatch(s);
+            Match match = Regex.Match(s, @"^([^a-z])+$");
+            return match.Success;
         }
 
         public static bool IsEmail(this string s)
         {
-            var match = Regex.Match(s,
+            Match match = Regex.Match(s,
                 @"^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-*)|(\w+\.))*\w+\.[a-zA-Z]{2,6}$",
                 RegexOptions.IgnoreCase);
             return match.Success;
@@ -136,13 +143,13 @@ namespace CommonLibrary.Extensions
 
         public static bool IsNumber(this string s)
         {
-            var match = Regex.Match(s, @"^[0-9]+$", RegexOptions.IgnoreCase);
+            Match match = Regex.Match(s, @"^[0-9]+$", RegexOptions.IgnoreCase);
             return match.Success;
         }
 
         public static bool IsPhone(this string s)
         {
-            var match = Regex.Match(s, @"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$", RegexOptions.IgnoreCase);
+            Match match = Regex.Match(s, @"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$", RegexOptions.IgnoreCase);
             return match.Success;
         }
 
@@ -150,7 +157,7 @@ namespace CommonLibrary.Extensions
         {
             if (s == null || string.IsNullOrWhiteSpace(s)) return string.Empty;
 
-            var match = Regex.Match(s, @"^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-*)|(\w+\.))*\w+\.[a-zA-Z]{2,6}$", RegexOptions.IgnoreCase);
+            Match match = Regex.Match(s, @"^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-*)|(\w+\.))*\w+\.[a-zA-Z]{2,6}$", RegexOptions.IgnoreCase);
             return match.Success ? match.Value : string.Empty;
         }
 
@@ -158,7 +165,7 @@ namespace CommonLibrary.Extensions
         {
             if (string.IsNullOrWhiteSpace(s)) return 0;
 
-            var match = Regex.Match(s, "[0-9]+", RegexOptions.IgnoreCase);
+            Match match = Regex.Match(s, "[0-9]+", RegexOptions.IgnoreCase);
             return match.Success ? match.Value.ToInt() : 0;
         }
 
@@ -167,11 +174,51 @@ namespace CommonLibrary.Extensions
             if (string.IsNullOrWhiteSpace(queryString) || string.IsNullOrWhiteSpace(paramName)) return string.Empty;
 
             var query = queryString.Replace("?", "");
-            if (!query.Contains("=")) return string.Empty;
+            if (!query.Contains($"=")) return string.Empty;
             Dictionary<string, string> queryValues = query.Split('&').Select(piQ => piQ.Split('=')).ToDictionary(piKey => piKey[0].ToLower().Trim(), piValue => piValue[1]);
             bool found = queryValues.TryGetValue(paramName.ToLower().Trim(), out var result);
             return found ? result : string.Empty;
 
+        }
+
+        /// <summary>
+        /// The Levenshtein's Distance Algorithm compares two strings approximately.
+        /// This algorithm calculates the minimum number of single-character edits (insertions, deletions, or substitutions) required to change one string into the other.
+        /// The smaller the number of edits, the more similar the two strings are.
+        /// </summary>
+        public static int LevenshteinDistance(this string s, string t)
+        {
+            int n = s.Length;
+            int m = t.Length;
+            int[,] d = new int[n + 1, m + 1];
+
+            if (n == 0) return m;
+
+            if (m == 0) return n;
+
+            for (int i = 0; i <= n; d[i, 0] = i++)
+            {
+            }
+
+            for (int j = 0; j <= m; d[0, j] = j++)
+            {
+            }
+
+            for (int i = 1; i <= n; i++)
+            {
+                for (int j = 1; j <= m; j++)
+                {
+                    int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
+
+                    d[i, j] = Math.Min(
+                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                        d[i - 1, j - 1] + cost);
+                }
+            }
+
+            int levenshteinDistance = d[n, m];
+            
+            return levenshteinDistance;
         }
     }
 }
