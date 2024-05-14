@@ -49,8 +49,6 @@
                         AutomationProperties.Name="HamburgerToggleButton"
                         IsChecked="True"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-
-
                 </StackPanel>
 
             </materialDesign:ColorZone>

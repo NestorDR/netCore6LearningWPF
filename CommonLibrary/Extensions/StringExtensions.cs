@@ -65,8 +65,8 @@ namespace CommonLibrary.Extensions
         }
 
         /// <summary>
-        /// Matching all capital letters in the s and separate them with spaces to form a sentence.
-        /// If the s is an abbreviation text, no space will be added and returns the same s.
+        /// Matching all capital letters of the string and separate them with spaces to form a sentence.
+        /// If the string is an abbreviation text, no space will be added and returns the same string.
         /// </summary>
         /// <param name="s">Input string</param>
         /// <returns>A string with a space added  before each capital letter, but not the first one</returns>
